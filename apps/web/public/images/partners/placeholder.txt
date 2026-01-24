@@ -1,0 +1,27 @@
+# Partner Logo Assets
+
+This directory should contain logo images for partners and joint ventures.
+
+## Required Files
+
+1. **slb-logo.png** - SLB (Schlumberger) company logo
+2. **kweti-logo.png** - Kweti Energy Services company logo
+
+## Recommended Specifications
+
+- **Dimensions:** 200x80px (or proportional for wider logos)
+- **Format:** PNG with transparent background
+- **Color:** Prefer full-color logos on transparent background
+- **File size:** Under 50KB for optimal web performance
+
+## Usage
+
+These logos are used on:
+- /partners page - Partner profile cards
+- /joint-ventures page - JV profile cards
+- Homepage partner/JV sections (optional future use)
+
+## Fallback Behavior
+
+If logo images are not found, a placeholder box with "Logo" text will display.
+Replace this placeholder with actual logo files when available.

@@ -1,0 +1,15 @@
+HSE Image Placeholders
+
+This directory should contain HSE-related field images:
+- hse-hero.jpg - Hero background image (dramatic field shot)
+- ppe-equipment.jpg - PPE and safety equipment
+- team-safety.jpg - Team following safety protocols
+- safety-signs.jpg - Safety signage and procedures
+
+Image requirements:
+- Minimum resolution: 1920x1080 for hero, 1200x800 for parallax
+- Format: JPEG for photos (smaller file size)
+- Compress to under 500KB each for performance
+
+NOTE: These are placeholder paths. Actual images need to be selected
+from the 26 WhatsApp images and renamed appropriately.

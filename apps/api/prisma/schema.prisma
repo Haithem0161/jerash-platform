@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ AUTHENTICATION ============
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         UserRole  @default(EDITOR)
+  avatar       String?
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  sessions  Session[]
+  auditLogs AuditLog[]
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+}
+
+// ============ CONTENT ENTITIES ============
+
+model HeroSlide {
+  id         String   @id @default(cuid())
+  imageUrl   String
+  titleEn    String
+  titleAr    String
+  subtitleEn String?
+  subtitleAr String?
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([isActive, order])
+}
+
+model SiteSetting {
+  id          String      @id @default(cuid())
+  key         String      @unique
+  value       String
+  type        SettingType @default(STRING)
+  groupName   String
+  description String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([groupName])
+}
+
+enum SettingType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+model Partner {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  nameEn        String
+  nameAr        String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  logoUrl       String
+  website       String?
+  order         Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([isActive, order])
+}
+
+model JointVenture {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  nameEn        String
+  nameAr        String
+  descriptionEn String   @db.Text
+  descriptionAr String   @db.Text
+  logoUrl       String
+  website       String?
+  order         Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([isActive, order])
+}
+
+model Office {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  nameEn       String
+  nameAr       String
+  addressEn    String
+  addressAr    String
+  phone        String
+  phoneDisplay String
+  email        String
+  hoursEn      String
+  hoursAr      String
+  latitude     Float
+  longitude    Float
+  order        Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isActive, order])
+}
+
+model ServiceCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  nameEn    String
+  nameAr    String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  services Service[]
+
+  @@index([isActive, order])
+}
+
+model Service {
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  categoryId         String
+  icon               String
+  titleEn            String
+  titleAr            String
+  shortDescriptionEn String   @db.Text
+  shortDescriptionAr String   @db.Text
+  descriptionEn      String   @db.Text
+  descriptionAr      String   @db.Text
+  order              Int      @default(0)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  category ServiceCategory @relation(fields: [categoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([isActive, order])
+}
+
+model GalleryImage {
+  id           String   @id @default(cuid())
+  imageUrl     String
+  thumbnailUrl String?
+  altEn        String
+  altAr        String
+  width        Int
+  height       Int
+  order        Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isActive, order])
+}
+
+model Job {
+  id                String    @id @default(cuid())
+  slug              String    @unique
+  titleEn           String
+  titleAr           String
+  departmentEn      String
+  departmentAr      String
+  locationEn        String
+  locationAr        String
+  typeEn            String
+  typeAr            String
+  descriptionEn     String    @db.Text
+  descriptionAr     String    @db.Text
+  fullDescriptionEn String    @db.Text
+  fullDescriptionAr String    @db.Text
+  isActive          Boolean   @default(true)
+  publishedAt       DateTime?
+  expiresAt         DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  applications JobApplication[]
+
+  @@index([isActive])
+}
+
+// ============ FORM SUBMISSIONS ============
+
+model ContactSubmission {
+  id          String           @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  department  String
+  message     String           @db.Text
+  status      SubmissionStatus @default(NEW)
+  notes       String?          @db.Text
+  respondedAt DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum SubmissionStatus {
+  NEW
+  READ
+  RESPONDED
+  ARCHIVED
+}
+
+model JobApplication {
+  id         String            @id @default(cuid())
+  jobId      String?
+  name       String
+  email      String
+  phone      String
+  cvUrl      String
+  cvFilename String
+  status     ApplicationStatus @default(NEW)
+  notes      String?           @db.Text
+  reviewedAt DateTime?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  job Job? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  @@index([jobId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWING
+  SHORTLISTED
+  INTERVIEWED
+  REJECTED
+  HIRED
+  ARCHIVED
+}
+
+// ============ MEDIA MANAGEMENT ============
+
+model MediaFile {
+  id           String   @id @default(cuid())
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  thumbnailUrl String?
+  width        Int?
+  height       Int?
+  folder       String   @default("uploads")
+  altEn        String?
+  altAr        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([folder])
+  @@index([createdAt])
+}
+
+// ============ AUDIT LOGGING ============
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entityType String
+  entityId   String
+  oldValue   Json?
+  newValue   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}

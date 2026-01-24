@@ -1,0 +1,27 @@
+{
+  "title": "Health, Safety & Environment",
+  "description": "Jerash's commitment to safety excellence and HSE standards",
+  "hero": {
+    "title": "Our Commitment to Safety Excellence",
+    "subtitle": "At Jerash, safety isn't just a priority—it's our foundation"
+  },
+  "commitments": {
+    "sectionTitle": "Our HSE Commitments",
+    "1": "Zero harm philosophy - every team member returns home safely each day",
+    "2": "Continuous training and certification for all field personnel",
+    "3": "Full compliance with international HSE standards and local regulations",
+    "4": "Regular safety audits and inspections across all operations",
+    "5": "Comprehensive emergency response planning and drills",
+    "6": "Personal protective equipment (PPE) provided and enforced at all times",
+    "7": "Environmental protection through responsible waste management",
+    "8": "Hazard identification and risk assessment before every task",
+    "9": "Open reporting culture - all incidents and near-misses documented",
+    "10": "Leadership accountability - HSE is everyone's responsibility from top to bottom"
+  },
+  "metrics": {
+    "sectionTitle": "Safety Performance",
+    "incidentFreeHours": "Incident-Free Work Hours",
+    "trainingHours": "Training Hours Completed",
+    "certifiedPersonnel": "Certified Safety Personnel"
+  }
+}

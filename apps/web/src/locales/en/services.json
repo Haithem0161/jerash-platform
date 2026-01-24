@@ -1,0 +1,143 @@
+{
+  "title": "Our Services",
+  "description": "Comprehensive oil field solutions for your needs",
+  "categories": {
+    "all": "All Services",
+    "production": "Production",
+    "wireline": "Wireline",
+    "consultancy": "Consultancy",
+    "other": "Other"
+  },
+  "items": {
+    "coiledTubing": {
+      "title": "Coiled Tubing",
+      "shortDescription": "Comprehensive coiled tubing solutions for stimulation, fishing, milling, and complex well applications.",
+      "description": "We have extensive coiled tubing experience in stimulation, nitrogen lifting, fishing, milling, clean-out scale removal, thru-tubing plug setting, horizontal logging and other complex well applications."
+    },
+    "drillingFluid": {
+      "title": "Drilling Fluid",
+      "shortDescription": "Advanced drilling fluid systems engineered for optimal wellbore stability and performance.",
+      "description": "We provide specialized drilling fluid services with advanced formulations designed to optimize drilling performance, maintain wellbore stability, and ensure safe operations across diverse geological formations."
+    },
+    "cementing": {
+      "title": "Cementing",
+      "shortDescription": "Expert cementing services meeting environmental and HPHT requirements across the region.",
+      "description": "We have experience in cementing services across the Middle East, North Africa & Asia. As new technologies and techniques become routine, operators are demanding new approaches to well cementing. Exploring high pressure, high temperature, deep gas potentials and having to comply with stringent environmental regulations drives the need to continuously improve cementing systems and equipment designs."
+    },
+    "nitrogen": {
+      "title": "Nitrogen Services",
+      "shortDescription": "World-class nitrogen fleet for wellbore operations and multi-service support.",
+      "description": "We offer complete nitrogen service packages to our clients. We have a world-class nitrogen fleet comprising of some of the most technically advanced equipment and applications in the industry. We provide low, intermediate and high-rate units. Our operational capabilities range from stand-alone nitrogen services, such as freeing stuck drill pipes and unloading or cleaning out wellbores, to supplying our coiled tubing, stimulation and cementing services with the essential gaseous components necessary for positive results in various applications."
+    },
+    "filtration": {
+      "title": "Filtration Services",
+      "shortDescription": "Professional filtration solutions preventing fluid contamination across the pay zone.",
+      "description": "We provide filtration services to our clients to help them meet their requirements, including cost-saving and avoiding related operational problems due to non-filtered fluids, especially across the pay zone."
+    },
+    "pipelines": {
+      "title": "Pipelines & Industrial Services",
+      "shortDescription": "Innovative pipeline services for downstream and midstream oil & gas industries.",
+      "description": "We are recognized as an innovative and high-quality solutions and services provider to the downstream and midstream oil & gas and petrochemical industries. These services can be provided during pre-commissioning and commissioning of new facilities or during turnaround maintenance of existing facilities. We employ innovative technologies and the highest safety and quality standards for pipeline services."
+    },
+    "waterProduction": {
+      "title": "Water & Production Assurance",
+      "shortDescription": "Production assurance chemicals and technical expertise for optimal hydrocarbon output.",
+      "description": "Jerash is equipped with a strong portfolio of production assurance chemicals to ensure that hydrocarbon production from specific reservoirs meet the desired production targets. This is achieved through strong collaboration with selected chemical companies and academic institutions, and by establishing an in-house technical team of engineers and laboratory capabilities."
+    },
+    "artificialLift": {
+      "title": "Artificial Lift Services",
+      "shortDescription": "Full-service sucker rod pumping, gas lift, and downhole monitoring systems.",
+      "description": "We are a full-service provider of sucker rod pumping systems and associated field services. We also provide gas lift systems & downhole monitoring systems. We maintain a downhole pump workshop that is equipped with up-to-date equipment and tools like pump testers, barrel honing & API Beam pump gauges."
+    },
+    "wirelineLogging": {
+      "title": "Wireline Logging Services",
+      "shortDescription": "Customized reservoir solutions with innovative technologies and expert geoscientists.",
+      "description": "Jerash offers customized solutions to maximize production for more efficient pay—no matter where your field is in the well life cycle. Our innovative technologies, coupled with asset expertise from our highly specialized multidisciplinary geoscientists collaborating with your teams, help you gain deeper reservoir insight. We also bring expertise to diagnose, design, and deliver engineering perforating and well intervention solutions to maximize production from your reservoirs."
+    },
+    "wellTesting": {
+      "title": "Well Testing Services",
+      "shortDescription": "Safe, customized well testing and blowout flow control for onshore operations.",
+      "description": "We provide safe, customized, and dependable well testing and blowout flow control for the oil and gas industry for onshore solutions. We provide our customers with a world class fleet of equipment set up to rapidly mobilize to any job site and is capable of handling hazardous flow streams including H2S, CO2, solids, high wellhead pressures, and temperatures. Our processes reduce project cost, while minimizing waste and associated disposal liabilities."
+    },
+    "stimulationPumping": {
+      "title": "Stimulation & Pumping",
+      "shortDescription": "Matrix stimulation and pumping with modern technology and state-of-the-art equipment.",
+      "description": "Matrix stimulation and pumping services are provided in all our operations, utilizing modern technology and state-of-the-art equipment."
+    },
+    "thruTubing": {
+      "title": "Thru-Tubing Intervention",
+      "shortDescription": "Comprehensive thru-tubing solutions from milling to fishing and well intervention.",
+      "description": "We provide comprehensive oilfield solutions for all thru-tubing intervention requirements of your well, from milling to thru-tubing fishing and thru-tubing well intervention. We have an experienced team of international and local experts from around the world who will offer you the perfect solution for your well problems, which can then be carried out by our expert field engineers."
+    },
+    "slickline": {
+      "title": "Slickline Services",
+      "shortDescription": "Essential well intervention services and measurements during production operations.",
+      "description": "Our slickline units provide a variety of well intervention services and measurements that are essential during the time a well is in production. This includes the control of sliding sleeves to open and close access to zones and the replacement of gas lift valves. Additionally, the capability to measure the depth of the well and well perforation (using run gun assemblies) and measuring down-hole pressures and temperatures using run gauge."
+    },
+    "completions": {
+      "title": "Completions",
+      "shortDescription": "Surface and subsurface safety systems with intelligent completion architectures.",
+      "description": "We provide surface and subsurface safety systems, high-pressure packer systems, flow controls, service tools, expandable liner technology, VIT Technology for Steam applications, and engineering capabilities with manufacturing capacity and testing facilities. We take a systems approach to well completions for maximum recovery in addition to intelligent completion architectures."
+    },
+    "scaffolding": {
+      "title": "Scaffolding Services",
+      "shortDescription": "Professional scaffolding solutions for oil field operations and maintenance projects.",
+      "description": "We provide professional scaffolding services designed to support oil field operations, maintenance activities, and construction projects. Our scaffolding solutions meet the highest safety standards and are customized to meet the specific requirements of each project site."
+    },
+    "importMachinery": {
+      "title": "Importing Machinery",
+      "shortDescription": "Import, purchase and sale of machinery and equipment for the oil industry.",
+      "description": "Import, purchase and sale of machinery, equipment, and various materials that enter the oil industry."
+    },
+    "importChemicals": {
+      "title": "Importing Chemicals",
+      "shortDescription": "Import and supply of chemicals for oil processing in surface facilities.",
+      "description": "Import, purchase and sale of adequate chemicals that are involved in the processing of oil extracted in surface facilities."
+    },
+    "importGasStation": {
+      "title": "Importing Gas Station Equipment",
+      "shortDescription": "Equipment and pumps for distribution and filtering sectors including refineries.",
+      "description": "Import, purchase and sale of all equipment and pumps that enter the distribution sector such as gas stations and filtering sectors such as refineries and others."
+    },
+    "processing": {
+      "title": "Processing & Supplying",
+      "shortDescription": "Comprehensive goods and services for drilling, exploration, and seismic survey.",
+      "description": "Processing and supplying all kinds of goods, support and services to assist drilling, research, exploration and seismic survey."
+    },
+    "customsClearance": {
+      "title": "Customs Clearance",
+      "shortDescription": "Import, transport, storage, and customs services for oil & gas contracting companies.",
+      "description": "Providing services such as import, transport, use, storage and customs clearance for the oil and gas sector and its contracting companies in the areas of exploration, distribution, liquidation and drilling."
+    },
+    "explosives": {
+      "title": "Explosive Services",
+      "shortDescription": "Use and storage of conventional and non-conventional explosives for extraction.",
+      "description": "Use and storage of conventional and non-conventional explosives for oil and gas extraction."
+    },
+    "inspection": {
+      "title": "Inspection Services",
+      "shortDescription": "Quality control, NDT, material testing for oil, gas, and petrochemical facilities.",
+      "description": "The company focuses on all kinds of quality control, NDT, material testing and inspection. The company is also deeply involved in maintenance inspection in the oil and gas industry and petrochemical plants, both offshore and onshore."
+    },
+    "training": {
+      "title": "Training & Technical Support",
+      "shortDescription": "Keep your staff current with rapidly advancing technology and regulations.",
+      "description": "In a world of fast-changing regulation and rapidly advancing technology, it is crucial to keep your staff up to speed with changes in technology, standards and regulation."
+    },
+    "fuelStations": {
+      "title": "Fuel Stations Maintenance",
+      "shortDescription": "Complete solutions for building, renovating, and maintaining petrol stations.",
+      "description": "Jerash team will first inspect, analyze and study any case before giving or following results. Our team is capable to educate you technically and will aid you to reach the best possible solution for the application on hand. If you want to build or renovate a petrol station, we have you covered throughout the process. We can take care of the design & scheduling, planning & regulatory approvals, risk assessment & mitigation, procurement & budget control, construction & handover."
+    },
+    "mudLogging": {
+      "title": "Mud Logging Services",
+      "shortDescription": "Geological and drilling data recording for improved operations and safety.",
+      "description": "Mud logging is the process of creating a record of geological and drilling data by carefully monitoring the drilling medium throughout the circulation system and testing the cuttings of rock brought to the surface through drilling medium. This provides the drillers with necessary and key information that helps to improve drilling operations. Mud Logging involves sophisticated methods for analysis of wellbore data to identify hydrocarbon zones and improve safety through early detection of potential drilling hazards."
+    },
+    "integratedDrilling": {
+      "title": "Integrated Drilling Services",
+      "shortDescription": "Cutting edge drilling technologies at competitive rates for complete operations.",
+      "description": "Our company is offering new services, cutting edge technologies, highest possible value at very competitive rates, especially for drilling operations."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Gallery",
+  "description": "Field operations and equipment from our projects across Iraq",
+  "seo": {
+    "title": "Photo Gallery | Oil Field Operations in Iraq",
+    "description": "Field operations photography showcasing our work across Iraqi oil fields. Professional equipment, trained crews, and safety-first approach."
+  },
+  "imageOf": "Image {{current}} of {{total}}",
+  "loading": "Loading images..."
+}

@@ -1,0 +1,26 @@
+{
+  "seo": {
+    "partnersTitle": "Our Partners | Strategic Alliances",
+    "partnersDescription": "Trusted partnerships with global oil field service leaders. Collaborative excellence in Iraq's energy sector.",
+    "jvTitle": "Joint Ventures | Collaborative Excellence",
+    "jvDescription": "Strategic joint ventures combining local expertise with international standards for oil field operations in Iraq."
+  },
+  "partners": {
+    "pageTitle": "Our Partners",
+    "pageDescription": "Strategic partnerships with global industry leaders driving excellence in oil field services.",
+    "visitWebsite": "Visit Website",
+    "slb": {
+      "name": "SLB (Schlumberger)",
+      "description": "SLB is a global technology company driving energy innovation. As a leading partner, SLB brings world-class expertise in oil field technology and services to our operations."
+    }
+  },
+  "jointVentures": {
+    "pageTitle": "Joint Ventures",
+    "pageDescription": "Strategic joint ventures expanding our capabilities in integrated energy services across the region.",
+    "comingSoon": "Website Coming Soon",
+    "kweti": {
+      "name": "Jerash for Energy Services",
+      "description": "Jerash for Energy Services is a strategic joint venture expanding Jerash's capabilities in integrated energy services across the region."
+    }
+  }
+}

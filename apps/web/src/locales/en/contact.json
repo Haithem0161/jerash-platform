@@ -1,0 +1,71 @@
+{
+  "seo": {
+    "title": "Contact Us | Offices in Basrah, Erbil & Baghdad",
+    "description": "Get in touch with Jerash For Oil Field Services. Main office in Basrah with branches in Erbil and Baghdad. Request a quote or consultation."
+  },
+  "title": "Contact Us",
+  "description": "Have a question or inquiry? We'd love to hear from you.",
+  "form": {
+    "title": "Send Us a Message",
+    "description": "Fill out the form below and we'll get back to you as soon as possible.",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone Number (Optional)",
+    "phonePlaceholder": "+964 XXX XXX XXXX",
+    "department": "Department",
+    "departmentPlaceholder": "Select a department",
+    "departments": {
+      "general": "General Inquiry",
+      "technical": "Technical Support",
+      "careers": "Careers / HR",
+      "other": "Other"
+    },
+    "message": "Message",
+    "messagePlaceholder": "Tell us how we can help you...",
+    "submit": "Send Message",
+    "submitting": "Sending..."
+  },
+  "success": {
+    "title": "Message Sent!",
+    "message": "Thank you for reaching out. Our team will review your message and get back to you within 1-2 business days."
+  },
+  "validation": {
+    "nameRequired": "Please enter your name",
+    "emailInvalid": "Please enter a valid email address",
+    "messageTooShort": "Message must be at least 10 characters"
+  },
+  "quickContact": {
+    "title": "Quick Contact",
+    "description": "Reach us directly at any of our offices"
+  },
+  "offices": {
+    "title": "Our Offices",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Working Hours",
+    "basrah": {
+      "name": "Basrah Office",
+      "address": "Basrah, Iraq",
+      "phone": "+964 XXX XXX XXXX",
+      "email": "basrah@jerash.com",
+      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
+    },
+    "erbil": {
+      "name": "Erbil Office",
+      "address": "Erbil, Kurdistan Region, Iraq",
+      "phone": "+964 XXX XXX XXXX",
+      "email": "erbil@jerash.com",
+      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
+    },
+    "baghdad": {
+      "name": "Baghdad Office",
+      "address": "Baghdad, Iraq",
+      "phone": "+964 XXX XXX XXXX",
+      "email": "baghdad@jerash.com",
+      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
+    }
+  }
+}

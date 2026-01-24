@@ -1,0 +1,15 @@
+{
+  "project": "jerash-website",
+  "created": "2026-01-21",
+  "model_profile": "quality",
+  "workflow": {
+    "mode": "yolo",
+    "depth": "comprehensive",
+    "parallelization": true,
+    "commit_docs": true
+  },
+  "planning": {
+    "phases_range": [8, 12],
+    "plans_per_phase": [5, 10]
+  }
+}

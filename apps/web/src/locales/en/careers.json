@@ -1,0 +1,97 @@
+{
+  "title": "Careers",
+  "description": "Join our team at Jerash For Oil Field Services. Explore open positions and submit your CV.",
+  "seo": {
+    "title": "Careers | Join Our Team",
+    "description": "Build your career in the Iraqi oil industry. Current openings for field engineers, HSE officers, and technical specialists."
+  },
+  "jobListings": {
+    "title": "Open Positions",
+    "description": "Explore our current job openings and find the right opportunity for you."
+  },
+  "jobCard": {
+    "department": "Department",
+    "location": "Location",
+    "type": "Type",
+    "viewDetails": "View Details"
+  },
+  "modal": {
+    "applyButton": "Apply for this Position",
+    "closeButton": "Close"
+  },
+  "upload": {
+    "title": "Submit Your CV",
+    "description": "Interested in joining our team? Send us your CV and we'll get in touch when a suitable position opens."
+  },
+  "dropzone": {
+    "placeholder": "Drag and drop your CV here, or click to select",
+    "acceptedFormats": "Accepted formats: PDF, DOC, DOCX, JPG, PNG",
+    "maxSize": "Maximum file size: 10MB"
+  },
+  "form": {
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "cv": "Your CV",
+    "submit": "Submit Application",
+    "submitting": "Submitting..."
+  },
+  "success": {
+    "title": "Application Submitted!",
+    "message": "Thank you for your interest in joining Jerash. We have received your CV and will contact you if a suitable position becomes available."
+  },
+  "validation": {
+    "nameRequired": "Please enter your full name",
+    "emailInvalid": "Please enter a valid email address",
+    "phoneRequired": "Please enter your phone number",
+    "fileRequired": "Please upload your CV",
+    "fileTooLarge": "File size must be less than 10MB",
+    "fileInvalidType": "File type not supported. Please upload PDF, Word document, or image",
+    "fileInvalidExtension": "Invalid file extension. Accepted: .pdf, .doc, .docx, .jpg, .jpeg, .png"
+  },
+  "jobs": {
+    "petroleumEngineer": {
+      "title": "Petroleum Engineer",
+      "department": "Engineering",
+      "location": "Basrah, Iraq",
+      "type": "Full-time",
+      "description": "Design and implement efficient drilling and production operations for oil and gas extraction.",
+      "fullDescription": "We are seeking an experienced Petroleum Engineer to join our Engineering team in Basrah. The successful candidate will be responsible for designing and implementing efficient drilling and production operations.\n\nResponsibilities:\n- Design well completion and stimulation programs\n- Analyze reservoir performance and optimize production\n- Collaborate with drilling teams to ensure safe operations\n- Prepare technical reports and recommendations\n\nRequirements:\n- Bachelor's degree in Petroleum Engineering or related field\n- 5+ years of experience in oil field operations\n- Strong knowledge of drilling and completion techniques\n- Excellent communication skills in English and Arabic"
+    },
+    "hseOfficer": {
+      "title": "HSE Officer",
+      "department": "Health, Safety & Environment",
+      "location": "Erbil, Iraq",
+      "type": "Full-time",
+      "description": "Ensure compliance with HSE standards and promote a culture of safety across all operations.",
+      "fullDescription": "Join our HSE team as an HSE Officer in Erbil. You will play a critical role in maintaining our safety-first culture and ensuring compliance with international HSE standards.\n\nResponsibilities:\n- Conduct regular safety inspections and audits\n- Develop and deliver safety training programs\n- Investigate incidents and implement corrective actions\n- Monitor compliance with HSE policies and regulations\n\nRequirements:\n- Bachelor's degree in Occupational Health & Safety or related field\n- NEBOSH or equivalent certification\n- 3+ years of HSE experience in oil and gas industry\n- Strong knowledge of OSHA and ISO 45001 standards"
+    },
+    "wirelineOperator": {
+      "title": "Wireline Operator",
+      "department": "Operations",
+      "location": "Basrah, Iraq",
+      "type": "Full-time",
+      "description": "Operate wireline equipment for well logging, perforating, and intervention services.",
+      "fullDescription": "We are looking for a skilled Wireline Operator to join our Operations team in Basrah. You will be responsible for operating wireline equipment and ensuring safe execution of well services.\n\nResponsibilities:\n- Operate open-hole and cased-hole wireline equipment\n- Perform well logging and perforating operations\n- Conduct equipment maintenance and troubleshooting\n- Ensure compliance with safety procedures\n\nRequirements:\n- Technical diploma or equivalent certification\n- 3+ years of wireline operations experience\n- Valid H2S and well control certifications\n- Ability to work in a rotational field schedule"
+    },
+    "accountant": {
+      "title": "Accountant",
+      "department": "Finance",
+      "location": "Baghdad, Iraq",
+      "type": "Full-time",
+      "description": "Manage financial records, prepare reports, and ensure compliance with accounting standards.",
+      "fullDescription": "We are hiring an Accountant to join our Finance team in Baghdad. The ideal candidate will have strong analytical skills and experience in corporate accounting.\n\nResponsibilities:\n- Maintain accurate financial records and ledgers\n- Prepare monthly financial statements and reports\n- Process accounts payable and receivable\n- Assist with annual audits and tax compliance\n\nRequirements:\n- Bachelor's degree in Accounting or Finance\n- CPA or equivalent certification preferred\n- 3+ years of accounting experience\n- Proficiency in accounting software and Excel"
+    },
+    "fieldTechnician": {
+      "title": "Field Technician",
+      "department": "Technical Services",
+      "location": "Basrah, Iraq",
+      "type": "Full-time",
+      "description": "Provide technical support for field equipment maintenance and operations.",
+      "fullDescription": "Join our Technical Services team as a Field Technician in Basrah. You will provide hands-on technical support for equipment maintenance and field operations.\n\nResponsibilities:\n- Perform routine maintenance on field equipment\n- Troubleshoot mechanical and electrical issues\n- Support installation and commissioning activities\n- Document maintenance activities and reports\n\nRequirements:\n- Technical diploma in Mechanical or Electrical Engineering\n- 2+ years of field technician experience\n- Strong troubleshooting and problem-solving skills\n- Willingness to work in remote field locations"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "common": {
+    "siteName": "Jerash",
+    "allRightsReserved": "All rights reserved.",
+    "menu": "Menu",
+    "loading": "Loading..."
+  },
+  "seo": {
+    "home": {
+      "title": "Jerash For Oil Field Services | Production Operations & Wireline Solutions",
+      "description": "Excellence in oil field services across Iraq. Production operations, wireline services, well testing, and HSE-focused solutions in Basrah, Erbil & Baghdad."
+    },
+    "services": {
+      "title": "Our Services | Production, Wireline & Well Services",
+      "description": "Comprehensive oil field services: production operations, wireline logging, well testing, coiled tubing, and specialized equipment rental across Iraq."
+    },
+    "hse": {
+      "title": "HSE Commitment | Safety Excellence in Oil Field Operations",
+      "description": "Our unwavering commitment to Health, Safety & Environment. Zero-incident culture with certified personnel and rigorous safety protocols."
+    }
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content",
+    "skipToFooter": "Skip to footer",
+    "mainNavigation": "Main navigation"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "hse": "HSE",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "careers": "Careers"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "aboutTitle": "About Us",
+    "aboutText": "Jerash For Oil Field Services provides comprehensive oil field solutions with an unwavering commitment to safety and excellence.",
+    "officesTitle": "Our Offices",
+    "offices": {
+      "basrah": {
+        "name": "Basrah",
+        "address": "Basrah, Iraq",
+        "phone": "+964 XXX XXX XXXX",
+        "email": "basrah@jerash.com"
+      },
+      "erbil": {
+        "name": "Erbil",
+        "address": "Erbil, Kurdistan Region, Iraq",
+        "phone": "+964 XXX XXX XXXX",
+        "email": "erbil@jerash.com"
+      },
+      "baghdad": {
+        "name": "Baghdad",
+        "address": "Baghdad, Iraq",
+        "phone": "+964 XXX XXX XXXX",
+        "email": "baghdad@jerash.com"
+      }
+    },
+    "poBox": "P.O. Box: 28211",
+    "followUs": "Follow Us"
+  },
+  "language": {
+    "select": "Language",
+    "en": "English",
+    "ar": "عربي"
+  },
+  "home": {
+    "title": "Home",
+    "description": "Jerash For Oil Field Services - Excellence in oil field solutions",
+    "heading": "Welcome to Jerash",
+    "subheading": "",
+    "hero": {
+      "title": "Jerash For Oil Field Services",
+      "subtitle": "Excellence in oil field solutions with an unwavering commitment to safety",
+      "previous": "Previous slide",
+      "next": "Next slide",
+      "goToSlide": "Go to slide {{number}}",
+      "imageAlt": "Jerash oil field operations"
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "To be the leading provider of integrated oil field services in the region, recognized for our commitment to safety, quality, and innovation."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "Delivering exceptional oil field solutions with unwavering commitment to safety, quality, and client satisfaction. Our experienced team and global partners bring rich knowledge to accomplish projects safely and on time."
+    },
+    "values": {
+      "title": "Our Values",
+      "safety": {
+        "title": "Safety First",
+        "description": "HSE is a fundamental element of all our business activities, from the lowest levels to the highest leadership."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Delivering high quality services and accomplishing our clients' projects on time with complete satisfaction."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "Commitment to total customer care and ethical business practices in all our operations."
+      },
+      "teamwork": {
+        "title": "Teamwork",
+        "description": "We believe in teamwork and partnerships as the foundation of our success."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Continuously improving our systems, technologies, and equipment designs to serve our clients better."
+      }
+    },
+    "stats": {
+      "yearsExperience": "Years of Experience",
+      "projectsCompleted": "Projects Completed",
+      "employees": "Team Members"
+    },
+    "management": {
+      "title": "Management Philosophy",
+      "content": "Our leadership believes in empowering teams through clear career paths, appropriate training, and a culture of accountability. We pride ourselves in offering a diverse work environment where both team and individual contributions are encouraged and valued. The leadership teams have full responsibility to drive our safety culture by ensuring effective implementation of our standards."
+    },
+    "partners": {
+      "title": "Our Partners",
+      "seeAll": "View All Partners",
+      "slb": {
+        "name": "SLB (Schlumberger)",
+        "description": "Global technology leader in the energy industry, partnering with Jerash to deliver advanced oil field solutions."
+      }
+    },
+    "jointVentures": {
+      "title": "Joint Ventures",
+      "seeAll": "View All Joint Ventures",
+      "kweti": {
+        "name": "Jerash for Energy Services",
+        "description": "Strategic joint venture expanding our capabilities in energy services across the region."
+      }
+    },
+    "services": {
+      "title": "Our Services",
+      "seeAll": "View All Services",
+      "waterTreatment": "Water Treatment",
+      "maintenance": "Maintenance",
+      "monitoring": "Process Monitoring",
+      "drilling": "Drilling Services",
+      "coiledTubing": "Coiled Tubing",
+      "safetyTraining": "Safety Training",
+      "chemicals": "Chemical Services",
+      "hse": "HSE Management"
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "heading": "Page Not Found",
+    "message": "The page you are looking for doesn't exist or has been moved.",
+    "backHome": "Back to Home"
+  }
+}
