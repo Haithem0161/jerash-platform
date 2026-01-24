@@ -55,6 +55,7 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@jerash.com}
       UPLOAD_DIR: ./uploads
       MAX_FILE_SIZE: ${MAX_FILE_SIZE:-10485760}
+      BASE_URL: ${BASE_URL:-http://localhost:3000}
     ports:
       - "3000:3000"
     volumes:
