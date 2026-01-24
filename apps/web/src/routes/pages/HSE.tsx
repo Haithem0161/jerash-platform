@@ -2,14 +2,14 @@ import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common/SEO'
 import { Section } from '@/components/layout/Section'
 import { Container } from '@/components/layout/Container'
+import { FadeIn } from '@/components/animations/FadeIn'
 import { HSEHero } from '@/components/hse/HSEHero'
 import { CommitmentList } from '@/components/hse/CommitmentList'
 import { ParallaxImage } from '@/components/hse/ParallaxImage'
-// SafetyMetrics removed - values were fabricated placeholders not from company profile
-// TODO: Re-add SafetyMetrics component when real verified metrics are available from client
 
 export function HSEPage() {
   const { t: tCommon } = useTranslation()
+  const { t } = useTranslation('hse')
 
   return (
     <>
@@ -23,10 +23,27 @@ export function HSEPage() {
       {/* Full-screen hero */}
       <HSEHero />
 
-      {/* Commitment points section */}
-      <CommitmentList />
+      {/* Introduction section - from company profile */}
+      <Section>
+        <Container>
+          <div className="max-w-3xl mx-auto space-y-6 text-lg leading-relaxed">
+            <FadeIn>
+              <p>{t('intro.paragraph1')}</p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <p>{t('intro.paragraph2')}</p>
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <p>{t('intro.paragraph3')}</p>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <p>{t('intro.paragraph4')}</p>
+            </FadeIn>
+          </div>
+        </Container>
+      </Section>
 
-      {/* First parallax image break - PPE/safety equipment */}
+      {/* First parallax image break */}
       <Section fullWidth className="py-8 md:py-12">
         <Container>
           <ParallaxImage
@@ -36,7 +53,10 @@ export function HSEPage() {
         </Container>
       </Section>
 
-      {/* Second parallax image break - Team in action */}
+      {/* Commitment points section */}
+      <CommitmentList />
+
+      {/* Second parallax image break */}
       <Section fullWidth className="py-8 md:py-12">
         <Container>
           <ParallaxImage
@@ -46,18 +66,19 @@ export function HSEPage() {
         </Container>
       </Section>
 
-      {/* Third parallax image break - Safety signs/procedures */}
-      <Section fullWidth className="py-8 md:py-12">
+      {/* Policy Compliance section */}
+      <Section>
         <Container>
-          <ParallaxImage
-            src="/images/hse/safety-signs.jpg"
-            alt="Safety signage and procedures"
-          />
+          <FadeIn className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-bold text-jerash-blue mb-4">
+              {t('policy.title')}
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {t('policy.text')}
+            </p>
+          </FadeIn>
         </Container>
       </Section>
-
-      {/* SafetyMetrics removed - values were fabricated placeholders not verified from company profile */}
-      {/* TODO: Re-add SafetyMetrics when client provides verified incident-free hours, training hours, certification % */}
     </>
   )
 }

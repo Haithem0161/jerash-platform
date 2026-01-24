@@ -2,21 +2,31 @@
   "title": "Health, Safety & Environment",
   "description": "Jerash's commitment to safety excellence and HSE standards",
   "hero": {
-    "title": "Our Commitment to Safety Excellence",
-    "subtitle": "At Jerash, safety isn't just a priority—it's our foundation"
+    "title": "Health, Safety & Environment",
+    "subtitle": "HSE is a fundamental element of all of our business activities"
+  },
+  "intro": {
+    "paragraph1": "Jerash recognizes that an essential factor in its business success is the emphasis it places on Health, Safety, and Environment (HSE).",
+    "paragraph2": "HSE is a fundamental element of all of our business activities. This commitment is an integral part of the service delivery workflows encompassing the organization from the lowest levels to the highest, including all contractors.",
+    "paragraph3": "The leadership teams have full responsibility, and accountability to drive this culture by ensuring effective implementation of our standards.",
+    "paragraph4": "In addition, we must comply to legal, international, national, customer and other applicable standards and requirements whichever are more stringent. Our ultimate aim is for Jerash to be recognized wherever we operate as the leader in HSE."
   },
   "commitments": {
-    "sectionTitle": "Our HSE Commitments",
-    "1": "Zero harm philosophy - every team member returns home safely each day",
-    "2": "Continuous training and certification for all field personnel",
-    "3": "Full compliance with international HSE standards and local regulations",
-    "4": "Regular safety audits and inspections across all operations",
-    "5": "Comprehensive emergency response planning and drills",
-    "6": "Personal protective equipment (PPE) provided and enforced at all times",
-    "7": "Environmental protection through responsible waste management",
-    "8": "Hazard identification and risk assessment before every task",
-    "9": "Open reporting culture - all incidents and near-misses documented",
-    "10": "Leadership accountability - HSE is everyone's responsibility from top to bottom"
+    "sectionTitle": "We will demonstrate our commitment by",
+    "1": "Setting measurable HSE objectives as part of our business performance and monitoring them for continuous improvement",
+    "2": "Driving HSE behavior with a no defect mindset and rewarding outstanding HSE performance and initiatives",
+    "3": "Eliminating undesirable HSE events and accidents with a strong reporting culture and effective investigation of near-misses",
+    "4": "Training our workforce and contractors on our HSE standards to prevent losses",
+    "5": "Effectively communicating our HSE policies, standards, programs and performance",
+    "6": "Protecting the health, safety and security of our people and contractors at all times",
+    "7": "Meeting legal, international, national, customer and other applicable standards and requirements",
+    "8": "Protecting the environment through spill prevention, reduction of natural resource consumption and emissions, and the reduction and recycling of waste",
+    "9": "Ensuring HSE is considered while designing, engineering and deploying our services and products",
+    "10": "Maintaining an updated response plan to minimize the effect of any business disruption or crisis"
+  },
+  "policy": {
+    "title": "Policy Compliance",
+    "text": "Every Jerash employee and contractor is accountable to ensure compliance with this policy. We will update this policy regularly to ensure that it still reflects our strong commitment and focus on HSE."
   },
   "metrics": {
     "sectionTitle": "Safety Performance",

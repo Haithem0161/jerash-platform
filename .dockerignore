@@ -1,0 +1,76 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs (will be built in Docker)
+dist
+build
+.next
+.nuxt
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*.sublime-*
+
+# Environment files (use Docker env vars instead)
+.env
+.env.*
+!.env.example
+!.env.docker.example
+
+# Documentation (not needed in container)
+*.md
+!README.md
+docs
+LICENSE
+
+# Tests (not needed in production)
+test
+tests
+__tests__
+*.test.*
+*.spec.*
+coverage
+.nyc_output
+jest.config.*
+vitest.config.*
+
+# CI/CD configuration
+.github
+.gitlab-ci.yml
+.circleci
+Jenkinsfile
+.travis.yml
+
+# Docker files (don't include in build context recursively)
+docker-compose*
+.docker
+
+# Misc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+*.tgz
+*.tar.gz
+
+# Planning and research files
+.planning
+.claude
+
+# Local development
+.turbo
+.vercel
+.netlify
+
+# TypeScript build info (will be regenerated)
+tsconfig.tsbuildinfo
+*.tsbuildinfo
