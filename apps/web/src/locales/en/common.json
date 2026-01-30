@@ -58,7 +58,8 @@
       }
     },
     "poBox": "P.O. Box: 28211",
-    "followUs": "Follow Us"
+    "postOffice": "Karkh Complex Post Office",
+    "subscriber": "Jerash For Oil Field Services"
   },
   "language": {
     "select": "Language",
@@ -134,17 +135,42 @@
         "description": "Strategic joint venture expanding our capabilities in energy services across the region."
       }
     },
+    "oec": {
+      "title": "Proudly Working With",
+      "name": "Oil Exploration Company (OEC)",
+      "subtitle": "Operating under the Iraqi Ministry of Oil, delivering critical oil field services across Iraq's national exploration programs."
+    },
+    "cta": {
+      "title": "Ready to Start Your Next Project?",
+      "subtitle": "Partner with Jerash for reliable, safety-focused oil field services delivered on time and to the highest standards.",
+      "button": "Get in Touch"
+    },
     "services": {
       "title": "Our Services",
+      "subtitle": "Find out which one of our services fit the needs of your project",
       "seeAll": "View All Services",
-      "waterTreatment": "Water Treatment",
-      "maintenance": "Maintenance",
-      "monitoring": "Process Monitoring",
-      "drilling": "Drilling Services",
-      "coiledTubing": "Coiled Tubing",
-      "safetyTraining": "Safety Training",
-      "chemicals": "Chemical Services",
-      "hse": "HSE Management"
+      "items": {
+        "coiledTubing": {
+          "title": "Coiled Tubing",
+          "description": "Advanced coiled tubing services for well intervention, cleanouts, and stimulation operations with state-of-the-art equipment."
+        },
+        "drillingFluid": {
+          "title": "Drilling Fluid",
+          "description": "Complete drilling fluid solutions including mud engineering, testing, and treatment services for optimal wellbore stability and performance."
+        },
+        "cementing": {
+          "title": "Cementing",
+          "description": "Professional cementing services for primary and remedial well cementing operations meeting environmental and HPHT requirements."
+        },
+        "nitrogen": {
+          "title": "Nitrogen Services",
+          "description": "High-pressure nitrogen pumping services for well unloading, pipeline purging, and pressure testing with a world-class fleet."
+        },
+        "filtration": {
+          "title": "Filtration Services",
+          "description": "Industrial filtration solutions for produced water, completion fluids, and process streams ensuring fluid cleanliness for critical operations."
+        }
+      }
     }
   },
   "notFound": {

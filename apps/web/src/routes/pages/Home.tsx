@@ -2,11 +2,13 @@ import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common/SEO'
 import { organizationSchema } from '@/lib/structured-data'
 import {
+  CTASection,
   HeroSlideshow,
   VisionMissionSection,
   ValuesSection,
   StatsSection,
   ManagementSection,
+  OECRibbonSection,
   ServicesPreview,
   PartnersSection,
   JointVenturesSection,
@@ -34,9 +36,11 @@ export function HomePage() {
       <ValuesSection />
       <StatsSection />
       <ManagementSection />
-      <ServicesPreview />
       <PartnersSection />
+      <OECRibbonSection />
+      <ServicesPreview />
       <JointVenturesSection />
+      <CTASection />
     </>
   )
 }

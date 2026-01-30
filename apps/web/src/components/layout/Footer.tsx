@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { MapPin, Phone, Mail, Linkedin } from 'lucide-react'
+import { MapPin, Phone, Mail } from 'lucide-react'
 import { Container } from './Container'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -98,26 +98,12 @@ export function Footer() {
             </Tabs>
           </div>
 
-          {/* Social/Contact Section */}
-          {/* TODO: Update LinkedIn href with actual company URL when available */}
-          {/* TODO: Update office phone numbers in locales/en/common.json and locales/ar/common.json */}
-          {/* TODO: Verify office email addresses are correct (@jerash.com domain) */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.followUs')}</h3>
-            <div className="flex gap-2">
-              {/* TODO: Replace href="#" with actual LinkedIn company page URL */}
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-md border border-jerash-blue/20 hover:border-jerash-orange hover:bg-jerash-orange/10 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5 text-jerash-blue" />
-              </a>
-            </div>
-            <div className="text-sm text-muted-foreground">
+          {/* Postal Info */}
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.subscriber')}</h3>
+            <div className="space-y-1 text-sm text-muted-foreground">
               <p>{t('footer.poBox')}</p>
+              <p>{t('footer.postOffice')}</p>
             </div>
           </div>
         </div>

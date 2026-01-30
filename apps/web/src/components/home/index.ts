@@ -1,6 +1,8 @@
+export { CTASection } from './CTASection'
 export { HeroSlideshow } from './HeroSlideshow'
 export { JointVenturesSection } from './JointVenturesSection'
 export { ManagementSection } from './ManagementSection'
+export { OECRibbonSection } from './OECRibbonSection'
 export { MissionSection } from './MissionSection'
 export { PartnersSection } from './PartnersSection'
 export { ServicesPreview } from './ServicesPreview'

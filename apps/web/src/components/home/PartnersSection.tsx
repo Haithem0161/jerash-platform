@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { ArrowRight } from 'lucide-react'
@@ -10,71 +9,85 @@ import { cn } from '@/lib/utils'
 import { usePartners } from '@/hooks/api'
 import { useBilingual } from '@/hooks/useBilingual'
 
-/**
- * Skeleton loader for partner card
- */
-function PartnerSkeleton() {
+function PartnerLogo({
+  name,
+  logoUrl,
+  website,
+}: {
+  name: string
+  logoUrl: string
+  website: string | null
+}) {
+  const content = (
+    <div className="flex h-20 items-center justify-center px-6">
+      <img
+        src={logoUrl}
+        alt={name}
+        className="max-h-12 w-auto object-contain grayscale transition-all hover:grayscale-0"
+        loading="lazy"
+      />
+    </div>
+  )
+
+  if (website) {
+    return (
+      <a href={website} target="_blank" rel="noopener noreferrer">
+        {content}
+      </a>
+    )
+  }
+
+  return content
+}
+
+function PartnersSkeleton() {
   return (
-    <div className="rounded-lg border p-6 text-center max-w-md">
-      <Skeleton className="mx-auto mb-4 h-16 w-32" />
-      <Skeleton className="mx-auto mb-2 h-6 w-40" />
-      <Skeleton className="mx-auto h-16 w-full" />
+    <div className="flex flex-wrap items-center justify-center gap-8">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Skeleton key={i} className="h-20 w-36 rounded-lg" />
+      ))}
     </div>
   )
 }
 
 /**
- * Partners section showcasing strategic business partnerships.
- * Displays first partner from API as featured partner.
+ * Partners section showing up to 10 partner logos in a static grid.
  */
 export function PartnersSection() {
   const { t, i18n } = useTranslation()
   const rtl = isRTL(i18n.language)
   const { data: partners, isLoading } = usePartners()
   const { resolve } = useBilingual()
-  const [logoError, setLogoError] = useState(false)
 
-  // Get first partner to display
-  const featuredPartner = partners?.[0]
+  const displayPartners = partners?.slice(0, 10)
 
   return (
     <Section id="partners">
-      <FadeIn className="text-center">
+      <FadeIn className="mb-12 text-center">
         <h2 className="text-3xl font-bold md:text-4xl">
           {t('home.partners.title')}
         </h2>
       </FadeIn>
 
-      <FadeIn delay={0.1} className="mt-12 flex justify-center">
+      <FadeIn delay={0.1}>
         {isLoading ? (
-          <PartnerSkeleton />
-        ) : featuredPartner ? (
-          <div className="rounded-lg border p-6 text-center max-w-md">
-            {/* Logo with fallback */}
-            <div className="mb-4 flex justify-center">
-              {logoError ? (
-                <div className="flex h-16 w-32 items-center justify-center rounded bg-muted text-muted-foreground text-sm">
-                  Logo
-                </div>
-              ) : (
-                <img
-                  src={featuredPartner.logoUrl}
-                  alt={resolve(featuredPartner.nameEn, featuredPartner.nameAr)}
-                  className="h-16 w-auto object-contain"
-                  onError={() => setLogoError(true)}
-                />
-              )}
-            </div>
-            <h3 className="text-xl font-semibold">
-              {resolve(featuredPartner.nameEn, featuredPartner.nameAr)}
-            </h3>
-            <p className="mt-2 text-muted-foreground">
-              {resolve(featuredPartner.descriptionEn, featuredPartner.descriptionAr)}
-            </p>
+          <PartnersSkeleton />
+        ) : displayPartners && displayPartners.length > 0 ? (
+          <div className="flex flex-wrap items-center justify-center gap-8">
+            {displayPartners.map((partner) => (
+              <PartnerLogo
+                key={partner.id}
+                name={resolve(partner.nameEn, partner.nameAr)}
+                logoUrl={partner.logoUrl}
+                website={partner.website}
+              />
+            ))}
           </div>
         ) : (
-          <div className="rounded-lg border p-6 text-center max-w-md">
-            <p className="text-muted-foreground">{t('home.partners.noPartners')}</p>
+          <div className="text-center">
+            <p className="text-muted-foreground">
+              {t('home.partners.noPartners')}
+            </p>
           </div>
         )}
       </FadeIn>
