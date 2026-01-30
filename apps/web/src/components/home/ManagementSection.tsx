@@ -26,7 +26,7 @@ export function ManagementSection() {
         {/* Image - 40% (2 columns) */}
         <FadeIn direction="left" className="md:col-span-2">
           <img
-            src="/management.png"
+            src="/management.jpg"
             alt={t("home.management.title")}
             className="aspect-[4/3] w-full rounded-lg object-cover"
           />

@@ -14,7 +14,7 @@ export function OECRibbonSection() {
     <Section fullWidth className="relative overflow-hidden py-12 md:py-16">
       {/* Background image */}
       <img
-        src="/omb.png"
+        src="/omb.jpg"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"

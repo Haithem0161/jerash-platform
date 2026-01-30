@@ -19,7 +19,7 @@ export function CTASection() {
     <Section id="cta" fullWidth className="relative overflow-hidden">
       {/* Background image */}
       <img
-        src="/cta.png"
+        src="/cta.jpg"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 h-full w-full object-cover"
