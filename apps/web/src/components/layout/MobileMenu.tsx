@@ -34,14 +34,17 @@ export function MobileMenu() {
       <SheetTrigger asChild>
         <Button
           variant="ghost"
-          size="icon"
-          className="md:hidden"
+          size="icon-sm"
+          className="text-white/70 hover:bg-white/10 hover:text-white md:hidden"
           aria-label={t('common.menu')}
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </SheetTrigger>
-      <SheetContent side={side} className="w-[280px] sm:w-[320px]">
+      <SheetContent
+        side={side}
+        className="w-[280px] border-white/10 bg-background/95 backdrop-blur-xl sm:w-[320px]"
+      >
         <SheetHeader>
           <SheetTitle asChild>
             <Link
@@ -54,12 +57,14 @@ export function MobileMenu() {
                 alt={t('common.siteName')}
                 className="h-8 w-auto"
               />
-              <span className="font-bold text-lg">{t('common.siteName')}</span>
+              <span className="text-lg font-bold text-white">
+                {t('common.siteName')}
+              </span>
             </Link>
           </SheetTitle>
         </SheetHeader>
 
-        <nav className="flex flex-col gap-1 mt-6 px-2">
+        <nav className="mt-6 flex flex-col gap-1 px-2">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
@@ -68,10 +73,10 @@ export function MobileMenu() {
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center py-3 px-4 rounded-md text-sm font-medium transition-colors',
+                  'flex items-center rounded-lg px-4 py-3 text-sm font-medium transition-colors',
                   isActive
-                    ? 'text-primary bg-accent'
-                    : 'text-foreground hover:text-primary hover:bg-accent/50'
+                    ? 'bg-white/5 text-jerash-orange'
+                    : 'text-white/70 hover:bg-white/5 hover:text-white',
                 )
               }
             >
@@ -81,7 +86,7 @@ export function MobileMenu() {
         </nav>
 
         <div className="mt-auto px-4 pb-4">
-          <div className="pt-4 border-t">
+          <div className="border-t border-white/10 pt-4">
             <LanguageSwitcher />
           </div>
         </div>

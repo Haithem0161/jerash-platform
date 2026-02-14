@@ -1,4 +1,7 @@
+import { useRef, useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SEO } from '@/components/common/SEO'
 import { organizationSchema } from '@/lib/structured-data'
 import {
@@ -14,12 +17,30 @@ import {
   JointVenturesSection,
 } from '@/components/home'
 
+gsap.registerPlugin(ScrollTrigger)
+
 /**
  * Homepage with all sections assembled.
- * Section order: Hero -> Vision -> Mission -> Values -> Stats -> Management -> Services -> Partners -> JV
+ * GSAP context wraps all sections for proper cleanup on unmount.
  */
 export function HomePage() {
   const { t } = useTranslation()
+  const mainRef = useRef<HTMLDivElement>(null)
+
+  // GSAP context for proper cleanup of all ScrollTriggers
+  useLayoutEffect(() => {
+    if (!mainRef.current) return
+
+    const ctx = gsap.context(() => {
+      // Individual sections handle their own GSAP setup.
+      // This context ensures cleanup when navigating away.
+    }, mainRef)
+
+    return () => {
+      ctx.revert()
+      ScrollTrigger.refresh()
+    }
+  }, [])
 
   return (
     <>
@@ -31,16 +52,18 @@ export function HomePage() {
         structuredData={organizationSchema}
       />
 
-      <HeroSlideshow />
-      <VisionMissionSection />
-      <ValuesSection />
-      <StatsSection />
-      <ManagementSection />
-      <PartnersSection />
-      <OECRibbonSection />
-      <ServicesPreview />
-      <JointVenturesSection />
-      <CTASection />
+      <div ref={mainRef}>
+        <HeroSlideshow />
+        <VisionMissionSection />
+        <ValuesSection />
+        <StatsSection />
+        <ManagementSection />
+        <PartnersSection />
+        <OECRibbonSection />
+        <ServicesPreview />
+        <JointVenturesSection />
+        <CTASection />
+      </div>
     </>
   )
 }

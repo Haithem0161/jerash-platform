@@ -20,35 +20,35 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer id="footer" className="bg-muted/30 border-t">
+    <footer id="footer" className="border-t border-white/5">
       <Container>
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12">
           {/* About Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.aboutTitle')}</h3>
+            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.aboutTitle')}</h3>
             <div className="flex items-center gap-2">
               <img
                 src="/Jerash-logo-color.png"
                 alt={t('common.siteName')}
                 className="h-8 w-auto"
               />
-              <span className="font-bold">{t('common.siteName')}</span>
+              <span className="font-bold text-white">{t('common.siteName')}</span>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-sm text-white/50 leading-relaxed">
               {t('footer.aboutText')}
             </p>
           </div>
 
           {/* Quick Links Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.quickLinks')}</h3>
+            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.quickLinks')}</h3>
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-sm text-muted-foreground hover:text-jerash-orange transition-colors"
+                  className="text-sm text-white/50 hover:text-jerash-orange transition-colors"
                 >
                   {t(link.key)}
                 </Link>
@@ -58,7 +58,7 @@ export function Footer() {
 
           {/* Offices Section with Tabs */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.officesTitle')}</h3>
+            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.officesTitle')}</h3>
             <Tabs defaultValue="basrah" className="w-full">
               <TabsList className="w-full grid grid-cols-3">
                 {officeKeys.map((office) => (
@@ -71,7 +71,7 @@ export function Footer() {
                 <TabsContent key={office} value={office} className="mt-4 space-y-3">
                   <div className="flex items-start gap-2 text-sm">
                     <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-jerash-orange" />
-                    <span className="text-muted-foreground">
+                    <span className="text-white/50">
                       {t(`footer.offices.${office}.address`)}
                     </span>
                   </div>
@@ -79,7 +79,7 @@ export function Footer() {
                     <Phone className="h-4 w-4 shrink-0 text-jerash-orange" />
                     <a
                       href={`tel:${t(`footer.offices.${office}.phone`)}`}
-                      className="text-muted-foreground hover:text-jerash-orange transition-colors"
+                      className="text-white/50 hover:text-jerash-orange transition-colors"
                     >
                       {t(`footer.offices.${office}.phone`)}
                     </a>
@@ -88,7 +88,7 @@ export function Footer() {
                     <Mail className="h-4 w-4 shrink-0 text-jerash-orange" />
                     <a
                       href={`mailto:${t(`footer.offices.${office}.email`)}`}
-                      className="text-muted-foreground hover:text-jerash-orange transition-colors"
+                      className="text-white/50 hover:text-jerash-orange transition-colors"
                     >
                       {t(`footer.offices.${office}.email`)}
                     </a>
@@ -100,8 +100,8 @@ export function Footer() {
 
           {/* Postal Info */}
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-jerash-blue">{t('footer.subscriber')}</h3>
-            <div className="space-y-1 text-sm text-muted-foreground">
+            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.subscriber')}</h3>
+            <div className="space-y-1 text-sm text-white/50">
               <p>{t('footer.poBox')}</p>
               <p>{t('footer.postOffice')}</p>
             </div>
@@ -111,9 +111,9 @@ export function Footer() {
         {/* Copyright Row */}
         <div className="h-px w-full bg-linear-to-r from-transparent via-jerash-orange/30 to-transparent" />
         <div className="py-6 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/50">
             &copy; {currentYear}{' '}
-            <span className="text-jerash-blue font-medium">{t('common.siteName')}</span>.{' '}
+            <span className="text-white font-medium">{t('common.siteName')}</span>.{' '}
             {t('common.allRightsReserved')}
           </p>
         </div>

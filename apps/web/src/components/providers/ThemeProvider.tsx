@@ -6,10 +6,10 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
-    // Force light mode
+    // Force dark mode
     const root = window.document.documentElement
-    root.classList.remove('dark')
-    root.classList.add('light')
+    root.classList.remove('light')
+    root.classList.add('dark')
   }, [])
 
   return <>{children}</>

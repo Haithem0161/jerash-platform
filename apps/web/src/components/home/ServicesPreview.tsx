@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'motion/react'
@@ -9,14 +9,17 @@ import {
   Layers,
   FlaskConical,
   Pipette,
-  Plus,
-  X,
   type LucideIcon,
 } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Section } from '@/components/layout/Section'
 import { FadeIn } from '@/components/animations/FadeIn'
 import { isRTL } from '@/lib/i18n'
+import { usePrefersReducedMotion, useIsDesktop } from '@/hooks'
 import { cn } from '@/lib/utils'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface ServiceItem {
   key: string
@@ -64,143 +67,192 @@ const SERVICES: ServiceItem[] = [
   },
 ]
 
-function AccordionItem({
-  icon: Icon,
-  title,
-  description,
-  isOpen,
-  onToggle,
-}: {
-  icon: LucideIcon
-  title: string
-  description: string
-  isOpen: boolean
-  onToggle: () => void
-}) {
-  return (
-    <div className="border-b border-border">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center gap-4 py-5 text-start"
-      >
-        <div
-          className={cn(
-            'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-colors',
-            isOpen
-              ? 'border-jerash-orange/20 bg-jerash-orange/10'
-              : 'border-border bg-muted/50'
-          )}
-        >
-          <Icon
-            className={cn(
-              'h-5 w-5 transition-colors',
-              isOpen ? 'text-jerash-orange' : 'text-muted-foreground'
-            )}
-          />
-        </div>
-        <span className="flex-1 text-lg font-semibold text-foreground">
-          {title}
-        </span>
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center">
-          {isOpen ? (
-            <X className="h-5 w-5 text-muted-foreground" />
-          ) : (
-            <Plus className="h-5 w-5 text-muted-foreground" />
-          )}
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 ps-14 text-base leading-relaxed text-muted-foreground">
-              {description}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
-}
-
 /**
- * Services section for homepage.
- * Split layout: image (left) + accordion (right).
- * Clicking an accordion item crossfades the image.
+ * Full-screen tabbed services showcase.
+ * Desktop: GSAP ScrollTrigger pins section, snaps between 5 service panels.
+ * Mobile: Stacked cards with FadeIn reveals.
  */
 export function ServicesPreview() {
   const { t, i18n } = useTranslation()
   const rtl = isRTL(i18n.language)
   const [activeIndex, setActiveIndex] = useState(0)
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const isDesktop = useIsDesktop()
+  const sectionRef = useRef<HTMLDivElement>(null)
 
-  const activeImage =
-    activeIndex >= 0
-      ? SERVICES[activeIndex].image
-      : SERVICES[0].image
+  // GSAP ScrollTrigger for desktop snap-scroll
+  useEffect(() => {
+    if (!isDesktop || prefersReducedMotion || !sectionRef.current) return
 
+    const section = sectionRef.current
+    const totalPanels = SERVICES.length
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: `+=${(totalPanels - 1) * 100}%`,
+        pin: true,
+        scrub: 0.5,
+        snap: {
+          snapTo: 1 / (totalPanels - 1),
+          duration: 0.5,
+          ease: 'power2.inOut',
+        },
+        onUpdate: (self) => {
+          const idx = Math.round(self.progress * (totalPanels - 1))
+          setActiveIndex(idx)
+        },
+      })
+    }, section)
+
+    return () => ctx.revert()
+  }, [isDesktop, prefersReducedMotion])
+
+  // Desktop full-screen view
+  if (isDesktop && !prefersReducedMotion) {
+    const activeService = SERVICES[activeIndex]
+    const ActiveIcon = activeService.icon
+
+    return (
+      <Section id="services" fullWidth className="p-0">
+        <div
+          ref={sectionRef}
+          className="relative h-screen w-full overflow-hidden"
+          style={{ height: `${SERVICES.length * 100}vh` }}
+        >
+          <div className="sticky top-0 h-screen w-full">
+            {/* Background image with crossfade */}
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeIndex}
+                src={activeService.image}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              />
+            </AnimatePresence>
+
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/60" />
+
+            {/* Content card - bottom start */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className={cn(
+                  'glass absolute bottom-16 max-w-lg rounded-2xl p-8',
+                  'start-16',
+                )}
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-jerash-orange/20 bg-jerash-orange/10">
+                  <ActiveIcon className="h-6 w-6 text-jerash-orange" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">
+                  {t(activeService.titleKey)}
+                </h3>
+                <p className="mt-3 leading-relaxed text-white/60">
+                  {t(activeService.descKey)}
+                </p>
+                {activeIndex === SERVICES.length - 1 && (
+                  <Link
+                    to="/services"
+                    className="mt-6 inline-flex items-center gap-2 text-sm text-jerash-orange transition-colors hover:text-jerash-orange-light"
+                  >
+                    {t('home.services.seeAll')}
+                    <ArrowRight
+                      className={cn('h-4 w-4', rtl && 'rotate-180')}
+                    />
+                  </Link>
+                )}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Vertical dot indicators - end side */}
+            <div
+              className={cn(
+                'absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3',
+                'end-8',
+              )}
+            >
+              {SERVICES.map((_, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    'h-2 w-2 rounded-full transition-all duration-300',
+                    activeIndex === index
+                      ? 'scale-125 bg-jerash-orange'
+                      : 'bg-white/30',
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Service badge */}
+            <div className="absolute start-16 top-16">
+              <span className="rounded-full border border-jerash-orange/20 bg-jerash-orange/10 px-4 py-1.5 text-sm font-medium text-jerash-orange">
+                {t('nav.services')}
+              </span>
+            </div>
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  // Mobile / reduced motion: stacked cards
   return (
     <Section id="services">
       <FadeIn className="mb-12 text-center">
         <span className="mb-4 inline-block rounded-full border border-jerash-orange/20 bg-jerash-orange/10 px-4 py-1.5 text-sm font-medium text-jerash-orange">
           {t('nav.services')}
         </span>
-        <h2 className="text-3xl font-bold md:text-4xl">
+        <h2 className="text-3xl font-bold text-white md:text-4xl">
           {t('home.services.title')}
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-          {t('home.services.subtitle')}
-        </p>
       </FadeIn>
 
-      <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2">
-        {/* Image with crossfade */}
-        <FadeIn direction="up" className="order-1">
-          <div className="relative aspect-4/3 overflow-hidden rounded-3xl lg:aspect-auto lg:h-full lg:min-h-[480px]">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={activeImage}
-                src={activeImage}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-              />
-            </AnimatePresence>
-          </div>
-        </FadeIn>
-
-        {/* Accordion */}
-        <FadeIn direction="up" delay={0.1} className="order-2">
-          <div className="flex flex-col border-t border-border">
-            {SERVICES.map((cat, i) => (
-              <AccordionItem
-                key={cat.key}
-                icon={cat.icon}
-                title={t(cat.titleKey)}
-                description={t(cat.descKey)}
-                isOpen={activeIndex === i}
-                onToggle={() =>
-                  setActiveIndex(i === activeIndex ? -1 : i)
-                }
-              />
-            ))}
-          </div>
-        </FadeIn>
+      <div className="space-y-6">
+        {SERVICES.map((service) => {
+          const Icon = service.icon
+          return (
+            <FadeIn key={service.key}>
+              <div className="relative overflow-hidden rounded-2xl">
+                <img
+                  src={service.image}
+                  alt=""
+                  className="h-64 w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-jerash-orange/20 bg-jerash-orange/10">
+                    <Icon className="h-5 w-5 text-jerash-orange" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">
+                    {t(service.titleKey)}
+                  </h3>
+                  <p className="mt-2 text-sm text-white/60">
+                    {t(service.descKey)}
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          )
+        })}
       </div>
 
       <FadeIn delay={0.2} className="mt-12 text-center">
         <Link
           to="/services"
-          className="linkHover inline-flex items-center gap-2 text-primary"
+          className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-jerash-orange"
         >
           {t('home.services.seeAll')}
           <ArrowRight className={cn('h-4 w-4', rtl && 'rotate-180')} />

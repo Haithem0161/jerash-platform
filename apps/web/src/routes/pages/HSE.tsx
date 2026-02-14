@@ -3,6 +3,8 @@ import { SEO } from '@/components/common/SEO'
 import { Section } from '@/components/layout/Section'
 import { Container } from '@/components/layout/Container'
 import { FadeIn } from '@/components/animations/FadeIn'
+import { TextReveal } from '@/components/animations/TextReveal'
+import { GlowBorder } from '@/components/animations/GlowBorder'
 import { HSEHero } from '@/components/hse/HSEHero'
 import { CommitmentList } from '@/components/hse/CommitmentList'
 import { ParallaxImage } from '@/components/hse/ParallaxImage'
@@ -23,10 +25,10 @@ export function HSEPage() {
       {/* Full-screen hero */}
       <HSEHero />
 
-      {/* Introduction section - from company profile */}
+      {/* Introduction section */}
       <Section>
         <Container>
-          <div className="max-w-3xl mx-auto space-y-6 text-lg leading-relaxed">
+          <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-white/60">
             <FadeIn>
               <p>{t('intro.paragraph1')}</p>
             </FadeIn>
@@ -69,13 +71,20 @@ export function HSEPage() {
       {/* Policy Compliance section */}
       <Section>
         <Container>
-          <FadeIn className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-jerash-blue mb-4">
-              {t('policy.title')}
-            </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              {t('policy.text')}
-            </p>
+          <FadeIn className="mx-auto max-w-3xl">
+            <GlowBorder color="blue" intensity={0.2}>
+              <div className="glass rounded-2xl p-8 text-center md:p-12">
+                <TextReveal
+                  as="h2"
+                  className="mb-4 text-2xl font-bold text-white md:text-3xl"
+                >
+                  {t('policy.title')}
+                </TextReveal>
+                <p className="text-lg leading-relaxed text-white/60">
+                  {t('policy.text')}
+                </p>
+              </div>
+            </GlowBorder>
           </FadeIn>
         </Container>
       </Section>

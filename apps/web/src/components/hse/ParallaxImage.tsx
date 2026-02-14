@@ -39,7 +39,7 @@ export function ParallaxImage({
     <div
       ref={ref}
       className={cn(
-        "relative h-80 md:h-96 overflow-hidden rounded-lg border border-jerash-blue/10",
+        "relative h-80 md:h-96 overflow-hidden rounded-2xl border border-white/10",
         className
       )}
     >

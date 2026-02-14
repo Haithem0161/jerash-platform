@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { Section } from '@/components/layout/Section'
-import { AnimatedCounter, StaggerContainer, StaggerItem } from '@/components/animations'
+import { AnimatedCounter } from '@/components/animations'
+import { Marquee } from '@/components/animations/Marquee'
+import { FadeIn } from '@/components/animations/FadeIn'
 
 const stats = [
   { key: 'yearsExperience', value: 15, suffix: '+' },
@@ -9,27 +11,33 @@ const stats = [
 ] as const
 
 /**
- * Statistics section with animated counters.
- * Displays years of experience, projects completed, and team members.
- * Counters animate up from zero when scrolled into view.
+ * Statistics section with horizontal marquee ticker.
+ * Oversized orange numbers scroll continuously across the viewport.
  */
 export function StatsSection() {
   const { t } = useTranslation()
 
   return (
-    <Section id="stats" className="bg-muted/50">
-      <StaggerContainer className="grid grid-cols-1 gap-8 md:grid-cols-3">
-        {stats.map((stat) => (
-          <StaggerItem key={stat.key} className="text-center">
-            <div className="text-5xl font-bold md:text-6xl">
-              <AnimatedCounter to={stat.value} suffix={stat.suffix} />
+    <Section id="stats" fullWidth className="py-8 md:py-12">
+      <FadeIn>
+        <div className="border-y border-white/10">
+          <Marquee speed={35} pauseOnHover>
+            <div className="flex items-baseline gap-16 px-8 py-6">
+              {stats.map((stat) => (
+                <div key={stat.key} className="flex items-baseline gap-4">
+                  <span className="text-[10vw] font-bold leading-none text-jerash-orange lg:text-[7vw]">
+                    <AnimatedCounter to={stat.value} suffix={stat.suffix} />
+                  </span>
+                  <span className="text-sm font-medium uppercase tracking-widest text-white/40">
+                    {t(`home.stats.${stat.key}`)}
+                  </span>
+                </div>
+              ))}
+              <span className="h-2 w-2 shrink-0 rounded-full bg-jerash-orange/50" />
             </div>
-            <p className="mt-2 text-lg text-muted-foreground">
-              {t(`home.stats.${stat.key}`)}
-            </p>
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
+          </Marquee>
+        </div>
+      </FadeIn>
     </Section>
   )
 }

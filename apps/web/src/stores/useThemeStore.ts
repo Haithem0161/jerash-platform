@@ -1,18 +1,18 @@
 import { create } from 'zustand'
 
-type Theme = 'light'
+type Theme = 'dark'
 
 interface ThemeState {
   theme: Theme
 }
 
 export const useThemeStore = create<ThemeState>()(() => ({
-  theme: 'light',
+  theme: 'dark',
 }))
 
-// Ensure light mode is always applied
+// Ensure dark mode is always applied
 if (typeof window !== 'undefined') {
   const root = window.document.documentElement
-  root.classList.remove('dark')
-  root.classList.add('light')
+  root.classList.remove('light')
+  root.classList.add('dark')
 }

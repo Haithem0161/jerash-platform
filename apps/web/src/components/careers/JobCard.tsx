@@ -1,5 +1,5 @@
 import { MapPin, Building2, Briefcase } from 'lucide-react'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { GlowBorder } from '@/components/animations/GlowBorder'
 import { cn } from '@/lib/utils'
 
 interface JobCardProps {
@@ -18,25 +18,25 @@ interface JobCardProps {
 }
 
 /**
- * Individual job card for the job listings grid.
- * Shows job title, department, location, type, and brief description.
- * Hover effect uses brightness-110 consistent with gallery pattern.
+ * Glass-styled job card with glow border on hover.
+ * Shows job title, department/location/type badges, and brief description.
  */
 export function JobCard({ title, department, location, type, description, onClick }: JobCardProps) {
   return (
-    <Card
-      className={cn(
-        'cursor-pointer transition-all duration-200',
-        'hover:border-jerash-orange hover:shadow-md'
-      )}
-      onClick={onClick}
-    >
-      <CardHeader>
-        <CardTitle className="text-lg text-jerash-blue">{title}</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <GlowBorder color="orange" intensity={0} className="h-full">
+      <button
+        type="button"
+        onClick={onClick}
+        className={cn(
+          'glass glass-hover flex h-full w-full flex-col items-start gap-4 rounded-2xl p-6 text-start',
+          'transition-all duration-300',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+        )}
+      >
+        <h3 className="text-lg font-semibold text-white">{title}</h3>
+
         {/* Badges row */}
-        <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-white/50">
           <span className="inline-flex items-center gap-1">
             <Building2 className="size-4 text-jerash-orange" />
             {department}
@@ -52,10 +52,10 @@ export function JobCard({ title, department, location, type, description, onClic
         </div>
 
         {/* Brief description */}
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-sm leading-relaxed text-white/50 line-clamp-2">
           {description}
         </p>
-      </CardContent>
-    </Card>
+      </button>
+    </GlowBorder>
   )
 }

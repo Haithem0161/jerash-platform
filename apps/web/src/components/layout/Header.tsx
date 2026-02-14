@@ -12,49 +12,48 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 200)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Direction is managed at the document level by RootLayout via useLayoutEffect
-  // so we don't need a key to force re-render on language change
   return (
-    <div
-      className={cn(
-        'fixed top-0 inset-x-0 z-50 flex justify-center transition-all duration-300',
-        isScrolled ? 'px-4' : 'px-0'
-      )}
-    >
+    <div className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
       <header
         className={cn(
-          'w-full backdrop-blur transition-all duration-300',
+          'rounded-full transition-all duration-500 ease-out',
           isScrolled
-            ? 'mt-3 max-w-6xl rounded-2xl border bg-background/70 shadow-lg'
-            : 'max-w-full border-b bg-background/50'
+            ? 'max-w-2xl border border-white/15 bg-white/8 shadow-2xl backdrop-blur-xl'
+            : 'max-w-3xl border border-white/10 bg-white/5 backdrop-blur-sm',
         )}
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <img
-                src="/Jerash-logo-color.png"
-                alt={t('common.siteName', 'Jerash')}
-                className="h-10 w-auto"
-              />
-            </Link>
+        <div className="flex items-center gap-1 px-3 py-2 sm:px-5">
+          {/* Logo - only visible when scrolled */}
+          <Link
+            to="/"
+            className={cn(
+              'flex shrink-0 items-center transition-all duration-500',
+              isScrolled
+                ? 'me-2 w-auto scale-100 opacity-100'
+                : 'w-0 scale-75 overflow-hidden opacity-0',
+            )}
+          >
+            <img
+              src="/Jerash-logo-color.png"
+              alt={t('common.siteName', 'Jerash')}
+              className="h-7 w-auto"
+            />
+          </Link>
 
-            {/* Navigation - Desktop */}
-            <Navigation />
+          {/* Navigation - Desktop */}
+          <Navigation />
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
-              <MobileMenu />
-              <LanguageSwitcher />
-            </div>
+          {/* Actions */}
+          <div className="flex items-center gap-1">
+            <MobileMenu />
+            <LanguageSwitcher />
           </div>
         </div>
       </header>

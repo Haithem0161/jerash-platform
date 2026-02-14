@@ -1,179 +1,263 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { useTranslation } from "react-i18next";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { isRTL } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
-import { useHeroSlides } from "@/hooks/api";
-import { useBilingual } from "@/hooks/useBilingual";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { useTranslation } from 'react-i18next'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { isRTL } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
+import { useHeroSlides } from '@/hooks/api'
+import { useBilingual } from '@/hooks/useBilingual'
+import { usePrefersReducedMotion } from '@/hooks'
+import { Skeleton } from '@/components/ui/skeleton'
 
-const SLIDE_INTERVAL = 7000; // 7 seconds
+gsap.registerPlugin(ScrollTrigger)
 
-/**
- * Skeleton loader for hero slideshow
- */
+const SLIDE_INTERVAL = 7000
+
 function HeroSkeleton() {
   return (
-    <section className="flex h-[94vh] w-full items-center justify-center px-[1vw] pt-[8vh]">
-      <div className="relative h-full w-full overflow-hidden rounded-3xl bg-muted">
-        <Skeleton className="absolute inset-0" />
-        <div className="absolute inset-0 flex items-end pb-24">
-          <div className="container mx-auto px-8">
-            <div className="max-w-xl">
-              <Skeleton className="mb-3 h-10 w-96" />
-              <Skeleton className="h-6 w-64" />
-            </div>
-          </div>
-        </div>
+    <section className="relative h-[200vh]">
+      <div className="flex h-screen w-full items-center justify-center">
+        <Skeleton className="h-full w-full" />
       </div>
     </section>
-  );
+  )
 }
 
 export function HeroSlideshow() {
-  const { t, i18n } = useTranslation();
-  const rtl = isRTL(i18n.language);
-  const { data: slides, isLoading } = useHeroSlides();
-  const { resolve } = useBilingual();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const { t, i18n } = useTranslation()
+  const rtl = isRTL(i18n.language)
+  const { data: slides, isLoading } = useHeroSlides()
+  const { resolve } = useBilingual()
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const prefersReducedMotion = usePrefersReducedMotion()
 
-  // Resolve bilingual content for slides
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const imageContainerRef = useRef<HTMLDivElement>(null)
+  const subtitleRef = useRef<HTMLDivElement>(null)
+  const accentRef = useRef<HTMLDivElement>(null)
+
   const resolvedSlides = useMemo(() => {
-    if (!slides) return [];
+    if (!slides) return []
     return slides.map((slide) => ({
       id: slide.id,
       imageUrl: slide.imageUrl,
       title: resolve(slide.titleEn, slide.titleAr),
       subtitle: resolve(slide.subtitleEn, slide.subtitleAr),
-    }));
-  }, [slides, resolve]);
+    }))
+  }, [slides, resolve])
 
-  const slideCount = resolvedSlides.length;
+  const slideCount = resolvedSlides.length
 
   const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index);
-  }, []);
+    setCurrentSlide(index)
+  }, [])
 
   const goToPrevious = useCallback(() => {
-    if (slideCount === 0) return;
-    setCurrentSlide((prev) => (prev === 0 ? slideCount - 1 : prev - 1));
-  }, [slideCount]);
+    if (slideCount === 0) return
+    setCurrentSlide((prev) => (prev === 0 ? slideCount - 1 : prev - 1))
+  }, [slideCount])
 
   const goToNext = useCallback(() => {
-    if (slideCount === 0) return;
-    setCurrentSlide((prev) => (prev === slideCount - 1 ? 0 : prev + 1));
-  }, [slideCount]);
+    if (slideCount === 0) return
+    setCurrentSlide((prev) => (prev === slideCount - 1 ? 0 : prev + 1))
+  }, [slideCount])
 
   // Auto-advance slides
   useEffect(() => {
-    if (slideCount === 0) return;
-    const interval = setInterval(goToNext, SLIDE_INTERVAL);
-    return () => clearInterval(interval);
-  }, [goToNext, slideCount]);
+    if (slideCount === 0) return
+    const interval = setInterval(goToNext, SLIDE_INTERVAL)
+    return () => clearInterval(interval)
+  }, [goToNext, slideCount])
 
-  // Preload first two hero images for smooth initial transition
+  // Preload first two hero images
   useEffect(() => {
-    if (!resolvedSlides.length) return;
+    if (!resolvedSlides.length) return
     resolvedSlides.slice(0, 2).forEach((slide) => {
-      const img = new Image();
-      img.src = slide.imageUrl;
-    });
-  }, [resolvedSlides]);
+      const img = new Image()
+      img.src = slide.imageUrl
+    })
+  }, [resolvedSlides])
+
+  // GSAP scroll-reveal animation
+  useEffect(() => {
+    if (prefersReducedMotion || !sectionRef.current) return
+
+    const section = sectionRef.current
+    const title = titleRef.current
+    const overlay = overlayRef.current
+    const imgContainer = imageContainerRef.current
+    const subtitle = subtitleRef.current
+    const accent = accentRef.current
+
+    if (!title || !overlay || !imgContainer || !subtitle || !accent) return
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: '+=100%',
+          pin: true,
+          scrub: 1,
+          pinSpacing: true,
+        },
+      })
+
+      // Title shrinks, rises, and fades
+      tl.fromTo(
+        title,
+        { scale: 1, y: 0, opacity: 1 },
+        { scale: 0.4, y: '-30vh', opacity: 0, ease: 'none' },
+        0,
+      )
+
+      // Background image unblurs and unscales
+      tl.fromTo(
+        imgContainer,
+        { filter: 'blur(8px)', scale: 1.1 },
+        { filter: 'blur(0px)', scale: 1, ease: 'none' },
+        0,
+      )
+
+      // Overlay fades partially
+      tl.fromTo(
+        overlay,
+        { opacity: 0.85 },
+        { opacity: 0.3, ease: 'none' },
+        0,
+      )
+
+      // Subtitle fades in during last 40% of scroll
+      tl.fromTo(
+        subtitle,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, ease: 'power2.out' },
+        0.6,
+      )
+
+      // Accent line animates width
+      tl.fromTo(
+        accent,
+        { width: 0 },
+        { width: 64, ease: 'power2.out' },
+        0.6,
+      )
+    }, section)
+
+    return () => ctx.revert()
+  }, [prefersReducedMotion, resolvedSlides.length])
 
   if (isLoading || resolvedSlides.length === 0) {
-    return <HeroSkeleton />;
+    return <HeroSkeleton />
   }
 
-  const currentSlideData = resolvedSlides[currentSlide];
+  const currentSlideData = resolvedSlides[currentSlide]
 
   return (
-    <section className="flex h-[94vh] w-full items-center justify-center px-[1vw] pt-[8vh]">
-      <div className="relative h-full w-full overflow-hidden rounded-3xl">
-        {/* Slides */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            {/* Hero Image with subtle Ken Burns */}
-            <img
-              src={currentSlideData.imageUrl}
-              alt={currentSlideData.title}
-              className="animate-ken-burns-subtle absolute inset-0 h-full w-full object-cover"
-              fetchPriority={currentSlide === 0 ? "high" : "auto"}
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Gradient Overlay with brand color accent */}
-        <div className="absolute inset-0 bg-linear-to-t from-jerash-blue-dark/80 via-black/30 to-transparent" />
-
-        {/* Hero Text */}
-        <div className="absolute inset-0 flex items-end pb-24">
-          <div className="container mx-auto px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="max-w-xl text-white"
-            >
-              <h1 className="mb-3 text-2xl font-medium tracking-tight md:text-3xl lg:text-4xl">
-                {currentSlideData.title}
-              </h1>
-              {currentSlideData.subtitle && (
-                <p className="text-sm font-light text-white/80 md:text-base">
-                  {currentSlideData.subtitle}
-                </p>
-              )}
-              <div className="mt-4 h-px w-16 bg-jerash-orange" />
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={rtl ? goToNext : goToPrevious}
-          aria-label={t("home.hero.previous")}
-          className={cn(
-            "absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20",
-            "start-4",
-          )}
+    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
+      {/* Background slide images */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          className="absolute inset-0"
+          ref={imageContainerRef}
         >
-          <ChevronLeft className={cn("h-5 w-5", rtl && "rotate-180")} />
-        </button>
-        <button
-          onClick={rtl ? goToPrevious : goToNext}
-          aria-label={t("home.hero.next")}
-          className={cn(
-            "absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20",
-            "end-4",
-          )}
-        >
-          <ChevronRight className={cn("h-5 w-5", rtl && "rotate-180")} />
-        </button>
+          <img
+            src={currentSlideData.imageUrl}
+            alt={currentSlideData.title}
+            className="absolute inset-0 h-full w-full object-cover"
+            fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+            style={
+              prefersReducedMotion
+                ? undefined
+                : { filter: 'blur(8px)', transform: 'scale(1.1)' }
+            }
+          />
+        </motion.div>
+      </AnimatePresence>
 
-        {/* Dot Indicators */}
-        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
-          {resolvedSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              aria-label={t("home.hero.goToSlide", { number: index + 1 })}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300",
-                currentSlide === index
-                  ? "w-6 bg-jerash-orange"
-                  : "w-1.5 bg-white/50 hover:bg-white/80",
-              )}
-            />
-          ))}
+      {/* Gradient overlay */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 bg-linear-to-t from-[oklch(0.08_0.02_250)] via-black/50 to-black/30"
+        style={prefersReducedMotion ? { opacity: 0.5 } : { opacity: 0.85 }}
+      />
+
+      {/* Centered title - large, transforms on scroll */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <h1
+          ref={titleRef}
+          className="max-w-4xl px-8 text-center text-[10vw] font-bold leading-none tracking-tighter text-white md:text-[8vw] lg:text-[6vw]"
+        >
+          {currentSlideData.title}
+        </h1>
+      </div>
+
+      {/* Subtitle + accent (revealed during scroll) */}
+      <div className="absolute inset-x-0 bottom-28 flex flex-col items-center text-center">
+        <div
+          ref={subtitleRef}
+          style={prefersReducedMotion ? undefined : { opacity: 0 }}
+        >
+          {currentSlideData.subtitle && (
+            <p className="mx-auto max-w-xl px-8 text-sm text-white/70 md:text-base">
+              {currentSlideData.subtitle}
+            </p>
+          )}
         </div>
+        <div
+          ref={accentRef}
+          className="mt-4 h-px bg-jerash-orange"
+          style={prefersReducedMotion ? { width: 64 } : { width: 0 }}
+        />
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={rtl ? goToNext : goToPrevious}
+        aria-label={t('home.hero.previous')}
+        className={cn(
+          'absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20',
+          'start-4',
+        )}
+      >
+        <ChevronLeft className={cn('h-5 w-5', rtl && 'rotate-180')} />
+      </button>
+      <button
+        onClick={rtl ? goToPrevious : goToNext}
+        aria-label={t('home.hero.next')}
+        className={cn(
+          'absolute top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20',
+          'end-4',
+        )}
+      >
+        <ChevronRight className={cn('h-5 w-5', rtl && 'rotate-180')} />
+      </button>
+
+      {/* Dot Indicators */}
+      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+        {resolvedSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            aria-label={t('home.hero.goToSlide', { number: index + 1 })}
+            className={cn(
+              'h-1.5 rounded-full transition-all duration-300',
+              currentSlide === index
+                ? 'w-6 bg-jerash-orange'
+                : 'w-1.5 bg-white/40 hover:bg-white/60',
+            )}
+          />
+        ))}
       </div>
     </section>
-  );
+  )
 }

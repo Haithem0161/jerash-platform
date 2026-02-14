@@ -5,13 +5,6 @@ import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react";
 import { Upload, CheckCircle, FileText, X, AlertCircle, Loader2 } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -60,8 +53,8 @@ function CVDropzone({ value, onChange, error }: CVDropzoneProps) {
           "relative flex min-h-[150px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition-colors",
           isDragActive
             ? "border-jerash-orange bg-jerash-orange/5"
-            : "border-muted-foreground/25 hover:border-jerash-orange/50",
-          error && "border-destructive",
+            : "border-white/15 hover:border-jerash-orange/50",
+          error && "border-red-500/50",
         )}
       >
         <input {...getInputProps()} />
@@ -70,8 +63,8 @@ function CVDropzone({ value, onChange, error }: CVDropzoneProps) {
           <div className="flex items-center gap-3">
             <FileText className="size-10 text-jerash-orange" />
             <div className="text-left">
-              <p className="font-medium">{value.name}</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-medium text-white">{value.name}</p>
+              <p className="text-sm text-white/50">
                 {(value.size / 1024 / 1024).toFixed(2)} MB
               </p>
             </div>
@@ -91,20 +84,20 @@ function CVDropzone({ value, onChange, error }: CVDropzoneProps) {
           </div>
         ) : (
           <div className="text-center">
-            <Upload className="mx-auto size-10 text-muted-foreground" />
-            <p className="mt-2 text-sm text-muted-foreground">
+            <Upload className="mx-auto size-10 text-white/30" />
+            <p className="mt-2 text-sm text-white/40">
               {t("dropzone.placeholder")}
             </p>
-            <p className="mt-1 text-xs text-muted-foreground/75">
+            <p className="mt-1 text-xs text-white/30">
               {t("dropzone.acceptedFormats")}
             </p>
-            <p className="text-xs text-muted-foreground/75">
+            <p className="text-xs text-white/30">
               {t("dropzone.maxSize")}
             </p>
           </div>
         )}
       </div>
-      {error && <p className="mt-2 text-sm text-destructive">{t(error)}</p>}
+      {error && <p className="mt-2 text-sm text-red-400">{t(error)}</p>}
     </div>
   );
 }
@@ -165,12 +158,12 @@ export function CVUploadForm() {
   const isSubmitting = submitApplication.isPending;
 
   return (
-    <Card id="cv-upload" className="scroll-mt-36">
-      <CardHeader>
-        <CardTitle className="text-jerash-blue">{t("upload.title")}</CardTitle>
-        <CardDescription>{t("upload.description")}</CardDescription>
-      </CardHeader>
-      <CardContent>
+    <div id="cv-upload" className="glass rounded-2xl scroll-mt-36">
+      <div className="p-6 pb-0">
+        <h2 className="font-semibold leading-none text-white">{t("upload.title")}</h2>
+        <p className="mt-2 text-sm text-white/50">{t("upload.description")}</p>
+      </div>
+      <div className="p-6">
         <AnimatePresence mode="wait">
           {!showSuccess ? (
             <motion.form
@@ -183,7 +176,7 @@ export function CVUploadForm() {
             >
               {/* Error Alert */}
               {submitApplication.isError && (
-                <div className="flex items-center gap-2 rounded-md border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive">
+                <div className="flex items-center gap-2 rounded-md border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">
                   <AlertCircle className="h-4 w-4" />
                   <span>{t("error.submission")}</span>
                 </div>
@@ -191,15 +184,16 @@ export function CVUploadForm() {
 
               {/* Name field */}
               <div className="space-y-2">
-                <Label htmlFor="name">{t("form.name")}</Label>
+                <Label htmlFor="name" className="text-white">{t("form.name")}</Label>
                 <Input
                   id="name"
                   placeholder={t("form.namePlaceholder")}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
                   aria-invalid={!!errors.name}
                   {...register("name")}
                 />
                 {errors.name && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-sm text-red-400">
                     {t(errors.name.message as string)}
                   </p>
                 )}
@@ -207,16 +201,17 @@ export function CVUploadForm() {
 
               {/* Email field */}
               <div className="space-y-2">
-                <Label htmlFor="email">{t("form.email")}</Label>
+                <Label htmlFor="email" className="text-white">{t("form.email")}</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder={t("form.emailPlaceholder")}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
                   aria-invalid={!!errors.email}
                   {...register("email")}
                 />
                 {errors.email && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-sm text-red-400">
                     {t(errors.email.message as string)}
                   </p>
                 )}
@@ -224,16 +219,17 @@ export function CVUploadForm() {
 
               {/* Phone field */}
               <div className="space-y-2">
-                <Label htmlFor="phone">{t("form.phone")}</Label>
+                <Label htmlFor="phone" className="text-white">{t("form.phone")}</Label>
                 <Input
                   id="phone"
                   type="tel"
                   placeholder={t("form.phonePlaceholder")}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
                   aria-invalid={!!errors.phone}
                   {...register("phone")}
                 />
                 {errors.phone && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-sm text-red-400">
                     {t(errors.phone.message as string)}
                   </p>
                 )}
@@ -241,7 +237,7 @@ export function CVUploadForm() {
 
               {/* CV File dropzone */}
               <div className="space-y-2">
-                <Label>{t("form.cv")}</Label>
+                <Label className="text-white">{t("form.cv")}</Label>
                 <CVDropzone
                   value={selectedFile}
                   onChange={(file) =>
@@ -276,10 +272,10 @@ export function CVUploadForm() {
               className="py-8 text-center"
             >
               <CheckCircle className="mx-auto size-16 text-jerash-orange" />
-              <h3 className="mt-4 text-xl font-semibold text-jerash-blue">
+              <h3 className="mt-4 text-xl font-semibold text-white">
                 {t("success.title")}
               </h3>
-              <p className="mt-2 text-muted-foreground">
+              <p className="mt-2 text-white/50">
                 {t("success.message")}
               </p>
               <Button
@@ -292,7 +288,7 @@ export function CVUploadForm() {
             </motion.div>
           )}
         </AnimatePresence>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

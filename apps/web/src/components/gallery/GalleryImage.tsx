@@ -58,7 +58,7 @@ export function GalleryImage({
         <div
           style={{ aspectRatio: `${width} / ${height}` }}
           className={cn(
-            'w-full rounded bg-gray-200 dark:bg-gray-700 animate-pulse'
+            'w-full rounded-xl bg-white/10 animate-pulse'
           )}
           aria-busy="true"
           aria-label="Loading image"
@@ -75,7 +75,7 @@ export function GalleryImage({
         loading="lazy"
         onLoad={() => setLoaded(true)}
         className={cn(
-          'w-full h-auto rounded ring-1 ring-jerash-blue/10 transition-all duration-300 group-hover:ring-jerash-orange group-hover:brightness-105',
+          'w-full h-auto rounded-xl ring-1 ring-white/10 transition-all duration-300 group-hover:ring-jerash-orange group-hover:brightness-110',
           loaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
         )}
       />

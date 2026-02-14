@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useOffices } from '@/hooks/api'
@@ -15,26 +14,26 @@ function OfficeLocationsSkeleton() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <Skeleton className="mx-auto h-8 w-48" />
+        <Skeleton className="mx-auto h-8 w-48 bg-white/10" />
       </div>
       <div className="grid w-full grid-cols-3 gap-2">
-        <Skeleton className="h-10" />
-        <Skeleton className="h-10" />
-        <Skeleton className="h-10" />
+        <Skeleton className="h-10 bg-white/10" />
+        <Skeleton className="h-10 bg-white/10" />
+        <Skeleton className="h-10 bg-white/10" />
       </div>
-      <Card>
-        <CardContent className="pt-6">
+      <div className="glass rounded-2xl">
+        <div className="p-6">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-4">
-              <Skeleton className="h-16 w-full" />
-              <Skeleton className="h-16 w-full" />
-              <Skeleton className="h-16 w-full" />
-              <Skeleton className="h-16 w-full" />
+              <Skeleton className="h-16 w-full bg-white/10" />
+              <Skeleton className="h-16 w-full bg-white/10" />
+              <Skeleton className="h-16 w-full bg-white/10" />
+              <Skeleton className="h-16 w-full bg-white/10" />
             </div>
-            <Skeleton className="h-64 w-full" />
+            <Skeleton className="h-64 w-full bg-white/10" />
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
@@ -57,8 +56,8 @@ export function OfficeLocations() {
   if (!offices || offices.length === 0) {
     return (
       <div className="text-center py-12">
-        <MapPin className="mx-auto mb-2 h-8 w-8 text-jerash-blue/30" />
-        <p className="text-muted-foreground">{t('offices.noOffices')}</p>
+        <MapPin className="mx-auto mb-2 h-8 w-8 text-white/20" />
+        <p className="text-white/40">{t('offices.noOffices')}</p>
       </div>
     )
   }
@@ -66,13 +65,17 @@ export function OfficeLocations() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-jerash-blue md:text-3xl">{t('offices.title')}</h2>
+        <h2 className="text-2xl font-bold text-white md:text-3xl">{t('offices.title')}</h2>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-3 bg-white/5 border border-white/10">
           {offices.map((office) => (
-            <TabsTrigger key={office.id} value={office.id}>
+            <TabsTrigger
+              key={office.id}
+              value={office.id}
+              className="text-white/50 data-[state=active]:bg-jerash-orange/15 data-[state=active]:text-white data-[state=active]:border-jerash-orange/30 data-[state=active]:shadow-none"
+            >
               {resolve(office.nameEn, office.nameAr)}
             </TabsTrigger>
           ))}
@@ -80,8 +83,8 @@ export function OfficeLocations() {
 
         {offices.map((office) => (
           <TabsContent key={office.id} value={office.id}>
-            <Card>
-              <CardContent className="pt-6">
+            <div className="glass rounded-2xl">
+              <div className="p-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   {/* Office Details */}
                   <div className="space-y-4">
@@ -89,10 +92,10 @@ export function OfficeLocations() {
                     <div className="flex items-start gap-3">
                       <Phone className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />
                       <div>
-                        <h4 className="mb-1 font-semibold text-jerash-blue">{t('offices.phone')}</h4>
+                        <h4 className="mb-1 font-semibold text-white">{t('offices.phone')}</h4>
                         <a
                           href={`tel:${office.phone}`}
-                          className="text-muted-foreground hover:text-jerash-orange transition-colors"
+                          className="text-white/50 hover:text-jerash-orange transition-colors"
                         >
                           {office.phoneDisplay}
                         </a>
@@ -103,10 +106,10 @@ export function OfficeLocations() {
                     <div className="flex items-start gap-3">
                       <Mail className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />
                       <div>
-                        <h4 className="mb-1 font-semibold text-jerash-blue">{t('offices.email')}</h4>
+                        <h4 className="mb-1 font-semibold text-white">{t('offices.email')}</h4>
                         <a
                           href={`mailto:${office.email}`}
-                          className="text-muted-foreground hover:text-jerash-orange transition-colors"
+                          className="text-white/50 hover:text-jerash-orange transition-colors"
                         >
                           {office.email}
                         </a>
@@ -117,8 +120,8 @@ export function OfficeLocations() {
                     <div className="flex items-start gap-3">
                       <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />
                       <div>
-                        <h4 className="mb-1 font-semibold text-jerash-blue">{t('offices.address')}</h4>
-                        <p className="text-sm text-muted-foreground">
+                        <h4 className="mb-1 font-semibold text-white">{t('offices.address')}</h4>
+                        <p className="text-sm text-white/50">
                           {resolve(office.addressEn, office.addressAr)}
                         </p>
                       </div>
@@ -128,8 +131,8 @@ export function OfficeLocations() {
                     <div className="flex items-start gap-3">
                       <Clock className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />
                       <div>
-                        <h4 className="mb-1 font-semibold text-jerash-blue">{t('offices.hours')}</h4>
-                        <p className="text-sm text-muted-foreground">
+                        <h4 className="mb-1 font-semibold text-white">{t('offices.hours')}</h4>
+                        <p className="text-sm text-white/50">
                           {resolve(office.hoursEn, office.hoursAr)}
                         </p>
                       </div>
@@ -137,9 +140,9 @@ export function OfficeLocations() {
                   </div>
 
                   {/* Map Placeholder */}
-                  <div className="flex h-64 items-center justify-center rounded-lg border border-jerash-blue/10 bg-muted/50">
-                    <div className="text-center text-muted-foreground">
-                      <MapPin className="mx-auto mb-2 h-8 w-8 text-jerash-blue/30" />
+                  <div className="flex h-64 items-center justify-center rounded-lg border border-white/10 bg-white/5">
+                    <div className="text-center text-white/40">
+                      <MapPin className="mx-auto mb-2 h-8 w-8 text-white/20" />
                       <p className="text-sm">Map coming soon</p>
                       <p className="mt-1 text-xs">
                         {office.latitude.toFixed(4)}, {office.longitude.toFixed(4)}
@@ -147,21 +150,21 @@ export function OfficeLocations() {
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </TabsContent>
         ))}
 
         {/* Default state when no tab selected */}
         {!activeTab && (
-          <Card>
-            <CardContent className="py-12">
-              <div className="text-center text-muted-foreground">
-                <MapPin className="mx-auto mb-2 h-8 w-8 text-jerash-blue/30" />
+          <div className="glass rounded-2xl">
+            <div className="py-12">
+              <div className="text-center text-white/40">
+                <MapPin className="mx-auto mb-2 h-8 w-8 text-white/20" />
                 <p>Select an office above to view details</p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
       </Tabs>
     </div>

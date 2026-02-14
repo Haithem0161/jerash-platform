@@ -81,7 +81,7 @@ export function ContactForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {/* Error Alert */}
               {submitContact.isError && (
-                <div className="flex items-center gap-2 rounded-md border border-destructive/50 bg-destructive/10 p-3 text-sm text-destructive">
+                <div className="flex items-center gap-2 rounded-md border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">
                   <AlertCircle className="h-4 w-4" />
                   <span>{t('error.submission')}</span>
                 </div>
@@ -95,11 +95,11 @@ export function ContactForm() {
                   name="name"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel className="text-jerash-blue">{t('form.name')}</FormLabel>
+                      <FormLabel className="text-white">{t('form.name')}</FormLabel>
                       <FormControl>
                         <Input
                           placeholder={t('form.namePlaceholder')}
-                          className="focus-visible:ring-jerash-orange"
+                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-jerash-orange"
                           {...field}
                         />
                       </FormControl>
@@ -118,12 +118,12 @@ export function ContactForm() {
                   name="email"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      <FormLabel className="text-jerash-blue">{t('form.email')}</FormLabel>
+                      <FormLabel className="text-white">{t('form.email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
                           placeholder={t('form.emailPlaceholder')}
-                          className="focus-visible:ring-jerash-orange"
+                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-jerash-orange"
                           {...field}
                         />
                       </FormControl>
@@ -145,13 +145,13 @@ export function ContactForm() {
                   name="department"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-jerash-blue">{t('form.department')}</FormLabel>
+                      <FormLabel className="text-white">{t('form.department')}</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="w-full focus:ring-jerash-orange">
+                          <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:ring-jerash-orange">
                             <SelectValue
                               placeholder={t('form.departmentPlaceholder')}
                             />
@@ -175,12 +175,12 @@ export function ContactForm() {
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-jerash-blue">{t('form.phone')}</FormLabel>
+                      <FormLabel className="text-white">{t('form.phone')}</FormLabel>
                       <FormControl>
                         <Input
                           type="tel"
                           placeholder={t('form.phonePlaceholder')}
-                          className="focus-visible:ring-jerash-orange"
+                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-jerash-orange"
                           {...field}
                         />
                       </FormControl>
@@ -195,11 +195,11 @@ export function ContactForm() {
                 name="message"
                 render={({ field, fieldState }) => (
                   <FormItem>
-                    <FormLabel className="text-jerash-blue">{t('form.message')}</FormLabel>
+                    <FormLabel className="text-white">{t('form.message')}</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder={t('form.messagePlaceholder')}
-                        className="min-h-32 resize-none focus-visible:ring-jerash-orange"
+                        className="min-h-32 resize-none bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-jerash-orange"
                         {...field}
                       />
                     </FormControl>
@@ -238,8 +238,8 @@ export function ContactForm() {
           className="flex flex-col items-center justify-center py-12 text-center"
         >
           <CheckCircle className="mb-4 h-16 w-16 text-jerash-orange" />
-          <h3 className="mb-2 text-xl font-semibold text-jerash-blue">{t('success.title')}</h3>
-          <p className="text-muted-foreground">{t('success.message')}</p>
+          <h3 className="mb-2 text-xl font-semibold text-white">{t('success.title')}</h3>
+          <p className="text-white/50">{t('success.message')}</p>
           <Button
             variant="outline"
             className="mt-6 border-jerash-orange text-jerash-orange hover:bg-jerash-orange hover:text-white"

@@ -12,8 +12,8 @@ interface CategoryTabsProps {
 }
 
 /**
- * Animated category filter tabs for the Services page.
- * Features smooth underline animation using layoutId.
+ * Glass pill category filter tabs for the Services page.
+ * Active tab has an animated orange pill background via layoutId.
  * Accessible with proper ARIA roles.
  */
 export function CategoryTabs({ activeCategory, onCategoryChange }: CategoryTabsProps) {
@@ -23,7 +23,7 @@ export function CategoryTabs({ activeCategory, onCategoryChange }: CategoryTabsP
     <div
       role="tablist"
       aria-label={t('title')}
-      className="flex flex-wrap justify-center gap-2 md:gap-4"
+      className="flex flex-wrap justify-center gap-2 md:gap-3"
     >
       {categories.map((category) => {
         const isActive = activeCategory === category
@@ -34,17 +34,16 @@ export function CategoryTabs({ activeCategory, onCategoryChange }: CategoryTabsP
             aria-selected={isActive}
             onClick={() => onCategoryChange(category)}
             className={cn(
-              'relative px-4 py-2 text-sm font-medium transition-colors md:text-base',
+              'relative rounded-full px-5 py-2 text-sm font-medium transition-colors md:text-base',
               isActive
-                ? 'text-jerash-blue'
-                : 'text-muted-foreground hover:text-jerash-blue'
+                ? 'text-white'
+                : 'text-white/50 hover:text-white/80'
             )}
           >
-            {t(`categories.${category}`)}
             {isActive && (
               <motion.span
-                layoutId="services-category-underline"
-                className="absolute inset-x-0 -bottom-px h-0.5 bg-jerash-orange"
+                layoutId="services-category-pill"
+                className="absolute inset-0 rounded-full border border-jerash-orange/30 bg-jerash-orange/15"
                 transition={{
                   type: 'spring',
                   stiffness: 500,
@@ -52,6 +51,10 @@ export function CategoryTabs({ activeCategory, onCategoryChange }: CategoryTabsP
                 }}
               />
             )}
+            {!isActive && (
+              <span className="absolute inset-0 rounded-full border border-white/10" />
+            )}
+            <span className="relative z-10">{t(`categories.${category}`)}</span>
           </button>
         )
       })}

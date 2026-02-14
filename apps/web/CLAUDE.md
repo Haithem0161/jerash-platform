@@ -58,3 +58,11 @@ Standard Vite React app structure:
 - [ZUSTAND.md](ZUSTAND.md) - Zustand state management
 - [REACT-HELMET.md](REACT-HELMET.md) - React Helmet SEO and meta tags
 - [AXIOS.md](AXIOS.md) - Axios HTTP client
+
+<!-- MEMORY:START -->
+# web
+
+_Last updated: 2026-02-14 | 0 active memories, 0 total_
+
+_For deeper context, use memory_search, memory_related, or memory_ask tools._
+<!-- MEMORY:END -->

@@ -15,7 +15,10 @@ export function Navigation() {
   const { t } = useTranslation()
 
   return (
-    <nav aria-label={t('accessibility.mainNavigation', 'Main navigation')} className="hidden md:flex items-center gap-6">
+    <nav
+      aria-label={t('accessibility.mainNavigation', 'Main navigation')}
+      className="hidden items-center gap-1 md:flex"
+    >
       {navLinks.map((link) => (
         <NavLink
           key={link.to}
@@ -23,19 +26,22 @@ export function Navigation() {
           end={link.to === '/'}
           className={({ isActive }) =>
             cn(
-              'relative text-sm font-medium transition-colors hover:text-jerash-blue',
-              // Underline pseudo-element styles
-              'after:absolute after:-bottom-0.5 after:start-0',
-              'after:h-px after:bg-jerash-orange',
-              'after:transition-all after:duration-300',
-              // Hover and active state for underline
+              'relative px-3 py-1.5 text-sm font-medium transition-colors',
               isActive
-                ? 'text-jerash-blue after:w-full'
-                : 'after:w-0 hover:after:w-full'
+                ? 'text-white'
+                : 'text-white/60 hover:text-white',
             )
           }
         >
-          {t(link.key)}
+          {({ isActive }) => (
+            <>
+              {t(link.key)}
+              {/* Active dot indicator */}
+              {isActive && (
+                <span className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-jerash-orange" />
+              )}
+            </>
+          )}
         </NavLink>
       ))}
     </nav>
