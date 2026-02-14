@@ -16,7 +16,8 @@ export function Providers({ children }: ProvidersProps) {
         <QueryProvider>
           <ThemeProvider>
             <I18nProvider>
-              <SmoothScrollProvider>{children}</SmoothScrollProvider>
+              {/* Lenis disabled temporarily to test GSAP pin jump */}
+              {children}
             </I18nProvider>
           </ThemeProvider>
         </QueryProvider>

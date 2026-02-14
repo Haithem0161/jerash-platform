@@ -2,6 +2,10 @@ import { useEffect, useRef } from 'react'
 import { ReactLenis, useLenis } from 'lenis/react'
 import type { LenisRef } from 'lenis/react'
 import { cancelFrame, frame } from 'motion/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface SmoothScrollProviderProps {
   children: React.ReactNode
@@ -40,6 +44,43 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     frame.update(update, true)
 
     return () => cancelFrame(update)
+  }, [])
+
+  // Bridge Lenis smooth scroll with GSAP ScrollTrigger.
+  // Without this proxy, ScrollTrigger reads native window.scrollY which
+  // desyncs from Lenis's lerped scroll position, causing pin jumps.
+  useEffect(() => {
+    const lenis = lenisRef.current?.lenis
+    if (!lenis) return
+
+    // Tell ScrollTrigger to read scroll position from Lenis
+    ScrollTrigger.scrollerProxy(document.documentElement, {
+      scrollTop(value) {
+        if (arguments.length) {
+          lenis.scrollTo(value as number, { immediate: true })
+        }
+        return lenis.scroll
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }
+      },
+    })
+
+    // Update ScrollTrigger whenever Lenis scrolls
+    lenis.on('scroll', ScrollTrigger.update)
+    gsap.ticker.lagSmoothing(0)
+
+    // Recalculate all ScrollTrigger positions with the proxy active
+    ScrollTrigger.refresh()
+
+    return () => {
+      lenis.off('scroll', ScrollTrigger.update)
+    }
   }, [])
 
   return (

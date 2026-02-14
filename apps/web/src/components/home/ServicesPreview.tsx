@@ -78,35 +78,48 @@ export function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState(0)
   const prefersReducedMotion = usePrefersReducedMotion()
   const isDesktop = useIsDesktop()
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   // GSAP ScrollTrigger for desktop snap-scroll
+  // Deferred to ensure HeroSlideshow's pin (async, depends on API data)
+  // has been created first. Without this delay, ServicesPreview's trigger
+  // positions are calculated before the Hero's pin-spacer exists (~963px off).
   useEffect(() => {
     if (!isDesktop || prefersReducedMotion || !sectionRef.current) return
 
     const section = sectionRef.current
     const totalPanels = SERVICES.length
+    let ctx: gsap.Context | null = null
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: `+=${(totalPanels - 1) * 150}%`,
-        pin: true,
-        scrub: 0.5,
-        snap: {
-          snapTo: 1 / (totalPanels - 1),
-          duration: 0.5,
-          ease: 'power2.inOut',
-        },
-        onUpdate: (self) => {
-          const idx = Math.round(self.progress * (totalPanels - 1))
-          setActiveIndex(idx)
-        },
-      })
-    }, section)
+    const timeoutId = setTimeout(() => {
+      ScrollTrigger.refresh()
 
-    return () => ctx.revert()
+      ctx = gsap.context(() => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: `+=${(totalPanels - 1) * 150}%`,
+          pin: true,
+          pinSpacing: true,
+          invalidateOnRefresh: true,
+          scrub: 0.5,
+          snap: {
+            snapTo: 1 / (totalPanels - 1),
+            duration: 0.5,
+            ease: 'power2.inOut',
+          },
+          onUpdate: (self) => {
+            const idx = Math.round(self.progress * (totalPanels - 1))
+            setActiveIndex(idx)
+          },
+        })
+      }, section)
+    }, 500)
+
+    return () => {
+      clearTimeout(timeoutId)
+      ctx?.revert()
+    }
   }, [isDesktop, prefersReducedMotion])
 
   // Desktop full-screen view
@@ -115,92 +128,91 @@ export function ServicesPreview() {
     const ActiveIcon = activeService.icon
 
     return (
-      <Section id="services" fullWidth className="p-0">
-        <div
-          ref={sectionRef}
-          className="relative h-screen w-full overflow-hidden"
-        >
-            {/* Background image with crossfade */}
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={activeIndex}
-                src={activeService.image}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              />
-            </AnimatePresence>
+      <section
+        id="services"
+        ref={sectionRef}
+        className="relative h-screen w-full overflow-hidden"
+      >
+        {/* Background image with crossfade */}
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={activeIndex}
+            src={activeService.image}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          />
+        </AnimatePresence>
 
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/60" />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/60" />
 
-            {/* Content card - bottom start */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className={cn(
-                  'glass absolute bottom-16 max-w-lg rounded-2xl p-8',
-                  'start-16',
-                )}
+        {/* Content card - bottom start */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeIndex}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className={cn(
+              'glass absolute bottom-16 max-w-lg rounded-2xl p-8',
+              'start-16',
+            )}
+          >
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-jerash-orange/20 bg-jerash-orange/10">
+              <ActiveIcon className="h-6 w-6 text-jerash-orange" />
+            </div>
+            <h3 className="text-2xl font-bold text-white">
+              {t(activeService.titleKey)}
+            </h3>
+            <p className="mt-3 leading-relaxed text-white/60">
+              {t(activeService.descKey)}
+            </p>
+            {activeIndex === SERVICES.length - 1 && (
+              <Link
+                to="/services"
+                className="mt-6 inline-flex items-center gap-2 text-sm text-jerash-orange transition-colors hover:text-jerash-orange-light"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-jerash-orange/20 bg-jerash-orange/10">
-                  <ActiveIcon className="h-6 w-6 text-jerash-orange" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">
-                  {t(activeService.titleKey)}
-                </h3>
-                <p className="mt-3 leading-relaxed text-white/60">
-                  {t(activeService.descKey)}
-                </p>
-                {activeIndex === SERVICES.length - 1 && (
-                  <Link
-                    to="/services"
-                    className="mt-6 inline-flex items-center gap-2 text-sm text-jerash-orange transition-colors hover:text-jerash-orange-light"
-                  >
-                    {t('home.services.seeAll')}
-                    <ArrowRight
-                      className={cn('h-4 w-4', rtl && 'rotate-180')}
-                    />
-                  </Link>
-                )}
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Vertical dot indicators - end side */}
-            <div
-              className={cn(
-                'absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3',
-                'end-8',
-              )}
-            >
-              {SERVICES.map((_, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    'h-2 w-2 rounded-full transition-all duration-300',
-                    activeIndex === index
-                      ? 'scale-125 bg-jerash-orange'
-                      : 'bg-white/30',
-                  )}
+                {t('home.services.seeAll')}
+                <ArrowRight
+                  className={cn('h-4 w-4', rtl && 'rotate-180')}
                 />
-              ))}
-            </div>
+              </Link>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-            {/* Service badge */}
-            <div className="absolute start-16 top-16">
-              <span className="rounded-full border border-jerash-orange/20 bg-jerash-orange/10 px-4 py-1.5 text-sm font-medium text-jerash-orange">
-                {t('nav.services')}
-              </span>
-            </div>
+        {/* Vertical dot indicators - end side */}
+        <div
+          className={cn(
+            'absolute top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3',
+            'end-8',
+          )}
+        >
+          {SERVICES.map((_, index) => (
+            <div
+              key={index}
+              className={cn(
+                'h-2 w-2 rounded-full transition-all duration-300',
+                activeIndex === index
+                  ? 'scale-125 bg-jerash-orange'
+                  : 'bg-white/30',
+              )}
+            />
+          ))}
         </div>
-      </Section>
+
+        {/* Service badge */}
+        <div className="absolute start-16 top-16">
+          <span className="rounded-full border border-jerash-orange/20 bg-jerash-orange/10 px-4 py-1.5 text-sm font-medium text-jerash-orange">
+            {t('nav.services')}
+          </span>
+        </div>
+      </section>
     )
   }
 
