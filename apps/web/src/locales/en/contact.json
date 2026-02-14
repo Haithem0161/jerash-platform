@@ -12,8 +12,6 @@
     "namePlaceholder": "Enter your full name",
     "email": "Email Address",
     "emailPlaceholder": "Enter your email address",
-    "phone": "Phone Number (Optional)",
-    "phonePlaceholder": "+964 XXX XXX XXXX",
     "department": "Department",
     "departmentPlaceholder": "Select a department",
     "departments": {
@@ -42,28 +40,24 @@
   },
   "offices": {
     "title": "Our Offices",
-    "phone": "Phone",
     "email": "Email",
     "address": "Address",
     "hours": "Working Hours",
     "basrah": {
       "name": "Basrah Office",
       "address": "Basrah, Iraq",
-      "phone": "+964 XXX XXX XXXX",
       "email": "basrah@jerash.com",
       "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
     },
     "erbil": {
       "name": "Erbil Office",
       "address": "Erbil, Kurdistan Region, Iraq",
-      "phone": "+964 XXX XXX XXXX",
       "email": "erbil@jerash.com",
       "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
     },
     "baghdad": {
       "name": "Baghdad Office",
       "address": "Baghdad, Iraq",
-      "phone": "+964 XXX XXX XXXX",
       "email": "baghdad@jerash.com",
       "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
     }

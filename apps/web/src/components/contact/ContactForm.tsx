@@ -42,7 +42,6 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
-      phone: '',
       department: 'general',
       message: '',
     },
@@ -137,57 +136,35 @@ export function ContactForm() {
                 />
               </div>
 
-              {/* Row 2: Department + Phone */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                {/* Department Field */}
-                <FormField
-                  control={form.control}
-                  name="department"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">{t('form.department')}</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:ring-jerash-orange">
-                            <SelectValue
-                              placeholder={t('form.departmentPlaceholder')}
-                            />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {departments.map((dept) => (
-                            <SelectItem key={dept} value={dept}>
-                              {t(`form.departments.${dept}`)}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormItem>
-                  )}
-                />
-
-                {/* Phone Field (Optional) */}
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">{t('form.phone')}</FormLabel>
+              {/* Department Field */}
+              <FormField
+                control={form.control}
+                name="department"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">{t('form.department')}</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <FormControl>
-                        <Input
-                          type="tel"
-                          placeholder={t('form.phonePlaceholder')}
-                          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-jerash-orange"
-                          {...field}
-                        />
+                        <SelectTrigger className="w-full bg-white/5 border-white/10 text-white focus:ring-jerash-orange">
+                          <SelectValue
+                            placeholder={t('form.departmentPlaceholder')}
+                          />
+                        </SelectTrigger>
                       </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
+                      <SelectContent>
+                        {departments.map((dept) => (
+                          <SelectItem key={dept} value={dept}>
+                            {t(`form.departments.${dept}`)}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
 
               {/* Message Field - Full Width */}
               <FormField

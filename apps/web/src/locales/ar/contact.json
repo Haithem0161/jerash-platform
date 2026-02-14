@@ -12,8 +12,6 @@
     "namePlaceholder": "أدخل اسمك الكامل",
     "email": "البريد الإلكتروني",
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
-    "phone": "رقم الهاتف (اختياري)",
-    "phonePlaceholder": "+964 XXX XXX XXXX",
     "department": "القسم",
     "departmentPlaceholder": "اختر القسم",
     "departments": {
@@ -42,28 +40,24 @@
   },
   "offices": {
     "title": "مكاتبنا",
-    "phone": "الهاتف",
     "email": "البريد الإلكتروني",
     "address": "العنوان",
     "hours": "ساعات العمل",
     "basrah": {
       "name": "مكتب البصرة",
       "address": "البصرة، العراق",
-      "phone": "+964 XXX XXX XXXX",
       "email": "basrah@jerash.com",
       "hours": "الأحد - الخميس: 8:00 صباحاً - 4:00 مساءً"
     },
     "erbil": {
       "name": "مكتب أربيل",
       "address": "أربيل، إقليم كردستان، العراق",
-      "phone": "+964 XXX XXX XXXX",
       "email": "erbil@jerash.com",
       "hours": "الأحد - الخميس: 8:00 صباحاً - 4:00 مساءً"
     },
     "baghdad": {
       "name": "مكتب بغداد",
       "address": "بغداد، العراق",
-      "phone": "+964 XXX XXX XXXX",
       "email": "baghdad@jerash.com",
       "hours": "الأحد - الخميس: 8:00 صباحاً - 4:00 مساءً"
     }

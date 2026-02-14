@@ -8,7 +8,6 @@ import { z } from 'zod'
 export const contactSchema = z.object({
   name: z.string().min(1, { message: 'validation.nameRequired' }),
   email: z.email({ message: 'validation.emailInvalid' }),
-  phone: z.string().optional(),
   department: z.enum(['general', 'technical', 'careers', 'other']),
   message: z.string().min(10, { message: 'validation.messageTooShort' }),
 })

@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { MapPin, Phone, Mail } from 'lucide-react'
+import { MapPin, Mail } from 'lucide-react'
 import { Container } from './Container'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -74,15 +74,6 @@ export function Footer() {
                     <span className="text-white/50">
                       {t(`footer.offices.${office}.address`)}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Phone className="h-4 w-4 shrink-0 text-jerash-orange" />
-                    <a
-                      href={`tel:${t(`footer.offices.${office}.phone`)}`}
-                      className="text-white/50 hover:text-jerash-orange transition-colors"
-                    >
-                      {t(`footer.offices.${office}.phone`)}
-                    </a>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Mail className="h-4 w-4 shrink-0 text-jerash-orange" />

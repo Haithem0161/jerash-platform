@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Mail, MapPin, Clock } from 'lucide-react'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -88,20 +88,6 @@ export function OfficeLocations() {
                 <div className="grid gap-6 md:grid-cols-2">
                   {/* Office Details */}
                   <div className="space-y-4">
-                    {/* Phone */}
-                    <div className="flex items-start gap-3">
-                      <Phone className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />
-                      <div>
-                        <h4 className="mb-1 font-semibold text-white">{t('offices.phone')}</h4>
-                        <a
-                          href={`tel:${office.phone}`}
-                          className="text-white/50 hover:text-jerash-orange transition-colors"
-                        >
-                          {office.phoneDisplay}
-                        </a>
-                      </div>
-                    </div>
-
                     {/* Email */}
                     <div className="flex items-start gap-3">
                       <Mail className="mt-0.5 h-5 w-5 shrink-0 text-jerash-orange" />

@@ -41,19 +41,16 @@
       "basrah": {
         "name": "البصرة",
         "address": "البصرة، العراق",
-        "phone": "+964 XXX XXX XXXX",
         "email": "basrah@jerash.com"
       },
       "erbil": {
         "name": "أربيل",
         "address": "أربيل، إقليم كردستان، العراق",
-        "phone": "+964 XXX XXX XXXX",
         "email": "erbil@jerash.com"
       },
       "baghdad": {
         "name": "بغداد",
         "address": "بغداد، العراق",
-        "phone": "+964 XXX XXX XXXX",
         "email": "baghdad@jerash.com"
       }
     },

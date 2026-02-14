@@ -154,7 +154,6 @@ export interface SiteSetting {
 export interface ContactFormData {
   name: string
   email: string
-  phone?: string
   department: string
   message: string
 }

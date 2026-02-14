@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Phone, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 import { SEO } from '@/components/common/SEO'
 import { Section } from '@/components/layout/Section'
@@ -9,29 +9,10 @@ import { TextReveal } from '@/components/animations/TextReveal'
 import { ParallaxImage } from '@/components/animations/ParallaxImage'
 import { ContactForm, OfficeLocations } from '@/components/contact'
 
-/**
- * Office data for quick contact sidebar.
- * Uses E.164 format for phone links.
- */
 const offices = [
-  {
-    id: 'basrah',
-    phone: '+964XXXXXXXXXX',
-    phoneDisplay: '+964 XXX XXX XXXX',
-    email: 'basrah@jerash.com',
-  },
-  {
-    id: 'erbil',
-    phone: '+964XXXXXXXXXX',
-    phoneDisplay: '+964 XXX XXX XXXX',
-    email: 'erbil@jerash.com',
-  },
-  {
-    id: 'baghdad',
-    phone: '+964XXXXXXXXXX',
-    phoneDisplay: '+964 XXX XXX XXXX',
-    email: 'baghdad@jerash.com',
-  },
+  { id: 'basrah', email: 'basrah@jerash.com' },
+  { id: 'erbil', email: 'erbil@jerash.com' },
+  { id: 'baghdad', email: 'baghdad@jerash.com' },
 ]
 
 /**
@@ -130,15 +111,6 @@ export function ContactPage() {
                     <h4 className="font-semibold text-white">
                       {t(`offices.${office.id}.name`)}
                     </h4>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Phone className="h-4 w-4 text-jerash-orange" />
-                      <a
-                        href={`tel:${office.phone}`}
-                        className="text-white/50 hover:text-jerash-orange transition-colors"
-                      >
-                        {office.phoneDisplay}
-                      </a>
-                    </div>
                     <div className="flex items-center gap-2 text-sm">
                       <Mail className="h-4 w-4 text-jerash-orange" />
                       <a
