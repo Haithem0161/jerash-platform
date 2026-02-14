@@ -66,7 +66,7 @@ export function JobListings() {
       {isLoading ? (
         <JobListingsSkeleton />
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {jobs?.map((job: Job, index: number) => {
               const isExpanded = expandedJobId === job.id
@@ -89,6 +89,7 @@ export function JobListings() {
                     layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
                   }}
                   className={cn(
+                    'h-full',
                     isExpanded && 'col-span-full',
                     hasExpanded && !isExpanded && 'pointer-events-none',
                   )}
