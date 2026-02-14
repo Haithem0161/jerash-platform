@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-jerash_dev_password}
       POSTGRES_DB: ${POSTGRES_DB:-jerash}
     ports:
-      - "5433:5432"
+      - "54829:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -87,6 +87,7 @@ services:
       args:
         VITE_API_URL: ${VITE_API_URL:-http://localhost:3000/api}
         VITE_SITE_URL: ${VITE_SITE_URL:-http://localhost:5173}
+        VITE_ENABLE_PWA: ${VITE_ENABLE_PWA:-false}
     container_name: jerash-web
     restart: unless-stopped
     depends_on:

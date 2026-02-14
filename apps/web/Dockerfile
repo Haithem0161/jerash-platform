@@ -37,9 +37,11 @@ RUN pnpm --filter @repo/validation build
 # Build-time environment variables for Vite
 ARG VITE_API_URL=http://localhost:3000/api
 ARG VITE_SITE_URL=http://localhost:5173
+ARG VITE_ENABLE_PWA=true
 
 ENV VITE_API_URL=$VITE_API_URL
 ENV VITE_SITE_URL=$VITE_SITE_URL
+ENV VITE_ENABLE_PWA=$VITE_ENABLE_PWA
 
 # Build the web application
 RUN pnpm --filter web build

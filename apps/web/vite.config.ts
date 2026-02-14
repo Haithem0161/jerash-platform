@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite"
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       babel: {
@@ -13,7 +13,7 @@ export default defineConfig({
       },
     }),
     tailwindcss(),
-    VitePWA({
+    (mode === 'production' && process.env.VITE_ENABLE_PWA !== 'false') && VitePWA({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,svg,woff2}'],
@@ -63,10 +63,10 @@ export default defineConfig({
         ],
       },
     }),
-  ],
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+}))
