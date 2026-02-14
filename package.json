@@ -11,11 +11,11 @@
     "build:admin": "pnpm --filter admin run build",
     "build:api": "pnpm --filter api run build",
     "lint": "pnpm -r run lint",
-    "db:migrate": "pnpm --filter api prisma migrate dev",
-    "db:push": "pnpm --filter api prisma db push",
-    "db:seed": "pnpm --filter api prisma db seed",
-    "db:studio": "pnpm --filter api prisma studio",
-    "db:generate": "pnpm --filter api prisma generate"
+    "db:migrate": "pnpm --filter api exec prisma migrate dev",
+    "db:push": "pnpm --filter api exec prisma db push",
+    "db:seed": "pnpm --filter api exec prisma db seed",
+    "db:studio": "pnpm --filter api exec prisma studio",
+    "db:generate": "pnpm --filter api exec prisma generate"
   },
   "devDependencies": {
     "typescript": "~5.9.3"
