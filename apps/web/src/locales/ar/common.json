@@ -34,29 +34,11 @@
   },
   "footer": {
     "quickLinks": "روابط سريعة",
-    "aboutTitle": "من نحن",
     "aboutText": "جرش لخدمات حقول النفط تقدم حلولاً شاملة لحقول النفط مع التزام راسخ بالسلامة والتميز.",
-    "officesTitle": "مكاتبنا",
-    "offices": {
-      "basrah": {
-        "name": "البصرة",
-        "address": "البصرة، العراق",
-        "email": "basrah@jerash.com"
-      },
-      "erbil": {
-        "name": "أربيل",
-        "address": "أربيل، إقليم كردستان، العراق",
-        "email": "erbil@jerash.com"
-      },
-      "baghdad": {
-        "name": "بغداد",
-        "address": "بغداد، العراق",
-        "email": "baghdad@jerash.com"
-      }
-    },
+    "contactTitle": "تواصل معنا",
+    "email": "info@jerash.com",
     "poBox": "رقم الصندوق: 28211",
-    "postOffice": "المكتب البريدي: مكتب بريد مجمع الكرخ",
-    "subscriber": "شركة جرش للخدمات النفطية"
+    "postOffice": "المكتب البريدي: مكتب بريد مجمع الكرخ"
   },
   "language": {
     "select": "اللغة",

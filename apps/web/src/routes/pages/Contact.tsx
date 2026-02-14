@@ -7,18 +7,8 @@ import { Container } from '@/components/layout/Container'
 import { FadeIn } from '@/components/animations/FadeIn'
 import { TextReveal } from '@/components/animations/TextReveal'
 import { ParallaxImage } from '@/components/animations/ParallaxImage'
-import { ContactForm, OfficeLocations } from '@/components/contact'
+import { ContactForm } from '@/components/contact'
 
-const offices = [
-  { id: 'basrah', email: 'basrah@jerash.com' },
-  { id: 'erbil', email: 'erbil@jerash.com' },
-  { id: 'baghdad', email: 'baghdad@jerash.com' },
-]
-
-/**
- * Contact page with parallax hero, inquiry form, and office locations.
- * Layout: Hero → Two-column grid (form left, quick contact right) → tabbed offices below.
- */
 export function ContactPage() {
   const { t } = useTranslation('contact')
   const { t: tCommon } = useTranslation()
@@ -37,7 +27,6 @@ export function ContactPage() {
         fullWidth
         className="relative flex min-h-[60vh] items-center overflow-hidden p-0"
       >
-        {/* Parallax background */}
         <div className="absolute inset-0">
           <ParallaxImage
             src="/cta.jpg"
@@ -47,10 +36,8 @@ export function ContactPage() {
           />
         </div>
 
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-t from-[oklch(0.08_0.02_250)] via-black/60 to-black/40" />
 
-        {/* Subtle gradient mesh accent */}
         <div
           className="absolute inset-0"
           style={{
@@ -82,59 +69,30 @@ export function ContactPage() {
         </Container>
       </Section>
 
-      {/* Form + Quick Contact Grid */}
+      {/* Contact Form + Email */}
       <Section className="py-8 md:py-12">
-        <div className="grid gap-8 md:grid-cols-[2fr,1fr]">
-          {/* Left: Contact Form */}
-          <FadeIn direction="left">
+        <div className="mx-auto max-w-2xl">
+          <FadeIn>
             <div className="glass rounded-2xl">
               <div className="p-6 pb-0">
                 <h2 className="font-semibold leading-none text-white">{t('form.title')}</h2>
                 <p className="mt-2 text-sm text-white/50">{t('form.description')}</p>
+                <div className="mt-4 flex items-center gap-2 text-sm">
+                  <Mail className="h-4 w-4 text-jerash-orange" />
+                  <a
+                    href="mailto:info@jerash.com"
+                    className="text-white/50 transition-colors hover:text-jerash-orange"
+                  >
+                    info@jerash.com
+                  </a>
+                </div>
               </div>
               <div className="p-6">
                 <ContactForm />
               </div>
             </div>
           </FadeIn>
-
-          {/* Right: Quick Contact Sidebar */}
-          <FadeIn direction="right">
-            <div className="glass rounded-2xl">
-              <div className="p-6 pb-0">
-                <h2 className="font-semibold leading-none text-white">{t('quickContact.title')}</h2>
-                <p className="mt-2 text-sm text-white/50">{t('quickContact.description')}</p>
-              </div>
-              <div className="space-y-6 p-6">
-                {offices.map((office) => (
-                  <div key={office.id} className="space-y-2">
-                    <h4 className="font-semibold text-white">
-                      {t(`offices.${office.id}.name`)}
-                    </h4>
-                    <div className="flex items-center gap-2 text-sm">
-                      <Mail className="h-4 w-4 text-jerash-orange" />
-                      <a
-                        href={`mailto:${office.email}`}
-                        className="text-white/50 hover:text-jerash-orange transition-colors"
-                      >
-                        {office.email}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
         </div>
-      </Section>
-
-      {/* Office Locations with Tabs */}
-      <Section className="py-8 md:py-12">
-        <Container>
-          <FadeIn>
-            <OfficeLocations />
-          </FadeIn>
-        </Container>
       </Section>
     </>
   )

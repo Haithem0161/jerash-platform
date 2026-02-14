@@ -1,8 +1,7 @@
 import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
-import { MapPin, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { Container } from './Container'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const navLinks = [
   { to: '/', key: 'nav.home' },
@@ -13,8 +12,6 @@ const navLinks = [
   { to: '/careers', key: 'nav.careers' },
 ] as const
 
-const officeKeys = ['basrah', 'erbil', 'baghdad'] as const
-
 export function Footer() {
   const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
@@ -22,11 +19,9 @@ export function Footer() {
   return (
     <footer id="footer" className="border-t border-white/5">
       <Container>
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12">
-          {/* About Section */}
+        <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-3">
+          {/* About */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.aboutTitle')}</h3>
             <div className="flex items-center gap-2">
               <img
                 src="/Jerash-logo-color.png"
@@ -35,20 +30,20 @@ export function Footer() {
               />
               <span className="font-bold text-white">{t('common.siteName')}</span>
             </div>
-            <p className="text-sm text-white/50 leading-relaxed">
+            <p className="text-sm leading-relaxed text-white/50">
               {t('footer.aboutText')}
             </p>
           </div>
 
-          {/* Quick Links Section */}
+          {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.quickLinks')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-jerash-orange">{t('footer.quickLinks')}</h3>
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className="text-sm text-white/50 hover:text-jerash-orange transition-colors"
+                  className="text-sm text-white/50 transition-colors hover:text-jerash-orange"
                 >
                   {t(link.key)}
                 </Link>
@@ -56,42 +51,18 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Offices Section with Tabs */}
+          {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.officesTitle')}</h3>
-            <Tabs defaultValue="basrah" className="w-full">
-              <TabsList className="w-full grid grid-cols-3">
-                {officeKeys.map((office) => (
-                  <TabsTrigger key={office} value={office} className="text-xs">
-                    {t(`footer.offices.${office}.name`)}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              {officeKeys.map((office) => (
-                <TabsContent key={office} value={office} className="mt-4 space-y-3">
-                  <div className="flex items-start gap-2 text-sm">
-                    <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-jerash-orange" />
-                    <span className="text-white/50">
-                      {t(`footer.offices.${office}.address`)}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Mail className="h-4 w-4 shrink-0 text-jerash-orange" />
-                    <a
-                      href={`mailto:${t(`footer.offices.${office}.email`)}`}
-                      className="text-white/50 hover:text-jerash-orange transition-colors"
-                    >
-                      {t(`footer.offices.${office}.email`)}
-                    </a>
-                  </div>
-                </TabsContent>
-              ))}
-            </Tabs>
-          </div>
-
-          {/* Postal Info */}
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-jerash-orange">{t('footer.subscriber')}</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-jerash-orange">{t('footer.contactTitle')}</h3>
+            <div className="flex items-center gap-2 text-sm">
+              <Mail className="h-4 w-4 shrink-0 text-jerash-orange" />
+              <a
+                href={`mailto:${t('footer.email')}`}
+                className="text-white/50 transition-colors hover:text-jerash-orange"
+              >
+                {t('footer.email')}
+              </a>
+            </div>
             <div className="space-y-1 text-sm text-white/50">
               <p>{t('footer.poBox')}</p>
               <p>{t('footer.postOffice')}</p>
@@ -99,12 +70,12 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Copyright Row */}
+        {/* Copyright */}
         <div className="h-px w-full bg-linear-to-r from-transparent via-jerash-orange/30 to-transparent" />
         <div className="py-6 text-center">
           <p className="text-sm text-white/50">
             &copy; {currentYear}{' '}
-            <span className="text-white font-medium">{t('common.siteName')}</span>.{' '}
+            <span className="font-medium text-white">{t('common.siteName')}</span>.{' '}
             {t('common.allRightsReserved')}
           </p>
         </div>

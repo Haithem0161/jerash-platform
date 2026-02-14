@@ -34,29 +34,11 @@
   },
   "footer": {
     "quickLinks": "Quick Links",
-    "aboutTitle": "About Us",
     "aboutText": "Jerash For Oil Field Services provides comprehensive oil field solutions with an unwavering commitment to safety and excellence.",
-    "officesTitle": "Our Offices",
-    "offices": {
-      "basrah": {
-        "name": "Basrah",
-        "address": "Basrah, Iraq",
-        "email": "basrah@jerash.com"
-      },
-      "erbil": {
-        "name": "Erbil",
-        "address": "Erbil, Kurdistan Region, Iraq",
-        "email": "erbil@jerash.com"
-      },
-      "baghdad": {
-        "name": "Baghdad",
-        "address": "Baghdad, Iraq",
-        "email": "baghdad@jerash.com"
-      }
-    },
+    "contactTitle": "Contact",
+    "email": "info@jerash.com",
     "poBox": "P.O. Box: 28211",
-    "postOffice": "Karkh Complex Post Office",
-    "subscriber": "Jerash For Oil Field Services"
+    "postOffice": "Karkh Complex Post Office"
   },
   "language": {
     "select": "Language",

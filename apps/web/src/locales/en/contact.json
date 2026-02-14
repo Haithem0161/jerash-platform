@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Contact Us | Offices in Basrah, Erbil & Baghdad",
-    "description": "Get in touch with Jerash For Oil Field Services. Main office in Basrah with branches in Erbil and Baghdad. Request a quote or consultation."
+    "title": "Contact Us | Jerash For Oil Field Services",
+    "description": "Get in touch with Jerash For Oil Field Services. Request a quote or consultation."
   },
   "title": "Contact Us",
   "description": "Have a question or inquiry? We'd love to hear from you.",
@@ -33,33 +33,5 @@
     "nameRequired": "Please enter your name",
     "emailInvalid": "Please enter a valid email address",
     "messageTooShort": "Message must be at least 10 characters"
-  },
-  "quickContact": {
-    "title": "Quick Contact",
-    "description": "Reach us directly at any of our offices"
-  },
-  "offices": {
-    "title": "Our Offices",
-    "email": "Email",
-    "address": "Address",
-    "hours": "Working Hours",
-    "basrah": {
-      "name": "Basrah Office",
-      "address": "Basrah, Iraq",
-      "email": "basrah@jerash.com",
-      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
-    },
-    "erbil": {
-      "name": "Erbil Office",
-      "address": "Erbil, Kurdistan Region, Iraq",
-      "email": "erbil@jerash.com",
-      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
-    },
-    "baghdad": {
-      "name": "Baghdad Office",
-      "address": "Baghdad, Iraq",
-      "email": "baghdad@jerash.com",
-      "hours": "Sunday - Thursday: 8:00 AM - 4:00 PM"
-    }
   }
 }
