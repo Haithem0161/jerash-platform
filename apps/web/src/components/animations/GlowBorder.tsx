@@ -40,13 +40,13 @@ export function GlowBorder({
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-[var(--glow-intensity)] transition-opacity duration-300 group-hover:opacity-80"
         style={{
-          background: `conic-gradient(from 0deg, transparent, ${glowColor}, transparent, ${glowColor}, transparent)`,
+          background: `conic-gradient(from var(--glow-angle), transparent, ${glowColor}, transparent, ${glowColor}, transparent)`,
           mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           maskComposite: 'exclude',
           WebkitMaskComposite: 'xor',
           padding: '1px',
           borderRadius: 'inherit',
-          animation: 'orbit 8s linear infinite',
+          animation: 'glow-spin 8s linear infinite',
         }}
       />
       {/* Content */}

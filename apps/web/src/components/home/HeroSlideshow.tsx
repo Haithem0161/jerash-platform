@@ -159,30 +159,34 @@ export function HeroSlideshow() {
 
   return (
     <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
-      {/* Background slide images */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: 'easeInOut' }}
-          className="absolute inset-0"
-          ref={imageContainerRef}
-        >
-          <img
-            src={currentSlideData.imageUrl}
-            alt={currentSlideData.title}
-            className="absolute inset-0 h-full w-full object-cover"
-            fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
-            style={
-              prefersReducedMotion
-                ? undefined
-                : { filter: 'blur(8px)', transform: 'scale(1.1)' }
-            }
-          />
-        </motion.div>
-      </AnimatePresence>
+      {/* Background slide images — outer div is stable for GSAP, inner slides crossfade */}
+      <div
+        ref={imageContainerRef}
+        className="absolute inset-0"
+        style={
+          prefersReducedMotion
+            ? undefined
+            : { filter: 'blur(8px)', transform: 'scale(1.1)' }
+        }
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
+            className="absolute inset-0"
+          >
+            <img
+              src={currentSlideData.imageUrl}
+              alt={currentSlideData.title}
+              className="absolute inset-0 h-full w-full object-cover"
+              fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Gradient overlay */}
       <div
