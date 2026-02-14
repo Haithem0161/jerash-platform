@@ -2,15 +2,13 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Shield, Award, Scale, Users, Lightbulb, type LucideIcon } from 'lucide-react'
 import { Section } from '@/components/layout/Section'
-import { StaggerContainer, StaggerItem } from '@/components/animations/StaggerContainer'
 import { FadeIn } from '@/components/animations/FadeIn'
-import { useIsMobile } from '@/hooks'
 import { cn } from '@/lib/utils'
 
 interface ValueConfig {
   key: string
   icon: LucideIcon
-  glowColor: string
+  iconColor: string
   dropShadow: string
 }
 
@@ -18,164 +16,109 @@ const values: ValueConfig[] = [
   {
     key: 'safety',
     icon: Shield,
-    glowColor: 'oklch(0.40 0.12 250 / 40%)',
-    dropShadow: 'drop-shadow(0 0 16px oklch(0.40 0.12 250 / 40%))',
+    iconColor: 'oklch(0.55 0.15 250)',
+    dropShadow: 'drop-shadow(0 0 12px oklch(0.55 0.15 250 / 50%))',
   },
   {
     key: 'excellence',
     icon: Award,
-    glowColor: 'oklch(0.65 0.20 50 / 40%)',
-    dropShadow: 'drop-shadow(0 0 16px oklch(0.65 0.20 50 / 40%))',
+    iconColor: 'oklch(0.70 0.20 50)',
+    dropShadow: 'drop-shadow(0 0 12px oklch(0.70 0.20 50 / 50%))',
   },
   {
     key: 'integrity',
     icon: Scale,
-    glowColor: 'oklch(0.55 0.12 250 / 40%)',
-    dropShadow: 'drop-shadow(0 0 16px oklch(0.55 0.12 250 / 40%))',
+    iconColor: 'oklch(0.60 0.15 250)',
+    dropShadow: 'drop-shadow(0 0 12px oklch(0.60 0.15 250 / 50%))',
   },
   {
     key: 'teamwork',
     icon: Users,
-    glowColor: 'oklch(0.75 0.18 55 / 40%)',
-    dropShadow: 'drop-shadow(0 0 16px oklch(0.75 0.18 55 / 40%))',
+    iconColor: 'oklch(0.75 0.18 55)',
+    dropShadow: 'drop-shadow(0 0 12px oklch(0.75 0.18 55 / 50%))',
   },
   {
     key: 'innovation',
     icon: Lightbulb,
-    glowColor: 'oklch(0.30 0.10 250 / 40%)',
-    dropShadow: 'drop-shadow(0 0 16px oklch(0.30 0.10 250 / 40%))',
+    iconColor: 'oklch(0.55 0.15 250)',
+    dropShadow: 'drop-shadow(0 0 12px oklch(0.55 0.15 250 / 50%))',
   },
 ]
 
 /**
- * Values section with hexagonal honeycomb layout.
- * Desktop: 3 hexagons on top, 2 offset below.
- * Mobile: stacked glass cards.
+ * Values section with 3D flip cards.
+ * Hover (desktop) or tap (mobile) to flip and reveal description.
  */
 export function ValuesSection() {
   const { t } = useTranslation()
-  const isMobile = useIsMobile()
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [flippedIndex, setFlippedIndex] = useState<number | null>(null)
 
-  // Mobile: glass cards
-  if (isMobile) {
-    return (
-      <Section id="values">
-        <FadeIn direction="up" className="mb-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-white">
-            {t('home.values.title')}
-          </h2>
-        </FadeIn>
-        <StaggerContainer className="grid grid-cols-1 gap-4">
-          {values.map(({ key, icon: Icon }) => (
-            <StaggerItem key={key}>
-              <div className="glass rounded-2xl p-5">
-                <Icon className="mb-2 h-8 w-8 text-jerash-orange" />
-                <h3 className="text-lg font-semibold text-white">
-                  {t(`home.values.${key}.title`)}
-                </h3>
-                <p className="mt-1 text-sm text-white/60">
-                  {t(`home.values.${key}.description`)}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-      </Section>
-    )
+  const handleClick = (index: number) => {
+    setFlippedIndex((prev) => (prev === index ? null : index))
   }
 
   return (
     <Section id="values">
-      <FadeIn direction="up" className="mb-16 text-center">
+      <FadeIn direction="up" className="mb-12 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
           {t('home.values.title')}
         </h2>
       </FadeIn>
 
-      {/* Honeycomb layout */}
-      <StaggerContainer className="flex flex-col items-center gap-4">
-        {/* Top row: 3 hexagons */}
-        <div className="flex gap-4">
-          {values.slice(0, 3).map((value, index) => (
-            <HexagonCard
-              key={value.key}
-              value={value}
-              isHovered={hoveredIndex === index}
-              onHover={() => setHoveredIndex(index)}
-              onLeave={() => setHoveredIndex(null)}
-              t={t}
-            />
-          ))}
-        </div>
-        {/* Bottom row: 2 hexagons (offset) */}
-        <div className="flex gap-4" style={{ marginTop: -20 }}>
-          {values.slice(3, 5).map((value, index) => (
-            <HexagonCard
-              key={value.key}
-              value={value}
-              isHovered={hoveredIndex === index + 3}
-              onHover={() => setHoveredIndex(index + 3)}
-              onLeave={() => setHoveredIndex(null)}
-              t={t}
-            />
-          ))}
-        </div>
-      </StaggerContainer>
-    </Section>
-  )
-}
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
+        {values.map(({ key, icon: Icon, iconColor, dropShadow }, index) => {
+          const isFlipped = flippedIndex === index
+          const isLast = index === values.length - 1
 
-function HexagonCard({
-  value,
-  isHovered,
-  onHover,
-  onLeave,
-  t,
-}: {
-  value: ValueConfig
-  isHovered: boolean
-  onHover: () => void
-  onLeave: () => void
-  t: (key: string) => string
-}) {
-  const { key, icon: Icon, dropShadow } = value
+          return (
+            <FadeIn
+              key={key}
+              direction="up"
+              delay={index * 0.1}
+              className={cn(
+                isLast && 'col-span-2 mx-auto w-full max-w-[calc(50%-0.625rem)] sm:col-span-1 sm:max-w-none',
+              )}
+            >
+              <div
+                className="group cursor-pointer perspective-[1000px]"
+                onClick={() => handleClick(index)}
+              >
+                <div
+                  className={cn(
+                    'relative h-56 w-full transition-transform duration-500 transform-3d',
+                    'group-hover:transform-[rotateY(180deg)]',
+                    isFlipped && 'transform-[rotateY(180deg)]',
+                  )}
+                >
+                  {/* Front face — no backdrop-filter (breaks backface-visibility) */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-[oklch(0.13_0.02_250)] backface-hidden">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                      <Icon
+                        className="h-7 w-7"
+                        style={{ color: iconColor, filter: dropShadow }}
+                      />
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-white">
+                      {t(`home.values.${key}.title`)}
+                    </h3>
+                  </div>
 
-  return (
-    <StaggerItem className="relative">
-      <div
-        className={cn(
-          'relative flex cursor-default flex-col items-center justify-center text-center transition-all duration-300',
-        )}
-        style={{
-          width: 200,
-          height: 220,
-          clipPath:
-            'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-          filter: isHovered ? dropShadow : 'none',
-          transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-        }}
-        onMouseEnter={onHover}
-        onMouseLeave={onLeave}
-      >
-        {/* Glass background */}
-        <div className="absolute inset-0 bg-white/5 backdrop-blur-xl" />
-        <div className="relative z-10 flex flex-col items-center px-4">
-          <Icon className="h-8 w-8 text-white/80" />
-          <h3 className="mt-3 text-sm font-semibold text-white">
-            {t(`home.values.${key}.title`)}
-          </h3>
-        </div>
+                  {/* Back face — no backdrop-filter (breaks backface-visibility) */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-[oklch(0.13_0.02_250)] p-5 backface-hidden transform-[rotateY(180deg)]">
+                    <Icon
+                      className="mb-3 h-6 w-6"
+                      style={{ color: iconColor, filter: dropShadow }}
+                    />
+                    <p className="text-center text-sm leading-relaxed text-white/70">
+                      {t(`home.values.${key}.description`)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          )
+        })}
       </div>
-
-      {/* Description tooltip on hover */}
-      {isHovered && (
-        <div className="glass absolute left-1/2 top-full z-20 mt-2 w-52 -translate-x-1/2 rounded-xl p-3 text-center">
-          <p className="text-xs leading-relaxed text-white/70">
-            {t(`home.values.${key}.description`)}
-          </p>
-        </div>
-      )}
-    </StaggerItem>
+    </Section>
   )
 }
