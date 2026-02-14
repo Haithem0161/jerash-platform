@@ -91,7 +91,7 @@ export function ServicesPreview() {
       ScrollTrigger.create({
         trigger: section,
         start: 'top top',
-        end: `+=${(totalPanels - 1) * 100}%`,
+        end: `+=${(totalPanels - 1) * 150}%`,
         pin: true,
         scrub: 0.5,
         snap: {
@@ -119,9 +119,7 @@ export function ServicesPreview() {
         <div
           ref={sectionRef}
           className="relative h-screen w-full overflow-hidden"
-          style={{ height: `${SERVICES.length * 100}vh` }}
         >
-          <div className="sticky top-0 h-screen w-full">
             {/* Background image with crossfade */}
             <AnimatePresence mode="wait">
               <motion.img
@@ -201,7 +199,6 @@ export function ServicesPreview() {
                 {t('nav.services')}
               </span>
             </div>
-          </div>
         </div>
       </Section>
     )
