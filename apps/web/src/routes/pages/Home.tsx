@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SEO } from '@/components/common/SEO'
 import { organizationSchema } from '@/lib/structured-data'
 import {
+  CertificatesSection,
+  CompanyProfileSection,
   CTASection,
   HeroSlideshow,
   VisionMissionSection,
@@ -57,11 +59,13 @@ export function HomePage() {
         <VisionMissionSection />
         <ValuesSection />
         <StatsSection />
+        <CertificatesSection />
         <ManagementSection />
         <PartnersSection />
         <OECRibbonSection />
         <ServicesPreview />
         <JointVenturesSection />
+        <CompanyProfileSection />
         <CTASection />
       </div>
     </>

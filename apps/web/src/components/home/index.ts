@@ -1,3 +1,5 @@
+export { CertificatesSection } from './CertificatesSection'
+export { CompanyProfileSection } from './CompanyProfileSection'
 export { CTASection } from './CTASection'
 export { HeroSlideshow } from './HeroSlideshow'
 export { JointVenturesSection } from './JointVenturesSection'

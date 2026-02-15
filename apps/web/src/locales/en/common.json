@@ -94,6 +94,20 @@
       "projectsCompleted": "Projects Completed",
       "employees": "Team Members"
     },
+    "certificates": {
+      "title": "Certifications",
+      "subtitle": "Internationally recognized standards",
+      "viewCertificate": "View Certificate",
+      "iso9001": {
+        "name": "Quality Management System"
+      },
+      "iso14001": {
+        "name": "Environmental Management System"
+      },
+      "iso45001": {
+        "name": "Occupational Health & Safety"
+      }
+    },
     "management": {
       "title": "Management Philosophy",
       "content": "Our leadership believes in empowering teams through clear career paths, appropriate training, and a culture of accountability. We pride ourselves in offering a diverse work environment where both team and individual contributions are encouraged and valued. The leadership teams have full responsibility to drive our safety culture by ensuring effective implementation of our standards."
@@ -118,6 +132,12 @@
       "title": "Proudly Working With",
       "name": "Oil Exploration Company (OEC)",
       "subtitle": "Operating under the Iraqi Ministry of Oil, delivering critical oil field services across Iraq's national exploration programs."
+    },
+    "companyProfile": {
+      "label": "Company Profile",
+      "title": "Download Our Corporate Brochure",
+      "description": "Learn more about our capabilities, services, and track record.",
+      "button": "Download PDF"
     },
     "cta": {
       "title": "Ready to Start Your Next Project?",
