@@ -170,6 +170,10 @@
         "filtration": {
           "title": "Filtration Services",
           "description": "Industrial filtration solutions for produced water, completion fluids, and process streams ensuring fluid cleanliness for critical operations."
+        },
+        "pipelines": {
+          "title": "Pipelines & Industrial Services",
+          "description": "Comprehensive pipeline construction, maintenance, and industrial support services including fluid storage and logistics."
         }
       }
     }

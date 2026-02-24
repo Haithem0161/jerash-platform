@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   ArrowRight,
+  Cable,
   Cog,
   Droplet,
   Layers,
@@ -65,11 +66,18 @@ const SERVICES: ServiceItem[] = [
     descKey: 'home.services.items.filtration.description',
     image: '/service5.webp',
   },
+  {
+    key: 'pipelines',
+    icon: Cable,
+    titleKey: 'home.services.items.pipelines.title',
+    descKey: 'home.services.items.pipelines.description',
+    image: '/service6.webp',
+  },
 ]
 
 /**
  * Full-screen tabbed services showcase.
- * Desktop: GSAP ScrollTrigger pins section, snaps between 5 service panels.
+ * Desktop: GSAP ScrollTrigger pins section, snaps between 6 service panels.
  * Mobile: Stacked cards with FadeIn reveals.
  */
 export function ServicesPreview() {
