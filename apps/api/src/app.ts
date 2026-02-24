@@ -20,8 +20,8 @@ import authPlugin from './plugins/auth.js'
 import authRoutes from './modules/auth/auth.routes.js'
 import heroSlidesRoutes from './modules/hero-slides/hero-slides.routes.js'
 import settingsRoutes from './modules/settings/settings.routes.js'
+import clientsRoutes from './modules/clients/clients.routes.js'
 import partnersRoutes from './modules/partners/partners.routes.js'
-import jointVenturesRoutes from './modules/joint-ventures/joint-ventures.routes.js'
 import officesRoutes from './modules/offices/offices.routes.js'
 import servicesRoutes from './modules/services/services.routes.js'
 import galleryRoutes from './modules/gallery/gallery.routes.js'
@@ -86,8 +86,8 @@ export async function buildApp() {
   await fastify.register(authRoutes, { prefix: '/auth' })
   await fastify.register(heroSlidesRoutes, { prefix: '/hero-slides' })
   await fastify.register(settingsRoutes, { prefix: '/settings' })
+  await fastify.register(clientsRoutes, { prefix: '/clients' })
   await fastify.register(partnersRoutes, { prefix: '/partners' })
-  await fastify.register(jointVenturesRoutes, { prefix: '/joint-ventures' })
   await fastify.register(officesRoutes, { prefix: '/offices' })
   await fastify.register(servicesRoutes, { prefix: '/services' })
   await fastify.register(galleryRoutes, { prefix: '/gallery' })

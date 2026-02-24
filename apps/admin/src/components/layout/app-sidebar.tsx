@@ -28,8 +28,8 @@ import {
 const contentItems = [
   { title: 'Dashboard', url: '/dashboard', icon: LayoutDashboard },
   { title: 'Hero Slides', url: '/hero-slides', icon: SlidersHorizontal },
-  { title: 'Partners', url: '/partners', icon: Handshake },
-  { title: 'Joint Ventures', url: '/joint-ventures', icon: Building2 },
+  { title: 'Clients', url: '/clients', icon: Handshake },
+  { title: 'Partners', url: '/partners', icon: Building2 },
   { title: 'Services', url: '/services', icon: Layers },
   { title: 'Gallery', url: '/gallery', icon: Image },
   { title: 'Offices', url: '/offices', icon: MapPin },

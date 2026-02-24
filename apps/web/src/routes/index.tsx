@@ -12,8 +12,8 @@ import { NotFoundPage } from './pages/NotFound'
 const GalleryPage = lazy(() => import('./pages/Gallery'))
 const ContactPage = lazy(() => import('./pages/Contact'))
 const CareersPage = lazy(() => import('./pages/Careers'))
+const ClientsPage = lazy(() => import('./pages/Clients'))
 const PartnersPage = lazy(() => import('./pages/Partners'))
-const JointVenturesPage = lazy(() => import('./pages/JointVentures'))
 
 // Simple loading spinner for lazy-loaded pages
 function PageLoader() {
@@ -71,18 +71,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'partners',
+        path: 'clients',
         element: (
           <LazyPage>
-            <PartnersPage />
+            <ClientsPage />
           </LazyPage>
         ),
       },
       {
-        path: 'joint-ventures',
+        path: 'partners',
         element: (
           <LazyPage>
-            <JointVenturesPage />
+            <PartnersPage />
           </LazyPage>
         ),
       },

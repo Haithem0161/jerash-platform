@@ -57,7 +57,38 @@ export interface SiteSettingUpdate {
   value: string
 }
 
-// Partners
+// Clients (formerly Partners — e.g. SLB)
+export interface Client extends BaseEntity, OrderableEntity {
+  slug: string
+  nameEn: string
+  nameAr: string
+  descriptionEn: string
+  descriptionAr: string
+  logoUrl: string
+  website: string | null
+}
+
+export interface ClientPublic {
+  id: string
+  slug: string
+  name: string
+  description: string
+  logo: string
+  website: string | null
+}
+
+export interface ClientFormData {
+  nameEn: string
+  nameAr: string
+  descriptionEn: string
+  descriptionAr: string
+  logoUrl: string
+  website?: string
+  order?: number
+  isActive?: boolean
+}
+
+// Partners (formerly Joint Ventures — e.g. Kweti)
 export interface Partner extends BaseEntity, OrderableEntity {
   slug: string
   nameEn: string
@@ -78,37 +109,6 @@ export interface PartnerPublic {
 }
 
 export interface PartnerFormData {
-  nameEn: string
-  nameAr: string
-  descriptionEn: string
-  descriptionAr: string
-  logoUrl: string
-  website?: string
-  order?: number
-  isActive?: boolean
-}
-
-// Joint Ventures (same structure as Partner)
-export interface JointVenture extends BaseEntity, OrderableEntity {
-  slug: string
-  nameEn: string
-  nameAr: string
-  descriptionEn: string
-  descriptionAr: string
-  logoUrl: string
-  website: string | null
-}
-
-export interface JointVenturePublic {
-  id: string
-  slug: string
-  name: string
-  description: string
-  logo: string
-  website: string | null
-}
-
-export interface JointVentureFormData {
   nameEn: string
   nameAr: string
   descriptionEn: string

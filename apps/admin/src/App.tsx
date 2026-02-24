@@ -5,8 +5,8 @@ import { AuthProvider } from '@/components/auth-provider'
 import { ProtectedLayout } from '@/components/layout'
 import { LoginPage } from '@/pages/login'
 import { DashboardPage } from '@/pages/dashboard'
+import { ClientsPage } from '@/pages/clients'
 import { PartnersPage } from '@/pages/partners'
-import { JointVenturesPage } from '@/pages/joint-ventures'
 import { ServicesPage } from '@/pages/services'
 import { GalleryPage } from '@/pages/gallery'
 import { OfficesPage } from '@/pages/offices'
@@ -35,8 +35,8 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route element={<ProtectedLayout />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/clients" element={<ClientsPage />} />
               <Route path="/partners" element={<PartnersPage />} />
-              <Route path="/joint-ventures" element={<JointVenturesPage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
               <Route path="/offices" element={<OfficesPage />} />

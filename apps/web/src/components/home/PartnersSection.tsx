@@ -7,10 +7,10 @@ import { OrbitalLogos } from '@/components/animations/OrbitalLogos'
 import { Skeleton } from '@/components/ui/skeleton'
 import { isRTL } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
-import { useJointVentures } from '@/hooks/api'
+import { usePartners } from '@/hooks/api'
 import { useBilingual } from '@/hooks/useBilingual'
 
-function JVSkeleton() {
+function PartnersSkeleton() {
   return (
     <div className="flex items-center justify-center py-20">
       <Skeleton className="h-[400px] w-[400px] rounded-full" />
@@ -19,35 +19,35 @@ function JVSkeleton() {
 }
 
 /**
- * Joint Ventures section with orbital logo arrangement.
- * Same pattern as Partners but different orbit speed/direction.
+ * Partners section with orbital logo arrangement.
+ * Logos orbit around the central Jerash logo.
  */
-export function JointVenturesSection() {
+export function PartnersSection() {
   const { t, i18n } = useTranslation()
   const rtl = isRTL(i18n.language)
-  const { data: jointVentures, isLoading } = useJointVentures()
+  const { data: partners, isLoading } = usePartners()
   const { resolve } = useBilingual()
 
-  const displayJVs = jointVentures?.slice(0, 10)
+  const displayPartners = partners?.slice(0, 10)
 
   const orbitalLogos =
-    displayJVs?.map((jv) => ({
-      name: resolve(jv.nameEn, jv.nameAr),
-      logoUrl: jv.logoUrl,
-      website: jv.website,
+    displayPartners?.map((partner) => ({
+      name: resolve(partner.nameEn, partner.nameAr),
+      logoUrl: partner.logoUrl,
+      website: partner.website,
     })) ?? []
 
   return (
-    <Section id="joint-ventures">
+    <Section id="partners">
       <FadeIn className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-white md:text-4xl">
-          {t('home.jointVentures.title')}
+          {t('home.partners.title')}
         </h2>
       </FadeIn>
 
       <FadeIn delay={0.1}>
         {isLoading ? (
-          <JVSkeleton />
+          <PartnersSkeleton />
         ) : orbitalLogos.length > 0 ? (
           <OrbitalLogos
             logos={orbitalLogos}
@@ -67,7 +67,7 @@ export function JointVenturesSection() {
         ) : (
           <div className="text-center">
             <p className="text-white/50">
-              {t('home.jointVentures.noJointVentures')}
+              {t('home.partners.noPartners')}
             </p>
           </div>
         )}
@@ -75,10 +75,10 @@ export function JointVenturesSection() {
 
       <FadeIn delay={0.2} className="mt-8 text-center">
         <Link
-          to="/joint-ventures"
+          to="/partners"
           className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-jerash-orange"
         >
-          {t('home.jointVentures.seeAll')}
+          {t('home.partners.seeAll')}
           <ArrowRight className={cn('h-4 w-4', rtl && 'rotate-180')} />
         </Link>
       </FadeIn>

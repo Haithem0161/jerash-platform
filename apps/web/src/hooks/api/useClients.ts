@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import api from '@/lib/axios'
-import type { ApiResponse, Partner } from '@/types/api'
+import type { ApiResponse, Client } from '@/types/api'
 
-export function usePartners() {
+export function useClients() {
   return useQuery({
-    queryKey: ['partners'],
+    queryKey: ['clients'],
     queryFn: async () => {
-      const { data } = await api.get<ApiResponse<Partner[]>>('/partners')
+      const { data } = await api.get<ApiResponse<Client[]>>('/clients')
       return data.data
     },
     staleTime: 1000 * 60 * 10,

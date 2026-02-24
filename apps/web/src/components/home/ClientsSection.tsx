@@ -7,10 +7,10 @@ import { OrbitalLogos } from '@/components/animations/OrbitalLogos'
 import { Skeleton } from '@/components/ui/skeleton'
 import { isRTL } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
-import { usePartners } from '@/hooks/api'
+import { useClients } from '@/hooks/api'
 import { useBilingual } from '@/hooks/useBilingual'
 
-function PartnersSkeleton() {
+function ClientsSkeleton() {
   return (
     <div className="flex items-center justify-center py-20">
       <Skeleton className="h-[400px] w-[400px] rounded-full" />
@@ -19,35 +19,35 @@ function PartnersSkeleton() {
 }
 
 /**
- * Partners section with orbital logo arrangement.
+ * Clients section with orbital logo arrangement.
  * Logos orbit around the central Jerash logo.
  */
-export function PartnersSection() {
+export function ClientsSection() {
   const { t, i18n } = useTranslation()
   const rtl = isRTL(i18n.language)
-  const { data: partners, isLoading } = usePartners()
+  const { data: clients, isLoading } = useClients()
   const { resolve } = useBilingual()
 
-  const displayPartners = partners?.slice(0, 10)
+  const displayClients = clients?.slice(0, 10)
 
   const orbitalLogos =
-    displayPartners?.map((partner) => ({
-      name: resolve(partner.nameEn, partner.nameAr),
-      logoUrl: partner.logoUrl,
-      website: partner.website,
+    displayClients?.map((client) => ({
+      name: resolve(client.nameEn, client.nameAr),
+      logoUrl: client.logoUrl,
+      website: client.website,
     })) ?? []
 
   return (
-    <Section id="partners">
+    <Section id="clients">
       <FadeIn className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-white md:text-4xl">
-          {t('home.partners.title')}
+          {t('home.clients.title')}
         </h2>
       </FadeIn>
 
       <FadeIn delay={0.1}>
         {isLoading ? (
-          <PartnersSkeleton />
+          <ClientsSkeleton />
         ) : orbitalLogos.length > 0 ? (
           <OrbitalLogos
             logos={orbitalLogos}
@@ -66,17 +66,17 @@ export function PartnersSection() {
           />
         ) : (
           <div className="text-center">
-            <p className="text-white/50">{t('home.partners.noPartners')}</p>
+            <p className="text-white/50">{t('home.clients.noClients')}</p>
           </div>
         )}
       </FadeIn>
 
       <FadeIn delay={0.2} className="mt-8 text-center">
         <Link
-          to="/partners"
+          to="/clients"
           className="inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-jerash-orange"
         >
-          {t('home.partners.seeAll')}
+          {t('home.clients.seeAll')}
           <ArrowRight className={cn('h-4 w-4', rtl && 'rotate-180')} />
         </Link>
       </FadeIn>

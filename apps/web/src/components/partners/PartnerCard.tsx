@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { ExternalLink } from 'lucide-react'
 import { FadeIn } from '@/components/animations/FadeIn'
 
-interface JointVentureCardProps {
-  /** JV name (already resolved for current language) */
+interface PartnerCardProps {
+  /** Partner name (already resolved for current language) */
   name: string
-  /** JV description (already resolved for current language) */
+  /** Partner description (already resolved for current language) */
   description: string
-  /** URL to JV logo */
+  /** URL to partner logo */
   logoUrl: string
   /** Optional external website URL */
   website?: string | null
@@ -17,11 +17,11 @@ interface JointVentureCardProps {
 }
 
 /**
- * Joint Venture profile card displaying logo, name, description, and optional website link.
+ * Partner profile card displaying logo, name, description, and optional website link.
  * Logo gracefully falls back to placeholder if image fails to load.
  */
-export function JointVentureCard({ name, description, logoUrl, website, delay = 0 }: JointVentureCardProps) {
-  const { t } = useTranslation('partners')
+export function PartnerCard({ name, description, logoUrl, website, delay = 0 }: PartnerCardProps) {
+  const { t } = useTranslation('clients')
   const [logoError, setLogoError] = useState(false)
 
   return (
@@ -57,12 +57,12 @@ export function JointVentureCard({ name, description, logoUrl, website, delay = 
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 text-primary hover:underline"
           >
-            {t('partners.visitWebsite')}
+            {t('clients.visitWebsite')}
             <ExternalLink className="h-4 w-4" />
           </a>
         ) : (
           <p className="mt-4 text-sm text-muted-foreground">
-            {t('jointVentures.comingSoon')}
+            {t('partners.comingSoon')}
           </p>
         )}
       </div>

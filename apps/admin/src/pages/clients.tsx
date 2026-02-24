@@ -6,8 +6,8 @@ import { z } from 'zod'
 import type { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
-import type { Partner } from '@repo/types'
-import { partnersApi } from '@/lib/api'
+import type { Client } from '@repo/types'
+import { clientsApi } from '@/lib/api'
 import { DataTable, DataTableColumnHeader, DataTableRowActions } from '@/components/data-table'
 import { BilingualInput, BilingualTextarea, ImageUploader } from '@/components/forms'
 import { Button } from '@/components/ui/button'
@@ -33,7 +33,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 
-const partnerSchema = z.object({
+const clientFormSchema = z.object({
   slug: z.string().min(1, 'Slug is required'),
   nameEn: z.string().min(1, 'English name is required'),
   nameAr: z.string().min(1, 'Arabic name is required'),
@@ -44,52 +44,52 @@ const partnerSchema = z.object({
   isActive: z.boolean(),
 })
 
-type PartnerForm = z.infer<typeof partnerSchema>
+type ClientForm = z.infer<typeof clientFormSchema>
 
-export function PartnersPage() {
+export function ClientsPage() {
   const queryClient = useQueryClient()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingPartner, setEditingPartner] = useState<Partner | null>(null)
-  const [deletingPartner, setDeletingPartner] = useState<Partner | null>(null)
+  const [editingClient, setEditingClient] = useState<Client | null>(null)
+  const [deletingClient, setDeletingClient] = useState<Client | null>(null)
 
   const { data, isLoading } = useQuery({
-    queryKey: ['partners'],
-    queryFn: () => partnersApi.getAll(),
+    queryKey: ['clients'],
+    queryFn: () => clientsApi.getAll(),
   })
 
   const createMutation = useMutation({
-    mutationFn: partnersApi.create,
+    mutationFn: clientsApi.create,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['partners'] })
-      toast.success('Partner created successfully')
+      queryClient.invalidateQueries({ queryKey: ['clients'] })
+      toast.success('Client created successfully')
       handleCloseDialog()
     },
-    onError: () => toast.error('Failed to create partner'),
+    onError: () => toast.error('Failed to create client'),
   })
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<Partner> }) =>
-      partnersApi.update(id, data),
+    mutationFn: ({ id, data }: { id: string; data: Partial<Client> }) =>
+      clientsApi.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['partners'] })
-      toast.success('Partner updated successfully')
+      queryClient.invalidateQueries({ queryKey: ['clients'] })
+      toast.success('Client updated successfully')
       handleCloseDialog()
     },
-    onError: () => toast.error('Failed to update partner'),
+    onError: () => toast.error('Failed to update client'),
   })
 
   const deleteMutation = useMutation({
-    mutationFn: partnersApi.delete,
+    mutationFn: clientsApi.delete,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['partners'] })
-      toast.success('Partner deleted successfully')
-      setDeletingPartner(null)
+      queryClient.invalidateQueries({ queryKey: ['clients'] })
+      toast.success('Client deleted successfully')
+      setDeletingClient(null)
     },
-    onError: () => toast.error('Failed to delete partner'),
+    onError: () => toast.error('Failed to delete client'),
   })
 
-  const form = useForm<PartnerForm>({
-    resolver: zodResolver(partnerSchema),
+  const form = useForm<ClientForm>({
+    resolver: zodResolver(clientFormSchema),
     defaultValues: {
       slug: '',
       nameEn: '',
@@ -102,21 +102,21 @@ export function PartnersPage() {
     },
   })
 
-  const handleOpenDialog = (partner?: Partner) => {
-    if (partner) {
-      setEditingPartner(partner)
+  const handleOpenDialog = (client?: Client) => {
+    if (client) {
+      setEditingClient(client)
       form.reset({
-        slug: partner.slug,
-        nameEn: partner.nameEn,
-        nameAr: partner.nameAr,
-        descriptionEn: partner.descriptionEn,
-        descriptionAr: partner.descriptionAr,
-        logoUrl: partner.logoUrl,
-        website: partner.website || '',
-        isActive: partner.isActive,
+        slug: client.slug,
+        nameEn: client.nameEn,
+        nameAr: client.nameAr,
+        descriptionEn: client.descriptionEn,
+        descriptionAr: client.descriptionAr,
+        logoUrl: client.logoUrl,
+        website: client.website || '',
+        isActive: client.isActive,
       })
     } else {
-      setEditingPartner(null)
+      setEditingClient(null)
       form.reset()
     }
     setIsDialogOpen(true)
@@ -124,19 +124,19 @@ export function PartnersPage() {
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false)
-    setEditingPartner(null)
+    setEditingClient(null)
     form.reset()
   }
 
-  const onSubmit = (data: PartnerForm) => {
-    if (editingPartner) {
-      updateMutation.mutate({ id: editingPartner.id, data })
+  const onSubmit = (data: ClientForm) => {
+    if (editingClient) {
+      updateMutation.mutate({ id: editingClient.id, data })
     } else {
       createMutation.mutate(data)
     }
   }
 
-  const columns: ColumnDef<Partner>[] = [
+  const columns: ColumnDef<Client>[] = [
     {
       accessorKey: 'logoUrl',
       header: 'Logo',
@@ -180,7 +180,7 @@ export function PartnersPage() {
       cell: ({ row }) => (
         <DataTableRowActions
           onEdit={() => handleOpenDialog(row.original)}
-          onDelete={() => setDeletingPartner(row.original)}
+          onDelete={() => setDeletingClient(row.original)}
         />
       ),
     },
@@ -198,29 +198,29 @@ export function PartnersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Partners</h1>
-        <p className="text-muted-foreground">Manage partner organizations</p>
+        <h1 className="text-3xl font-bold">Clients</h1>
+        <p className="text-muted-foreground">Manage client organizations</p>
       </div>
 
       <DataTable
         columns={columns}
         data={data?.data ?? []}
         searchKey="nameEn"
-        searchPlaceholder="Search partners..."
+        searchPlaceholder="Search clients..."
         onAdd={() => handleOpenDialog()}
-        addLabel="Add Partner"
+        addLabel="Add Client"
       />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {editingPartner ? 'Edit Partner' : 'Add Partner'}
+              {editingClient ? 'Edit Client' : 'Add Client'}
             </DialogTitle>
             <DialogDescription>
-              {editingPartner
-                ? 'Update partner information'
-                : 'Add a new partner organization'}
+              {editingClient
+                ? 'Update client information'
+                : 'Add a new client organization'}
             </DialogDescription>
           </DialogHeader>
 
@@ -230,7 +230,7 @@ export function PartnersPage() {
               <Input
                 id="slug"
                 {...form.register('slug')}
-                placeholder="partner-slug"
+                placeholder="client-slug"
               />
               {form.formState.errors.slug && (
                 <p className="text-sm text-destructive">
@@ -259,7 +259,7 @@ export function PartnersPage() {
               label="Logo"
               value={form.watch('logoUrl')}
               onChange={(url) => form.setValue('logoUrl', url)}
-              folder="partners"
+              folder="clients"
               required
               error={form.formState.errors.logoUrl?.message}
             />
@@ -300,7 +300,7 @@ export function PartnersPage() {
                 {(createMutation.isPending || updateMutation.isPending) && (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                {editingPartner ? 'Update' : 'Create'}
+                {editingClient ? 'Update' : 'Create'}
               </Button>
             </div>
           </form>
@@ -308,21 +308,21 @@ export function PartnersPage() {
       </Dialog>
 
       <AlertDialog
-        open={!!deletingPartner}
-        onOpenChange={() => setDeletingPartner(null)}
+        open={!!deletingClient}
+        onOpenChange={() => setDeletingClient(null)}
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Partner</AlertDialogTitle>
+            <AlertDialogTitle>Delete Client</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{deletingPartner?.nameEn}"? This
+              Are you sure you want to delete "{deletingClient?.nameEn}"? This
               action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deletingPartner && deleteMutation.mutate(deletingPartner.id)}
+              onClick={() => deletingClient && deleteMutation.mutate(deletingClient.id)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               Delete

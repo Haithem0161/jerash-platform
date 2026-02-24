@@ -1,29 +1,29 @@
 /**
- * Partner data structure with translation key references.
+ * Client data structure with translation key references.
  * Ready for CMS/API migration - all display text uses translation keys.
  */
-export interface Partner {
-  /** Unique identifier for the partner */
+export interface Client {
+  /** Unique identifier for the client */
   id: string
-  /** Translation key for partner name (e.g., 'partners.slb.name') */
+  /** Translation key for client name (e.g., 'clients.slb.name') */
   nameKey: string
-  /** Translation key for partner description */
+  /** Translation key for client description */
   descriptionKey: string
-  /** Path to partner logo image */
+  /** Path to client logo image */
   logo: string
   /** Optional external website URL */
   website?: string
 }
 
 /**
- * Static partners data.
- * Add new partners by extending this array.
+ * Static clients data.
+ * Add new clients by extending this array.
  */
-export const partners: Partner[] = [
+export const clients: Client[] = [
   {
     id: 'slb',
-    nameKey: 'partners.slb.name',
-    descriptionKey: 'partners.slb.description',
+    nameKey: 'clients.slb.name',
+    descriptionKey: 'clients.slb.description',
     logo: '/images/partners/slb-logo.png',
     website: 'https://www.slb.com',
   },

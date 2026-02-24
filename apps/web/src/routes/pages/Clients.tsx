@@ -2,15 +2,15 @@ import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common/SEO'
 import { Section } from '@/components/layout/Section'
 import { FadeIn } from '@/components/animations/FadeIn'
-import { PartnerCard } from '@/components/partners/PartnerCard'
-import { usePartners } from '@/hooks/api'
+import { ClientCard } from '@/components/clients/ClientCard'
+import { useClients } from '@/hooks/api'
 import { useBilingual } from '@/hooks/useBilingual'
 import { Skeleton } from '@/components/ui/skeleton'
 
 /**
- * Skeleton loader for partner cards
+ * Skeleton loader for client cards
  */
-function PartnersSkeleton() {
+function ClientsSkeleton() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {[1, 2, 3].map((i) => (
@@ -25,20 +25,20 @@ function PartnersSkeleton() {
 }
 
 /**
- * Partners page showcasing strategic business partnerships.
- * Grid layout supports multiple partners.
+ * Clients page showcasing strategic business clients.
+ * Grid layout supports multiple clients.
  */
-export function PartnersPage() {
-  const { t } = useTranslation('partners')
-  const { data: partners, isLoading } = usePartners()
+export function ClientsPage() {
+  const { t } = useTranslation('clients')
+  const { data: clients, isLoading } = useClients()
   const { resolve } = useBilingual()
 
   return (
     <>
       <SEO
-        title={t('seo.partnersTitle')}
-        description={t('seo.partnersDescription')}
-        url="/partners"
+        title={t('seo.clientsTitle')}
+        description={t('seo.clientsDescription')}
+        url="/clients"
         image="/images/gallery/jerash-site-15.jpg"
       />
 
@@ -46,25 +46,25 @@ export function PartnersPage() {
         {/* Page header */}
         <FadeIn className="mb-12 text-center">
           <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
-            {t('partners.pageTitle')}
+            {t('clients.pageTitle')}
           </h1>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            {t('partners.pageDescription')}
+            {t('clients.pageDescription')}
           </p>
         </FadeIn>
 
-        {/* Partners grid */}
+        {/* Clients grid */}
         {isLoading ? (
-          <PartnersSkeleton />
+          <ClientsSkeleton />
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {partners?.map((partner, idx) => (
-              <PartnerCard
-                key={partner.id}
-                name={resolve(partner.nameEn, partner.nameAr)}
-                description={resolve(partner.descriptionEn, partner.descriptionAr)}
-                logoUrl={partner.logoUrl}
-                website={partner.website}
+            {clients?.map((client, idx) => (
+              <ClientCard
+                key={client.id}
+                name={resolve(client.nameEn, client.nameAr)}
+                description={resolve(client.descriptionEn, client.descriptionAr)}
+                logoUrl={client.logoUrl}
+                website={client.website}
                 delay={idx * 0.1}
               />
             ))}
@@ -75,4 +75,4 @@ export function PartnersPage() {
   )
 }
 
-export default PartnersPage
+export default ClientsPage

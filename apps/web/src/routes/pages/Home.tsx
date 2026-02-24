@@ -15,8 +15,8 @@ import {
   ManagementSection,
   OECRibbonSection,
   ServicesPreview,
+  ClientsSection,
   PartnersSection,
-  JointVenturesSection,
 } from '@/components/home'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -61,10 +61,10 @@ export function HomePage() {
         <StatsSection />
         <CertificatesSection />
         <ManagementSection />
-        <PartnersSection />
+        <ClientsSection />
         <OECRibbonSection />
         <ServicesPreview />
-        <JointVenturesSection />
+        <PartnersSection />
         <CompanyProfileSection />
         <CTASection />
       </div>

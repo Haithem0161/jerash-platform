@@ -13,8 +13,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { dashboardApi } from '@/lib/api'
 
 const statCards = [
-  { key: 'partners', label: 'Partners', icon: Handshake, color: 'text-blue-600' },
-  { key: 'jointVentures', label: 'Joint Ventures', icon: Building2, color: 'text-purple-600' },
+  { key: 'clients', label: 'Clients', icon: Handshake, color: 'text-blue-600' },
+  { key: 'partners', label: 'Partners', icon: Building2, color: 'text-purple-600' },
   { key: 'services', label: 'Services', icon: Layers, color: 'text-green-600' },
   { key: 'galleryImages', label: 'Gallery Images', icon: Image, color: 'text-yellow-600' },
   { key: 'jobs', label: 'Active Jobs', icon: Briefcase, color: 'text-orange-600' },

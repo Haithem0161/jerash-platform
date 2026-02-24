@@ -56,7 +56,7 @@ export interface Service {
   updatedAt: string
 }
 
-export interface Partner {
+export interface Client {
   id: string
   slug: string
   nameEn: string
@@ -71,7 +71,7 @@ export interface Partner {
   updatedAt: string
 }
 
-export interface JointVenture {
+export interface Partner {
   id: string
   slug: string
   nameEn: string

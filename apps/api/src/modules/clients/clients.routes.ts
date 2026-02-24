@@ -1,14 +1,14 @@
 import type { FastifyPluginAsync } from 'fastify'
-import { partnerSchema, partnerUpdateSchema, reorderSchema } from '@repo/validation'
+import { clientSchema, clientUpdateSchema, reorderSchema } from '@repo/validation'
 import { generateSlug, ensureUniqueSlug } from '../../utils/slug.js'
 import { withFullUrls, withFullUrlsArray } from '../../utils/url.js'
 
-const partnersRoutes: FastifyPluginAsync = async (fastify) => {
-  // GET /partners - Public
+const clientsRoutes: FastifyPluginAsync = async (fastify) => {
+  // GET /clients - Public
   fastify.get('/', {
     schema: {
-      tags: ['Partners'],
-      summary: 'Get all active partners',
+      tags: ['Clients'],
+      summary: 'Get all active clients',
     },
   }, async () => {
     const partners = await fastify.prisma.partner.findMany({
@@ -18,12 +18,12 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     return { data: withFullUrlsArray(partners, ['logoUrl']) }
   })
 
-  // GET /partners/admin - Admin (all partners)
+  // GET /clients/admin - Admin (all clients)
   fastify.get('/admin', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Get all partners (admin)',
+      tags: ['Clients'],
+      summary: 'Get all clients (admin)',
       security: [{ bearerAuth: [] }],
     },
   }, async () => {
@@ -33,12 +33,12 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     return { data: withFullUrlsArray(partners, ['logoUrl']) }
   })
 
-  // GET /partners/:id - Admin
+  // GET /clients/:id - Admin
   fastify.get<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Get partner by ID',
+      tags: ['Clients'],
+      summary: 'Get client by ID',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
@@ -46,21 +46,21 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
       where: { id: request.params.id },
     })
     if (!partner) {
-      throw fastify.httpErrors.notFound('Partner not found')
+      throw fastify.httpErrors.notFound('Client not found')
     }
     return { data: withFullUrls(partner, ['logoUrl']) }
   })
 
-  // POST /partners - Admin
+  // POST /clients - Admin
   fastify.post('/', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Create partner',
+      tags: ['Clients'],
+      summary: 'Create client',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    const data = partnerSchema.parse(request.body)
+    const data = clientSchema.parse(request.body)
 
     const baseSlug = generateSlug(data.nameEn)
     const slug = await ensureUniqueSlug(baseSlug, async (s) => {
@@ -74,16 +74,16 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     return { data: partner }
   })
 
-  // PATCH /partners/:id - Admin
+  // PATCH /clients/:id - Admin
   fastify.patch<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Update partner',
+      tags: ['Clients'],
+      summary: 'Update client',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    const data = partnerUpdateSchema.parse(request.body)
+    const data = clientUpdateSchema.parse(request.body)
     const partner = await fastify.prisma.partner.update({
       where: { id: request.params.id },
       data: { ...data, website: data.website || null },
@@ -91,27 +91,27 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     return { data: partner }
   })
 
-  // DELETE /partners/:id - Admin
+  // DELETE /clients/:id - Admin
   fastify.delete<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Delete partner',
+      tags: ['Clients'],
+      summary: 'Delete client',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
     await fastify.prisma.partner.delete({
       where: { id: request.params.id },
     })
-    return { message: 'Partner deleted' }
+    return { message: 'Client deleted' }
   })
 
-  // PATCH /partners/reorder - Admin
+  // PATCH /clients/reorder - Admin
   fastify.patch('/reorder', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Reorder partners',
+      tags: ['Clients'],
+      summary: 'Reorder clients',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
@@ -126,8 +126,8 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
       )
     )
 
-    return { message: 'Partners reordered' }
+    return { message: 'Clients reordered' }
   })
 }
 
-export default partnersRoutes
+export default clientsRoutes

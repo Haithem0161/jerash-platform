@@ -28,7 +28,7 @@ i18n
     fallbackLng: defaultLanguage,
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
-    ns: ['common', 'services', 'hse', 'partners', 'careers', 'contact', 'gallery'],
+    ns: ['common', 'services', 'hse', 'clients', 'partners', 'careers', 'contact', 'gallery'],
 
     interpolation: {
       escapeValue: false, // React already escapes

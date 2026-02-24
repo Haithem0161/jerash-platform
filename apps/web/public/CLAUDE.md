@@ -1,5 +1,5 @@
 <!-- MEMORY:START -->
-# jerash-platform
+# public
 
 _Last updated: 2026-02-24 | 0 active memories, 0 total_
 

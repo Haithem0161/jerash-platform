@@ -528,7 +528,7 @@ async function main() {
   }
   console.log('✅ Created offices (3)')
 
-  // Create partner
+  // Create client (uses partner DB model)
   await prisma.partner.upsert({
     where: { slug: 'slb' },
     update: {},
@@ -536,17 +536,17 @@ async function main() {
       slug: 'slb',
       nameEn: 'SLB (Schlumberger)',
       nameAr: 'إس إل بي (شلمبرجر)',
-      descriptionEn: 'SLB is a global technology company driving energy innovation. As a leading partner, SLB brings world-class expertise in oil field technology and services to our operations.',
-      descriptionAr: 'إس إل بي هي شركة تكنولوجيا عالمية تقود الابتكار في مجال الطاقة. كشريك رائد، تجلب إس إل بي خبرة عالمية المستوى في تكنولوجيا وخدمات حقول النفط لعملياتنا.',
-      logoUrl: '/uploads/partners/slb-logo.png',
+      descriptionEn: 'SLB is a global technology company driving energy innovation. As a leading client, SLB brings world-class expertise in oil field technology and services to our operations.',
+      descriptionAr: 'إس إل بي هي شركة تكنولوجيا عالمية تقود الابتكار في مجال الطاقة. كعميل رائد، تجلب إس إل بي خبرة عالمية المستوى في تكنولوجيا وخدمات حقول النفط لعملياتنا.',
+      logoUrl: '/uploads/clients/slb-logo.png',
       website: 'https://www.slb.com',
       order: 0,
       isActive: true,
     },
   })
-  console.log('✅ Created partner (SLB)')
+  console.log('✅ Created client (SLB)')
 
-  // Create joint venture
+  // Create partner (uses jointVenture DB model)
   await prisma.jointVenture.upsert({
     where: { slug: 'kweti' },
     update: {},
@@ -554,14 +554,14 @@ async function main() {
       slug: 'kweti',
       nameEn: 'Jerash for Energy Services',
       nameAr: 'جرش لخدمات الطاقة',
-      descriptionEn: 'Jerash for Energy Services is a strategic joint venture expanding Jerash\'s capabilities in integrated energy services across the region.',
-      descriptionAr: 'جرش لخدمات الطاقة هي مشروع مشترك استراتيجي يوسع قدرات جرش في خدمات الطاقة المتكاملة عبر المنطقة.',
+      descriptionEn: 'Jerash for Energy Services is a strategic partner expanding Jerash\'s capabilities in integrated energy services across the region.',
+      descriptionAr: 'جرش لخدمات الطاقة هي شريك استراتيجي يوسع قدرات جرش في خدمات الطاقة المتكاملة عبر المنطقة.',
       logoUrl: '/uploads/partners/kweti-logo.png',
       order: 0,
       isActive: true,
     },
   })
-  console.log('✅ Created joint venture (KWETI)')
+  console.log('✅ Created partner (KWETI)')
 
   // Create gallery images (26)
   const galleryImages = [
@@ -825,8 +825,8 @@ Requirements:
   console.log('- 4 Service categories')
   console.log('- 26 Services')
   console.log('- 3 Offices')
-  console.log('- 1 Partner (SLB)')
-  console.log('- 1 Joint Venture (KWETI)')
+  console.log('- 1 Client (SLB)')
+  console.log('- 1 Partner (KWETI)')
   console.log('- 26 Gallery images')
   console.log('- 5 Jobs')
   console.log('Total: 76 records')

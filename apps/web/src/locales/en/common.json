@@ -112,20 +112,22 @@
       "title": "Management Philosophy",
       "content": "Our leadership believes in empowering teams through clear career paths, appropriate training, and a culture of accountability. We pride ourselves in offering a diverse work environment where both team and individual contributions are encouraged and valued. The leadership teams have full responsibility to drive our safety culture by ensuring effective implementation of our standards."
     },
-    "partners": {
-      "title": "Our Partners",
-      "seeAll": "View All Partners",
+    "clients": {
+      "title": "Our Clients",
+      "seeAll": "View All Clients",
+      "noClients": "No clients found",
       "slb": {
         "name": "SLB (Schlumberger)",
         "description": "Global technology leader in the energy industry, partnering with Jerash to deliver advanced oil field solutions."
       }
     },
-    "jointVentures": {
-      "title": "Joint Ventures",
-      "seeAll": "View All Joint Ventures",
+    "partners": {
+      "title": "Partners",
+      "seeAll": "View All Partners",
+      "noPartners": "No partners found",
       "kweti": {
         "name": "Jerash for Energy Services",
-        "description": "Strategic joint venture expanding our capabilities in energy services across the region."
+        "description": "Strategic partner expanding our capabilities in energy services across the region."
       }
     },
     "oec": {

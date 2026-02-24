@@ -1,7 +1,7 @@
 import axios from 'axios'
 import type {
+  Client,
   Partner,
-  JointVenture,
   Office,
   Service,
   ServiceCategory,
@@ -171,8 +171,8 @@ function createFullAdminCrudApi<T>(endpoint: string) {
 }
 
 // Entity APIs - Standard pattern (/{entity}/admin for list)
+export const clientsApi = createStandardCrudApi<Client>('clients')
 export const partnersApi = createStandardCrudApi<Partner>('partners')
-export const jointVenturesApi = createStandardCrudApi<JointVenture>('joint-ventures')
 export const officesApi = createStandardCrudApi<Office>('offices')
 export const heroSlidesApi = createStandardCrudApi<HeroSlide>('hero-slides')
 export const galleryApi = createStandardCrudApi<GalleryImage>('gallery')
@@ -290,9 +290,9 @@ export const uploadMedia = async (file: File, folder = 'uploads') => {
 export const dashboardApi = {
   getStats: async () => {
     // Fetch counts from each endpoint
-    const [partners, jointVentures, services, jobs, gallery, contact, applications] = await Promise.all([
+    const [clients, partners, services, jobs, gallery, contact, applications] = await Promise.all([
+      api.get('/clients/admin').catch(() => ({ data: { data: [] } })),
       api.get('/partners/admin').catch(() => ({ data: { data: [] } })),
-      api.get('/joint-ventures/admin').catch(() => ({ data: { data: [] } })),
       api.get('/services/admin/all').catch(() => ({ data: { data: [] } })),
       api.get('/jobs/admin/all').catch(() => ({ data: { data: [] } })),
       api.get('/gallery/admin').catch(() => ({ data: { data: [] } })),
@@ -301,8 +301,8 @@ export const dashboardApi = {
     ])
 
     return {
+      clients: clients.data?.data?.length || 0,
       partners: partners.data?.data?.length || 0,
-      jointVentures: jointVentures.data?.data?.length || 0,
       services: services.data?.data?.length || 0,
       jobs: jobs.data?.data?.length || 0,
       galleryImages: gallery.data?.data?.length || 0,

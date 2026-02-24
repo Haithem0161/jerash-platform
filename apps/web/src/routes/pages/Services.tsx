@@ -83,7 +83,7 @@ export function ServicesPage() {
         title={tCommon('seo.services.title')}
         description={tCommon('seo.services.description')}
         url="/services"
-        image="/service1.jpg"
+        image="/service1.webp"
       />
 
       {/* Hero section */}
@@ -94,7 +94,7 @@ export function ServicesPage() {
         {/* Parallax background */}
         <div className="absolute inset-0">
           <ParallaxImage
-            src="/service1.jpg"
+            src="/service1.webp"
             alt=""
             speed={0.15}
             className="h-full w-full"

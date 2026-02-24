@@ -35,9 +35,9 @@ export const heroSlideSchema = z.object({
 
 export const heroSlideUpdateSchema = heroSlideSchema.partial()
 
-// ============ Partner Schemas ============
+// ============ Client Schemas (formerly Partner — e.g. SLB) ============
 
-export const partnerSchema = z.object({
+export const clientSchema = z.object({
   nameEn: z.string().min(1, 'English name is required').max(200),
   nameAr: z.string().min(1, 'Arabic name is required').max(200),
   descriptionEn: z.string().min(10, 'English description must be at least 10 characters'),
@@ -48,12 +48,12 @@ export const partnerSchema = z.object({
   isActive: z.boolean().optional(),
 })
 
-export const partnerUpdateSchema = partnerSchema.partial()
+export const clientUpdateSchema = clientSchema.partial()
 
-// ============ Joint Venture Schemas ============
+// ============ Partner Schemas (formerly Joint Venture — e.g. Kweti) ============
 
-export const jointVentureSchema = partnerSchema
-export const jointVentureUpdateSchema = partnerUpdateSchema
+export const partnerSchema = clientSchema
+export const partnerUpdateSchema = clientUpdateSchema
 
 // ============ Office Schemas ============
 
@@ -206,8 +206,8 @@ export type LoginInput = z.infer<typeof loginSchema>
 export type UserCreateInput = z.infer<typeof userCreateSchema>
 export type UserUpdateInput = z.infer<typeof userUpdateSchema>
 export type HeroSlideInput = z.infer<typeof heroSlideSchema>
+export type ClientInput = z.infer<typeof clientSchema>
 export type PartnerInput = z.infer<typeof partnerSchema>
-export type JointVentureInput = z.infer<typeof jointVentureSchema>
 export type OfficeInput = z.infer<typeof officeSchema>
 export type ServiceCategoryInput = z.infer<typeof serviceCategorySchema>
 export type ServiceInput = z.infer<typeof serviceSchema>
