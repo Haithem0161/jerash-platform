@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { ExternalLink } from 'lucide-react'
 import { FadeIn } from '@/components/animations/FadeIn'
 
-interface PartnerCardProps {
-  /** Partner name (already resolved for current language) */
+interface JointVentureCardProps {
+  /** JV name (already resolved for current language) */
   name: string
-  /** Partner description (already resolved for current language) */
+  /** JV description (already resolved for current language) */
   description: string
-  /** URL to partner logo */
+  /** URL to JV logo */
   logoUrl: string
   /** Optional external website URL */
   website?: string | null
@@ -17,10 +17,10 @@ interface PartnerCardProps {
 }
 
 /**
- * Partner profile card displaying logo, name, description, and optional website link.
+ * Joint Venture profile card displaying logo, name, description, and optional website link.
  * Logo gracefully falls back to placeholder if image fails to load.
  */
-export function PartnerCard({ name, description, logoUrl, website, delay = 0 }: PartnerCardProps) {
+export function JointVentureCard({ name, description, logoUrl, website, delay = 0 }: JointVentureCardProps) {
   const { t } = useTranslation('partners')
   const [logoError, setLogoError] = useState(false)
 
@@ -49,8 +49,8 @@ export function PartnerCard({ name, description, logoUrl, website, delay = 0 }: 
         {/* Description */}
         <p className="mt-2 text-muted-foreground">{description}</p>
 
-        {/* Website link (optional) */}
-        {website && (
+        {/* Website link (optional) or Coming Soon */}
+        {website ? (
           <a
             href={website}
             target="_blank"
@@ -60,6 +60,10 @@ export function PartnerCard({ name, description, logoUrl, website, delay = 0 }: 
             {t('partners.visitWebsite')}
             <ExternalLink className="h-4 w-4" />
           </a>
+        ) : (
+          <p className="mt-4 text-sm text-muted-foreground">
+            {t('jointVentures.comingSoon')}
+          </p>
         )}
       </div>
     </FadeIn>

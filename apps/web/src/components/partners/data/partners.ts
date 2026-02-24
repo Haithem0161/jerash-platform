@@ -1,30 +1,30 @@
 /**
- * Partner data structure with translation key references.
+ * Joint Venture data structure with translation key references.
  * Ready for CMS/API migration - all display text uses translation keys.
  */
-export interface Partner {
-  /** Unique identifier for the partner */
+export interface JointVenture {
+  /** Unique identifier for the joint venture */
   id: string
-  /** Translation key for partner name (e.g., 'partners.slb.name') */
+  /** Translation key for JV name (e.g., 'partners.kweti.name') */
   nameKey: string
-  /** Translation key for partner description */
+  /** Translation key for JV description */
   descriptionKey: string
-  /** Path to partner logo image */
+  /** Path to JV logo image */
   logo: string
   /** Optional external website URL */
   website?: string
 }
 
 /**
- * Static partners data.
- * Add new partners by extending this array.
+ * Static joint ventures data.
+ * Add new JVs by extending this array.
  */
-export const partners: Partner[] = [
+export const jointVentures: JointVenture[] = [
   {
-    id: 'slb',
-    nameKey: 'partners.slb.name',
-    descriptionKey: 'partners.slb.description',
-    logo: '/images/partners/slb-logo.png',
-    website: 'https://www.slb.com',
+    id: 'kweti',
+    nameKey: 'partners.kweti.name',
+    descriptionKey: 'partners.kweti.description',
+    logo: '/images/partners/kweti-logo.png',
+    website: undefined,
   },
 ]

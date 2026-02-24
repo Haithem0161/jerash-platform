@@ -6,8 +6,8 @@ import { z } from 'zod'
 import type { ColumnDef } from '@tanstack/react-table'
 import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
-import type { JointVenture } from '@repo/types'
-import { jointVenturesApi } from '@/lib/api'
+import type { Partner } from '@repo/types'
+import { partnersApi } from '@/lib/api'
 import { DataTable, DataTableColumnHeader, DataTableRowActions } from '@/components/data-table'
 import { BilingualInput, BilingualTextarea, ImageUploader } from '@/components/forms'
 import { Button } from '@/components/ui/button'
@@ -33,62 +33,63 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 
-const jvSchema = z.object({
+const partnerSchema = z.object({
   slug: z.string().min(1, 'Slug is required'),
   nameEn: z.string().min(1, 'English name is required'),
   nameAr: z.string().min(1, 'Arabic name is required'),
   descriptionEn: z.string().min(1, 'English description is required'),
   descriptionAr: z.string().min(1, 'Arabic description is required'),
   logoUrl: z.string().min(1, 'Logo is required'),
+  website: z.string().url().optional().or(z.literal('')),
   isActive: z.boolean(),
 })
 
-type JVForm = z.infer<typeof jvSchema>
+type PartnerForm = z.infer<typeof partnerSchema>
 
-export function JointVenturesPage() {
+export function PartnersPage() {
   const queryClient = useQueryClient()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingJV, setEditingJV] = useState<JointVenture | null>(null)
-  const [deletingJV, setDeletingJV] = useState<JointVenture | null>(null)
+  const [editingPartner, setEditingPartner] = useState<Partner | null>(null)
+  const [deletingPartner, setDeletingPartner] = useState<Partner | null>(null)
 
   const { data, isLoading } = useQuery({
-    queryKey: ['joint-ventures'],
-    queryFn: () => jointVenturesApi.getAll(),
+    queryKey: ['partners'],
+    queryFn: () => partnersApi.getAll(),
   })
 
   const createMutation = useMutation({
-    mutationFn: jointVenturesApi.create,
+    mutationFn: partnersApi.create,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['joint-ventures'] })
-      toast.success('Joint venture created successfully')
+      queryClient.invalidateQueries({ queryKey: ['partners'] })
+      toast.success('Partner created successfully')
       handleCloseDialog()
     },
-    onError: () => toast.error('Failed to create joint venture'),
+    onError: () => toast.error('Failed to create partner'),
   })
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<JointVenture> }) =>
-      jointVenturesApi.update(id, data),
+    mutationFn: ({ id, data }: { id: string; data: Partial<Partner> }) =>
+      partnersApi.update(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['joint-ventures'] })
-      toast.success('Joint venture updated successfully')
+      queryClient.invalidateQueries({ queryKey: ['partners'] })
+      toast.success('Partner updated successfully')
       handleCloseDialog()
     },
-    onError: () => toast.error('Failed to update joint venture'),
+    onError: () => toast.error('Failed to update partner'),
   })
 
   const deleteMutation = useMutation({
-    mutationFn: jointVenturesApi.delete,
+    mutationFn: partnersApi.delete,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['joint-ventures'] })
-      toast.success('Joint venture deleted successfully')
-      setDeletingJV(null)
+      queryClient.invalidateQueries({ queryKey: ['partners'] })
+      toast.success('Partner deleted successfully')
+      setDeletingPartner(null)
     },
-    onError: () => toast.error('Failed to delete joint venture'),
+    onError: () => toast.error('Failed to delete partner'),
   })
 
-  const form = useForm<JVForm>({
-    resolver: zodResolver(jvSchema),
+  const form = useForm<PartnerForm>({
+    resolver: zodResolver(partnerSchema),
     defaultValues: {
       slug: '',
       nameEn: '',
@@ -96,24 +97,26 @@ export function JointVenturesPage() {
       descriptionEn: '',
       descriptionAr: '',
       logoUrl: '',
+      website: '',
       isActive: true,
     },
   })
 
-  const handleOpenDialog = (jv?: JointVenture) => {
-    if (jv) {
-      setEditingJV(jv)
+  const handleOpenDialog = (partner?: Partner) => {
+    if (partner) {
+      setEditingPartner(partner)
       form.reset({
-        slug: jv.slug,
-        nameEn: jv.nameEn,
-        nameAr: jv.nameAr,
-        descriptionEn: jv.descriptionEn,
-        descriptionAr: jv.descriptionAr,
-        logoUrl: jv.logoUrl,
-        isActive: jv.isActive,
+        slug: partner.slug,
+        nameEn: partner.nameEn,
+        nameAr: partner.nameAr,
+        descriptionEn: partner.descriptionEn,
+        descriptionAr: partner.descriptionAr,
+        logoUrl: partner.logoUrl,
+        website: partner.website || '',
+        isActive: partner.isActive,
       })
     } else {
-      setEditingJV(null)
+      setEditingPartner(null)
       form.reset()
     }
     setIsDialogOpen(true)
@@ -121,19 +124,19 @@ export function JointVenturesPage() {
 
   const handleCloseDialog = () => {
     setIsDialogOpen(false)
-    setEditingJV(null)
+    setEditingPartner(null)
     form.reset()
   }
 
-  const onSubmit = (data: JVForm) => {
-    if (editingJV) {
-      updateMutation.mutate({ id: editingJV.id, data })
+  const onSubmit = (data: PartnerForm) => {
+    if (editingPartner) {
+      updateMutation.mutate({ id: editingPartner.id, data })
     } else {
       createMutation.mutate(data)
     }
   }
 
-  const columns: ColumnDef<JointVenture>[] = [
+  const columns: ColumnDef<Partner>[] = [
     {
       accessorKey: 'logoUrl',
       header: 'Logo',
@@ -177,7 +180,7 @@ export function JointVenturesPage() {
       cell: ({ row }) => (
         <DataTableRowActions
           onEdit={() => handleOpenDialog(row.original)}
-          onDelete={() => setDeletingJV(row.original)}
+          onDelete={() => setDeletingPartner(row.original)}
         />
       ),
     },
@@ -195,29 +198,29 @@ export function JointVenturesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Joint Ventures</h1>
-        <p className="text-muted-foreground">Manage joint venture partnerships</p>
+        <h1 className="text-3xl font-bold">Partners</h1>
+        <p className="text-muted-foreground">Manage partner organizations</p>
       </div>
 
       <DataTable
         columns={columns}
         data={data?.data ?? []}
         searchKey="nameEn"
-        searchPlaceholder="Search joint ventures..."
+        searchPlaceholder="Search partners..."
         onAdd={() => handleOpenDialog()}
-        addLabel="Add Joint Venture"
+        addLabel="Add Partner"
       />
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>
-              {editingJV ? 'Edit Joint Venture' : 'Add Joint Venture'}
+              {editingPartner ? 'Edit Partner' : 'Add Partner'}
             </DialogTitle>
             <DialogDescription>
-              {editingJV
-                ? 'Update joint venture information'
-                : 'Add a new joint venture partnership'}
+              {editingPartner
+                ? 'Update partner information'
+                : 'Add a new partner organization'}
             </DialogDescription>
           </DialogHeader>
 
@@ -227,7 +230,7 @@ export function JointVenturesPage() {
               <Input
                 id="slug"
                 {...form.register('slug')}
-                placeholder="joint-venture-slug"
+                placeholder="partner-slug"
               />
               {form.formState.errors.slug && (
                 <p className="text-sm text-destructive">
@@ -256,10 +259,24 @@ export function JointVenturesPage() {
               label="Logo"
               value={form.watch('logoUrl')}
               onChange={(url) => form.setValue('logoUrl', url)}
-              folder="joint-ventures"
+              folder="partners"
               required
               error={form.formState.errors.logoUrl?.message}
             />
+
+            <div className="space-y-2">
+              <Label htmlFor="website">Website</Label>
+              <Input
+                id="website"
+                {...form.register('website')}
+                placeholder="https://example.com"
+              />
+              {form.formState.errors.website && (
+                <p className="text-sm text-destructive">
+                  {form.formState.errors.website.message}
+                </p>
+              )}
+            </div>
 
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -283,7 +300,7 @@ export function JointVenturesPage() {
                 {(createMutation.isPending || updateMutation.isPending) && (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                {editingJV ? 'Update' : 'Create'}
+                {editingPartner ? 'Update' : 'Create'}
               </Button>
             </div>
           </form>
@@ -291,21 +308,21 @@ export function JointVenturesPage() {
       </Dialog>
 
       <AlertDialog
-        open={!!deletingJV}
-        onOpenChange={() => setDeletingJV(null)}
+        open={!!deletingPartner}
+        onOpenChange={() => setDeletingPartner(null)}
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Joint Venture</AlertDialogTitle>
+            <AlertDialogTitle>Delete Partner</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{deletingJV?.nameEn}"? This
+              Are you sure you want to delete "{deletingPartner?.nameEn}"? This
               action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deletingJV && deleteMutation.mutate(deletingJV.id)}
+              onClick={() => deletingPartner && deleteMutation.mutate(deletingPartner.id)}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               Delete

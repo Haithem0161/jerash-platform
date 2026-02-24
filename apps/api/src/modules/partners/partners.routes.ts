@@ -1,117 +1,117 @@
 import type { FastifyPluginAsync } from 'fastify'
-import { partnerSchema, partnerUpdateSchema, reorderSchema } from '@repo/validation'
+import { jointVentureSchema, jointVentureUpdateSchema, reorderSchema } from '@repo/validation'
 import { generateSlug, ensureUniqueSlug } from '../../utils/slug.js'
 import { withFullUrls, withFullUrlsArray } from '../../utils/url.js'
 
-const partnersRoutes: FastifyPluginAsync = async (fastify) => {
-  // GET /partners - Public
+const jointVenturesRoutes: FastifyPluginAsync = async (fastify) => {
+  // GET /joint-ventures - Public
   fastify.get('/', {
     schema: {
-      tags: ['Partners'],
-      summary: 'Get all active partners',
+      tags: ['Joint Ventures'],
+      summary: 'Get all active joint ventures',
     },
   }, async () => {
-    const partners = await fastify.prisma.partner.findMany({
+    const jvs = await fastify.prisma.jointVenture.findMany({
       where: { isActive: true },
       orderBy: { order: 'asc' },
     })
-    return { data: withFullUrlsArray(partners, ['logoUrl']) }
+    return { data: withFullUrlsArray(jvs, ['logoUrl']) }
   })
 
-  // GET /partners/admin - Admin (all partners)
+  // GET /joint-ventures/admin - Admin
   fastify.get('/admin', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Get all partners (admin)',
+      tags: ['Joint Ventures'],
+      summary: 'Get all joint ventures (admin)',
       security: [{ bearerAuth: [] }],
     },
   }, async () => {
-    const partners = await fastify.prisma.partner.findMany({
+    const jvs = await fastify.prisma.jointVenture.findMany({
       orderBy: { order: 'asc' },
     })
-    return { data: withFullUrlsArray(partners, ['logoUrl']) }
+    return { data: withFullUrlsArray(jvs, ['logoUrl']) }
   })
 
-  // GET /partners/:id - Admin
+  // GET /joint-ventures/:id - Admin
   fastify.get<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Get partner by ID',
+      tags: ['Joint Ventures'],
+      summary: 'Get joint venture by ID',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    const partner = await fastify.prisma.partner.findUnique({
+    const jv = await fastify.prisma.jointVenture.findUnique({
       where: { id: request.params.id },
     })
-    if (!partner) {
-      throw fastify.httpErrors.notFound('Partner not found')
+    if (!jv) {
+      throw fastify.httpErrors.notFound('Joint venture not found')
     }
-    return { data: withFullUrls(partner, ['logoUrl']) }
+    return { data: withFullUrls(jv, ['logoUrl']) }
   })
 
-  // POST /partners - Admin
+  // POST /joint-ventures - Admin
   fastify.post('/', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Create partner',
+      tags: ['Joint Ventures'],
+      summary: 'Create joint venture',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    const data = partnerSchema.parse(request.body)
+    const data = jointVentureSchema.parse(request.body)
 
     const baseSlug = generateSlug(data.nameEn)
     const slug = await ensureUniqueSlug(baseSlug, async (s) => {
-      const existing = await fastify.prisma.partner.findUnique({ where: { slug: s } })
+      const existing = await fastify.prisma.jointVenture.findUnique({ where: { slug: s } })
       return !!existing
     })
 
-    const partner = await fastify.prisma.partner.create({
+    const jv = await fastify.prisma.jointVenture.create({
       data: { ...data, slug, website: data.website || null },
     })
-    return { data: partner }
+    return { data: jv }
   })
 
-  // PATCH /partners/:id - Admin
+  // PATCH /joint-ventures/:id - Admin
   fastify.patch<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Update partner',
+      tags: ['Joint Ventures'],
+      summary: 'Update joint venture',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    const data = partnerUpdateSchema.parse(request.body)
-    const partner = await fastify.prisma.partner.update({
+    const data = jointVentureUpdateSchema.parse(request.body)
+    const jv = await fastify.prisma.jointVenture.update({
       where: { id: request.params.id },
       data: { ...data, website: data.website || null },
     })
-    return { data: partner }
+    return { data: jv }
   })
 
-  // DELETE /partners/:id - Admin
+  // DELETE /joint-ventures/:id - Admin
   fastify.delete<{ Params: { id: string } }>('/:id', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Delete partner',
+      tags: ['Joint Ventures'],
+      summary: 'Delete joint venture',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
-    await fastify.prisma.partner.delete({
+    await fastify.prisma.jointVenture.delete({
       where: { id: request.params.id },
     })
-    return { message: 'Partner deleted' }
+    return { message: 'Joint venture deleted' }
   })
 
-  // PATCH /partners/reorder - Admin
+  // PATCH /joint-ventures/reorder - Admin
   fastify.patch('/reorder', {
     onRequest: [fastify.authorizeRoles('SUPER_ADMIN', 'ADMIN', 'EDITOR')],
     schema: {
-      tags: ['Partners'],
-      summary: 'Reorder partners',
+      tags: ['Joint Ventures'],
+      summary: 'Reorder joint ventures',
       security: [{ bearerAuth: [] }],
     },
   }, async (request) => {
@@ -119,15 +119,15 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
 
     await fastify.prisma.$transaction(
       items.map((item) =>
-        fastify.prisma.partner.update({
+        fastify.prisma.jointVenture.update({
           where: { id: item.id },
           data: { order: item.order },
         })
       )
     )
 
-    return { message: 'Partners reordered' }
+    return { message: 'Joint ventures reordered' }
   })
 }
 
-export default partnersRoutes
+export default jointVenturesRoutes

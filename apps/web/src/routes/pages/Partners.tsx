@@ -2,15 +2,15 @@ import { useTranslation } from 'react-i18next'
 import { SEO } from '@/components/common/SEO'
 import { Section } from '@/components/layout/Section'
 import { FadeIn } from '@/components/animations/FadeIn'
-import { PartnerCard } from '@/components/partners/PartnerCard'
-import { usePartners } from '@/hooks/api'
+import { JointVentureCard } from '@/components/joint-ventures/JointVentureCard'
+import { useJointVentures } from '@/hooks/api'
 import { useBilingual } from '@/hooks/useBilingual'
 import { Skeleton } from '@/components/ui/skeleton'
 
 /**
- * Skeleton loader for partner cards
+ * Skeleton loader for JV cards
  */
-function PartnersSkeleton() {
+function JointVenturesSkeleton() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {[1, 2, 3].map((i) => (
@@ -25,46 +25,46 @@ function PartnersSkeleton() {
 }
 
 /**
- * Partners page showcasing strategic business partnerships.
- * Grid layout supports multiple partners.
+ * Joint Ventures page showcasing strategic JV partnerships.
+ * Grid layout supports multiple JVs.
  */
-export function PartnersPage() {
+export function JointVenturesPage() {
   const { t } = useTranslation('partners')
-  const { data: partners, isLoading } = usePartners()
+  const { data: jointVentures, isLoading } = useJointVentures()
   const { resolve } = useBilingual()
 
   return (
     <>
       <SEO
-        title={t('seo.partnersTitle')}
-        description={t('seo.partnersDescription')}
-        url="/partners"
-        image="/images/gallery/jerash-site-15.jpg"
+        title={t('seo.jvTitle')}
+        description={t('seo.jvDescription')}
+        url="/joint-ventures"
+        image="/images/gallery/jerash-site-20.jpg"
       />
 
       <Section className="py-16 md:py-20">
         {/* Page header */}
         <FadeIn className="mb-12 text-center">
           <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">
-            {t('partners.pageTitle')}
+            {t('jointVentures.pageTitle')}
           </h1>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            {t('partners.pageDescription')}
+            {t('jointVentures.pageDescription')}
           </p>
         </FadeIn>
 
-        {/* Partners grid */}
+        {/* Joint Ventures grid */}
         {isLoading ? (
-          <PartnersSkeleton />
+          <JointVenturesSkeleton />
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {partners?.map((partner, idx) => (
-              <PartnerCard
-                key={partner.id}
-                name={resolve(partner.nameEn, partner.nameAr)}
-                description={resolve(partner.descriptionEn, partner.descriptionAr)}
-                logoUrl={partner.logoUrl}
-                website={partner.website}
+            {jointVentures?.map((jv, idx) => (
+              <JointVentureCard
+                key={jv.id}
+                name={resolve(jv.nameEn, jv.nameAr)}
+                description={resolve(jv.descriptionEn, jv.descriptionAr)}
+                logoUrl={jv.logoUrl}
+                website={jv.website}
                 delay={idx * 0.1}
               />
             ))}
@@ -75,4 +75,4 @@ export function PartnersPage() {
   )
 }
 
-export default PartnersPage
+export default JointVenturesPage
