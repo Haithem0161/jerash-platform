@@ -37,9 +37,10 @@ const partnerSchema = z.object({
   slug: z.string().min(1, 'Slug is required'),
   nameEn: z.string().min(1, 'English name is required'),
   nameAr: z.string().min(1, 'Arabic name is required'),
-  descriptionEn: z.string().min(1, 'English description is required'),
-  descriptionAr: z.string().min(1, 'Arabic description is required'),
+  descriptionEn: z.string().optional().or(z.literal('')),
+  descriptionAr: z.string().optional().or(z.literal('')),
   logoUrl: z.string().min(1, 'Logo is required'),
+  website: z.string().url().optional().or(z.literal('')),
   isActive: z.boolean(),
 })
 
@@ -96,6 +97,7 @@ export function PartnersPage() {
       descriptionEn: '',
       descriptionAr: '',
       logoUrl: '',
+      website: '',
       isActive: true,
     },
   })
@@ -107,9 +109,10 @@ export function PartnersPage() {
         slug: partner.slug,
         nameEn: partner.nameEn,
         nameAr: partner.nameAr,
-        descriptionEn: partner.descriptionEn,
-        descriptionAr: partner.descriptionAr,
+        descriptionEn: partner.descriptionEn ?? '',
+        descriptionAr: partner.descriptionAr ?? '',
         logoUrl: partner.logoUrl,
+        website: partner.website ?? '',
         isActive: partner.isActive,
       })
     } else {
@@ -260,6 +263,20 @@ export function PartnersPage() {
               required
               error={form.formState.errors.logoUrl?.message}
             />
+
+            <div className="space-y-2">
+              <Label htmlFor="website">Website</Label>
+              <Input
+                id="website"
+                {...form.register('website')}
+                placeholder="https://example.com"
+              />
+              {form.formState.errors.website && (
+                <p className="text-sm text-destructive">
+                  {form.formState.errors.website.message}
+                </p>
+              )}
+            </div>
 
             <div className="flex items-center space-x-2">
               <Checkbox

@@ -69,7 +69,13 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     })
 
     const partner = await fastify.prisma.jointVenture.create({
-      data: { ...data, slug, website: data.website || null },
+      data: {
+        ...data,
+        slug,
+        descriptionEn: data.descriptionEn || null,
+        descriptionAr: data.descriptionAr || null,
+        website: data.website || null,
+      },
     })
     return { data: partner }
   })
@@ -86,7 +92,12 @@ const partnersRoutes: FastifyPluginAsync = async (fastify) => {
     const data = partnerUpdateSchema.parse(request.body)
     const partner = await fastify.prisma.jointVenture.update({
       where: { id: request.params.id },
-      data: { ...data, website: data.website || null },
+      data: {
+        ...data,
+        descriptionEn: data.descriptionEn || null,
+        descriptionAr: data.descriptionAr || null,
+        website: data.website || null,
+      },
     })
     return { data: partner }
   })

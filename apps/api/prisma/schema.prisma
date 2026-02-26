@@ -87,8 +87,8 @@ model Partner {
   slug          String   @unique
   nameEn        String
   nameAr        String
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  descriptionEn String?  @db.Text
+  descriptionAr String?  @db.Text
   logoUrl       String
   website       String?
   order         Int      @default(0)
@@ -104,8 +104,8 @@ model JointVenture {
   slug          String   @unique
   nameEn        String
   nameAr        String
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  descriptionEn String?  @db.Text
+  descriptionAr String?  @db.Text
   logoUrl       String
   website       String?
   order         Int      @default(0)

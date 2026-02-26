@@ -7,7 +7,7 @@ interface ClientCardProps {
   /** Client name (already resolved for current language) */
   name: string
   /** Client description (already resolved for current language) */
-  description: string
+  description?: string | null
   /** URL to client logo */
   logoUrl: string
   /** Optional external website URL */
@@ -47,7 +47,7 @@ export function ClientCard({ name, description, logoUrl, website, delay = 0 }: C
         <h3 className="text-xl font-semibold">{name}</h3>
 
         {/* Description */}
-        <p className="mt-2 text-muted-foreground">{description}</p>
+        {description && <p className="mt-2 text-muted-foreground">{description}</p>}
 
         {/* Website link (optional) */}
         {website && (

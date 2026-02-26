@@ -69,7 +69,13 @@ const clientsRoutes: FastifyPluginAsync = async (fastify) => {
     })
 
     const partner = await fastify.prisma.partner.create({
-      data: { ...data, slug, website: data.website || null },
+      data: {
+        ...data,
+        slug,
+        descriptionEn: data.descriptionEn || null,
+        descriptionAr: data.descriptionAr || null,
+        website: data.website || null,
+      },
     })
     return { data: partner }
   })
@@ -86,7 +92,12 @@ const clientsRoutes: FastifyPluginAsync = async (fastify) => {
     const data = clientUpdateSchema.parse(request.body)
     const partner = await fastify.prisma.partner.update({
       where: { id: request.params.id },
-      data: { ...data, website: data.website || null },
+      data: {
+        ...data,
+        descriptionEn: data.descriptionEn || null,
+        descriptionAr: data.descriptionAr || null,
+        website: data.website || null,
+      },
     })
     return { data: partner }
   })

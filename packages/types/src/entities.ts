@@ -62,8 +62,8 @@ export interface Client extends BaseEntity, OrderableEntity {
   slug: string
   nameEn: string
   nameAr: string
-  descriptionEn: string
-  descriptionAr: string
+  descriptionEn: string | null
+  descriptionAr: string | null
   logoUrl: string
   website: string | null
 }
@@ -72,7 +72,7 @@ export interface ClientPublic {
   id: string
   slug: string
   name: string
-  description: string
+  description: string | null
   logo: string
   website: string | null
 }
@@ -80,8 +80,8 @@ export interface ClientPublic {
 export interface ClientFormData {
   nameEn: string
   nameAr: string
-  descriptionEn: string
-  descriptionAr: string
+  descriptionEn?: string
+  descriptionAr?: string
   logoUrl: string
   website?: string
   order?: number
@@ -93,8 +93,8 @@ export interface Partner extends BaseEntity, OrderableEntity {
   slug: string
   nameEn: string
   nameAr: string
-  descriptionEn: string
-  descriptionAr: string
+  descriptionEn: string | null
+  descriptionAr: string | null
   logoUrl: string
   website: string | null
 }
@@ -103,7 +103,7 @@ export interface PartnerPublic {
   id: string
   slug: string
   name: string
-  description: string
+  description: string | null
   logo: string
   website: string | null
 }
@@ -111,8 +111,8 @@ export interface PartnerPublic {
 export interface PartnerFormData {
   nameEn: string
   nameAr: string
-  descriptionEn: string
-  descriptionAr: string
+  descriptionEn?: string
+  descriptionAr?: string
   logoUrl: string
   website?: string
   order?: number

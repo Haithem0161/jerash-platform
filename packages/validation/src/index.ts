@@ -40,8 +40,8 @@ export const heroSlideUpdateSchema = heroSlideSchema.partial()
 export const clientSchema = z.object({
   nameEn: z.string().min(1, 'English name is required').max(200),
   nameAr: z.string().min(1, 'Arabic name is required').max(200),
-  descriptionEn: z.string().min(10, 'English description must be at least 10 characters'),
-  descriptionAr: z.string().min(10, 'Arabic description must be at least 10 characters'),
+  descriptionEn: z.string().optional().or(z.literal('')),
+  descriptionAr: z.string().optional().or(z.literal('')),
   logoUrl: z.string().url('Invalid logo URL'),
   website: z.string().url('Invalid website URL').optional().or(z.literal('')),
   order: z.number().int().min(0).optional(),
@@ -52,8 +52,18 @@ export const clientUpdateSchema = clientSchema.partial()
 
 // ============ Partner Schemas (formerly Joint Venture — e.g. Kweti) ============
 
-export const partnerSchema = clientSchema
-export const partnerUpdateSchema = clientUpdateSchema
+export const partnerSchema = z.object({
+  nameEn: z.string().min(1, 'English name is required').max(200),
+  nameAr: z.string().min(1, 'Arabic name is required').max(200),
+  descriptionEn: z.string().optional().or(z.literal('')),
+  descriptionAr: z.string().optional().or(z.literal('')),
+  logoUrl: z.string().url('Invalid logo URL'),
+  website: z.string().url('Invalid website URL').optional().or(z.literal('')),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+})
+
+export const partnerUpdateSchema = partnerSchema.partial()
 
 // ============ Office Schemas ============
 
