@@ -11,8 +11,8 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Jerash For Oil Field Services',
-  url: 'https://jerash.com',
-  logo: 'https://jerash.com/Jerash-logo-color.png',
+  url: 'https://jerash-iq.com',
+  logo: 'https://jerash-iq.com/Jerash-logo-color.png',
   description:
     'Excellence in oil field solutions with an unwavering commitment to safety',
   address: {

@@ -14,7 +14,7 @@ interface SEOProps {
 const SITE_NAME = 'Jerash For Oil Field Services'
 const DEFAULT_DESCRIPTION =
   'Excellence in oil field solutions with an unwavering commitment to safety'
-const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://jerash.com'
+const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://jerash-iq.com'
 const DEFAULT_IMAGE = `${BASE_URL}/images/gallery/jerash-site-01.jpg`
 
 export function SEO({
